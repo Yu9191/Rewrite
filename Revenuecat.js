@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Browser':{ name: 'pro', id: 'pro_zoomable'},
     'becoming':{ name: 'Strength Pro', id: 'strength_membership_monthly'},//练就
     'Chords':{ name: 'FullUnlock', id: 'cas_full_unlock_yearly_50_off'},//8.1
     'reader':{ name: 'subscriptions', id: 'com.valo.reader.vip1.forever'},
