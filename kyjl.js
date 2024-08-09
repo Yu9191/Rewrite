@@ -4,7 +4,7 @@
 退出登录重新登录
 [rewrite_local]
 
-https://api-sprite.notehot.cn/api/user url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/kyjl.js
+https://api-sprite.notehot.cn/api/user url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/kyjl.js
 
 hostname = api-sprite.notehot.cn
 
