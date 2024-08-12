@@ -1,0 +1,10 @@
+#!name=91暗网
+#!desc=6.27最新域名
+
+
+[Script]
+
+91暗网 = type=http-request,pattern=https:\/\/\S+\.m3u8\?token=[^&]+&c=https:\/\/\S+,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/m3u8/91anwang.js
+
+[MITM]
+hostname = %APPEND% *.cloudfront.net, *.ninghaixin.club
