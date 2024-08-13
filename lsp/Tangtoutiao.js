@@ -8,11 +8,12 @@
 [rewrite_local]
 
 #通用
+^https:\/\/[^\/]*\.qxoovv\.cn\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8(\?.*)?$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/Tangtoutiao.js
 ^https:\/\/[^\/]*\.shjsvkj\.cn\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8(\?.*)?$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/Tangtoutiao.js
 
 [mitm] 
 
-hostname = *.shjsvkj.cn
+hostname = *.shjsvkj.cn, *.qxoovv.cn
 
 
 
