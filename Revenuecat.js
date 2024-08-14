@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Loora':{ name: 'Yearly', id: 'yearly_119_99_no_trial'},//8.14
     'Browser':{ name: 'pro', id: 'pro_zoomable'},//8.7
     'becoming':{ name: 'Strength Pro', id: 'strength_membership_monthly'},//练就
     'Chords':{ name: 'FullUnlock', id: 'cas_full_unlock_yearly_50_off'},//8.1
