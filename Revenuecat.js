@@ -75,7 +75,7 @@ if (typeof $response == "undefined") {
     'PrevisShot':{ name: 'VIP', id: 'com.previsshot.previsshot.continuous_subscribe_12month_vip'},//7.9
     'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
     'MusicPutty':{ name: 'pro_version', id: 'mp_3599_1y'},//6.24
-    'Linearity':{ name: 'pro', id: 'linearity_curve_pro_yearly_launch_offer'},
+    'Linearity':{ name: 'pro', id: 'linearity_curve_pro_yearly_special_offer_trial'},
     'iplayTV':{ name: 'com.ll.btplayer.12', id: 'com.ll.btplayer.12'},//6.21
     '%E8%B5%84%E6%BA%90%E6%90%AC%E8%BF%90%E5%A4%A7%E5%B8%88':{ name: 'SaveTikYoutu_common', id: 'LifetimeSubscription'},
     'DHWaterMarkManager':{ name: 'Vip', id: 'lifetimeVIP_001'},//6.20
