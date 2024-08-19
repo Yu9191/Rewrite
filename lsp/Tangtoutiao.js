@@ -1,6 +1,6 @@
 /**
- * https://p5.ymvfegagd.net
- * 汤头条 
+ * 汤头条 https://p5.ymvfegagd.net
+ * 50度灰 https://p1.6p3ucmp.com
  * 域名请及时提供
  * 搭配Senplayer （弃用）
  * 搭配Aloha 下载视频转到本地并自动转换成MP4
