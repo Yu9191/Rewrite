@@ -64,6 +64,7 @@ if (typeof $response == "undefined") {
   const app = '1';
   const UAMappings = {
     'iScape':{ name: 'Pro', id: 'Limited_YearlyProAutoRenew'},//8.15
+    'GigaBody':{ name: 'Pro', id: 'GigaBodySubscriptionYear_v1'},//8.21
     'FunPix':{ name: 'premium', id: 'intro_price_weekly'},//8.15
     'WiseMate':{ name: 'vip_entitlement', id: 'wisemate.ai.ios.week'},//8.15
     'Loora':{ name: 'Yearly', id: 'yearly_119_99_no_trial'},//8.14
