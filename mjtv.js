@@ -3,7 +3,7 @@
 
 [rewrite_local]
 
-^https:\/\/api\.maijitv\.com url script-reponse-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mjtv.js
+^https:\/\/api\.maijitv\.com url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mjtv.js
 # 首页 右下角 悬浮广告
 ^https:\/\/api02\.maijitv\.com\/api\/v1\/layout\/floatingcards url reject
 # 摇一摇弹窗屏蔽
