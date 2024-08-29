@@ -6,9 +6,7 @@
 
 http://106.54.2.168/emmoDiary/user/getUser url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/emmo.js
 
-[mitm]
 
-hostname = 106.54.2.168
 
 */
 let obj = JSON.parse($response.body);
