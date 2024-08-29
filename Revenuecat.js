@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Boring':{ name: 'pro', id: 'month'},//8.29lifelog
     'Overdue':{ name: 'Pro', id: '1'},//8.29我的物品
     'iScape':{ name: 'Pro', id: 'Limited_YearlyProAutoRenew'},//8.15
     'GigaBody':{ name: 'Pro', id: 'GigaBodySubscriptionYear_v1'},//8.21
