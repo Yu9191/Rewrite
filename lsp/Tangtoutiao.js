@@ -4,7 +4,11 @@
  * 域名请及时提供
  * 搭配Senplayer （弃用）
  * 搭配Aloha 下载视频转到本地并自动转换成MP4
- * TF地址 https://testflight.apple.com/join/bZyNXMAx
+ * TF地址 https://testflight.apple.com/join/bZyNXMAx（弃用）
+ * 如果你觉得麻烦 可以直接用浏览器内观看的脚本 无需跳转
+ * 但这样 不能加速 不能滑动进度条 
+ * 本地添加下面这个规则 
+ * ^https:\/\/[^\/]*\..*\.cn\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8(\?.*)? url script-request-header https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/tangtoutiao.js
 
 [rewrite_local]
 
