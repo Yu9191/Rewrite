@@ -6,7 +6,7 @@
 
 hostname = *.youban.fun
 */
-// 获取响应体
+
 let body = $response.body;
 let modifiedBody = body
     .replace(/"vipEndTime":-?\d+/g, '"vipEndTime":4092595200000')  
