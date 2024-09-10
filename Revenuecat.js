@@ -65,6 +65,7 @@ if (typeof $response == "undefined") {
   const UAMappings = {
     'Baby%20Generator':{ name: 'premium_features', id: 'babygenerator_499_weekly'},//9.9
     'Boring':{ name: 'pro', id: 'month'},//8.29lifelog
+    'Snipd':{ name: 'premium', id: 'test_snipd_premium_grandfather_1y_4200_trial_2w_v1'},//9.10
     'Overdue':{ name: 'Pro', id: '1'},//8.29我的物品
     'iScape':{ name: 'Pro', id: 'Limited_YearlyProAutoRenew'},//8.15
     'GigaBody':{ name: 'Pro', id: 'GigaBodySubscriptionYear_v1'},//8.21
