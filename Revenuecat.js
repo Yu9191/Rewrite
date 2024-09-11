@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Opal':{ name: 'premium_tier_2', id: 'com.withopal.opal.premiumtier2lifetime'},//9.11
     'Baby%20Generator':{ name: 'premium_features', id: 'babygenerator_499_weekly'},//9.9
     'Boring':{ name: 'pro', id: 'month'},//8.29lifelog
     'Snipd':{ name: 'premium', id: 'test_snipd_premium_grandfather_1y_4200_trial_2w_v1'},//9.10
