@@ -19,11 +19,10 @@ hostname = *.camscanner.com, *.intsig.net
 *************************************/
 var chxm1023;
 try {
-    chxm1023 = JSON.parse($response.body);
+    chxm1023 = JSON.parse($response.body) ?? {};
 } catch (e) {
-    console.log("Response is not valid JSON:", $response.body);
-    $done({});
-    return;
+    // console.log("Failed to parse JSON:", e);
+    chxm1023 = {}; 
 }
 
 const vipa = '/purchase/cs/query_property';
