@@ -8,9 +8,9 @@ FT中文网 外区
 ***********************
 
 [rewrite_local]
-^https:\/\/dqbam2jv6gg9m\.cloudfront\.net\/index\.php\/jsapi\/paywall url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/FTzhongwenwang.js
+^https:\/\/.*\.cloudfront\.net\/index\.php\/jsapi\/paywall url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/FTzhongwenwang.js
 [mitm] 
-hostname = dqbam2jv6gg9m.cloudfront.net
+hostname = *.cloudfront.net
 
 *******************************/
 var baby = JSON.parse($response.body);
