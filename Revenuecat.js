@@ -143,6 +143,9 @@ if (typeof $response == "undefined") {
     'windiary':{ name: 'Pro', id: 'windiary_1799_lt'},
     'Liftbear':{ name: 'Pro', id: 'liftbear_2399_1y'},
     'Currency':{ name: 'plus', id: 'com.jeffreygrossman.currencyapp.iap.pro.crossgrade'},
+
+    'VSCO':{name:'pro',id:'vscopro_global_5999_annual_7D_free'}
+    'Pillow':{name:'premium',id:'com.neybox.pillow.premium.yearly'}
     
     
     
