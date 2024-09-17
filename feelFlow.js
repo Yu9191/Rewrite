@@ -1,0 +1,16 @@
+/*
+ * feelFlow
+ * 解锁会员
+https://feel.wunitu.com/api/User/getUserInfo
+[rewrite_local]
+^https:\/\/feel\.wunitu\.com\/api\/User\/getUserInfo url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/feelFlow.js
+
+[mitm]
+hostname = feel.wunitu.com
+*/
+
+let response = {
+  body: 'gpAL6opcFP4i6iNqo1MeCKYpPXM4snnSuVX594V9oAuvMutbEEuwYdr7OG/bxjcKhRJyK9trChxXYQ/pglTr55TUNcV+qjNjre0EbtDVzxdn7elwfRyM/Z3XL1x+/fUIGjwfDTXSV8v42fFt9B5Rl9ltJimYBqxMbis911EIBzVbc9R8KuJIwZ7ISTL0G4uWKz6/e4LURVOfPVVKqDYz+ctGcm1jmxj/2vwdAP/ZwdhBvzeRAsbh77kVNQM6o+QIxUGmwxZpfSR4X3BNsTFCDDxfnTPaaeWW5y13+16gqq8tIrKPEdev9FGsuTSJMjbC8ywwU5TFd9QUxbppmzURzdJe/7n8iQSqwXXvLk7VuNi/vseTZPMuXWmTWyBu+qeMWyzRkXZc3kfezfkhAs2Lkw6ReTsl3SAGPNBqYez59m4BzkAlQtKGUr8oUEH/w3pNe3MWomtvYAHUubA3iZFekGPRp02ZptNR8V6mbZgA+xGPrY75yd4OnEfI9w0UOk/9ciZ8Tg6jjQN9N2SOI1LzMpdOBrcshJ9MN/b8v/wW3lR3k1YmK0OMENFPdyJ4KRHrR4UvNLiEkLPCosA1bqKTmBpiOs7ZDoavhE2xJf8G55+e3DhH5AOzVN/hBuY2kLigOrkvHm1ggFoCr60WW0YZFbyQ/77q6OIM9NAZAcLLwh2zjHT1Vit+BYijIL/PCAoO/HGBX4huqF3yTTXu1EYpgEMoUXIhJieu/cM4OJhRoWdsptWOEe+tGFIkLCb8pHEuJRFm9K+z2AS7yBpb/q1TJ9l4FsYiTXoo53g4lio+ZjbwY1QNUBKwSHhgr6VVtK/QAcSYU8MTbKAKUOleKkAfdgJRQAnrEg/n8aWfy9/57c/N0NlPKKkhkuuPED4MJKZ9Ahqqnk1LJezb1gUtCfCgSdiwRBf0xBeBJ5SlLbxT9WRVxlLtuhIX5NUH7Lzg+YDkgWMzbK6plMvPDh/mD3PRHCVGMgHvHZLG1LBd4QNlxZrMkULKgcRZQyYsx3F5eMlr7u8dYtmkTc3qk79ztmPzzjaR256nnna/bp0wYplLcvSUPfZGhFvQEiWvA+YqLSQG',
+};
+
+$done({body: response.body});
