@@ -148,7 +148,7 @@ if (typeof $response == "undefined") {
     'Currency':{ name: 'plus', id: 'com.jeffreygrossman.currencyapp.iap.pro.crossgrade'},
 
     'VSCO':{name:'pro',id:'vscopro_global_5999_annual_7D_free'},
-    'Pillow':{name:'premium',id:'com.neybox.pillow.premium.yearly'},
+    'Pillow':{name:'premium',id:'com.neybox.pillow.premium.yearly'}
     
     
     
