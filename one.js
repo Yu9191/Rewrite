@@ -4,7 +4,7 @@
  * 仅适配2.2.3版本
 
 [rewrite_local]
-https:\/\/api\.\w+\.com\/v2\.4\/(bootstrap|article\/detail) url sscript-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/one.js
+https:\/\/api\.\w+\.com\/v2\.4\/(bootstrap|article\/detail) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/one.js
 [mitm]
 hostname = api.3459381.com, api.61c76a0.com, api.87735d5.com, api.afe9a49.com, api.c6dd5cc.com, api.2b37894.com, api.35a46dd.com, api.43b8477.com, api.5ce3771.com, api.632d809.com, api.b675211.com, api.a9a2bc4.com, api.8eb269a.com, api.4c86d03.com, api.979bb9e.com, api.988068b.com, api.9cbd862.com, api.c2e777b.com, api.b676039.com, api.ab1e7ee.com, api.5ed249d.com, api.2b1daea.com, api.4934430.com, api.645fb8d.com, api.53cuk7g.com, api.5ebd5d.com, api.em1oifd0.com, api*-uat.*.com, jmtp.*.com, api.k55n2r.com, api.zbdk8ws.com, api.26bb4xt.com, api.vf5x3hv.com
 
