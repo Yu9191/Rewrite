@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'AdGuard%20Home%20Remote':{name:'aghrpro',id:'adguard.home.remote.pro'},//9.25
     'Chatme':{name:'premium',id:'chatme_premium_year_discount'},//9.24
     'Alpenglow':{ name: 'newPro', id: 'ProLifetime'},//9.23
     'Opal':{ name: 'premium_tier_2', id: 'com.withopal.opal.premiumtier2lifetime'},//9.11
