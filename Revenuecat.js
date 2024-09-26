@@ -63,6 +63,8 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'dtdVibe':{name:'pro',id:'com.dtd.aroundu.year'},//9.26
+    'DtdVibe':{name:'pro',id:'com.dtd.playlist.premium.subscription.yearr'},//9.26
     'AdGuard%20Home%20Remote':{name:'aghrpro',id:'adguard.home.remote.pro'},//9.25
     'Chatme':{name:'premium',id:'chatme_premium_year_discount'},//9.24
     'Alpenglow':{ name: 'newPro', id: 'ProLifetime'},//9.23
