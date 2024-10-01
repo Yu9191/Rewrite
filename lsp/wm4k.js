@@ -2,7 +2,7 @@ const $ = new Env("GOGOGOGO");
 
 let url = $request.url,
   headers = $request.headers;
-if (headers.hasOwnProperty("x-device-id") || headers.hasOwnProperty("X-Device-Id")) {
+if (headers.hasOwnProperty("x-device-id") || headers.hasOwnProperty("X-Device-ID")) {
   try {
     const notify = $.getdata("m3u8");
     if (!notify || notify != url) {
