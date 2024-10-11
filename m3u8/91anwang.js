@@ -1,21 +1,26 @@
+
 const $ = new Env("GOGOGOGO");
 let url = $request.url, headers = $request.headers;
-const m3u8Regex = /https:\/\/\S+\.m3u8\?token=[^&]+&c=https:\/\/\S+/;
-let matchedUrl = url.match(m3u8Regex);
-if (matchedUrl && matchedUrl.length > 0) {
-    matchedUrl = matchedUrl[0];
-    if (headers.hasOwnProperty("X-Playback-Session-Id") || headers.hasOwnProperty("x-playback-session-id") || headers.hasOwnProperty("Sec-Fetch-Dest") || headers.hasOwnProperty("sec-fetch-dest")) {
-        try {
-            const notify = $.getdata("m3u8");
-            if (!notify || notify != matchedUrl) {
-                $.setdata(matchedUrl, "m3u8");
-                $.msg("视频链接捕获成功", "点击此通知在线观看", "视频还没开始播放之前会通知1-4次", matchedUrl);
-            }
-        } catch (e) {
-            console.error("An error occurred:", e);
-        }
+    if (headers.hasOwnProperty("X-Playback-Session-Id") || headers.hasOwnProperty("x-playback-session-id")) {
+          try {
+    const notify = $.getdata("m3u8");
+
+    if (!notify || notify != url) {
+      $.setdata(url, "m3u8");
+
+      const senPlayerUrl = "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(url),
+        mediaUrl = "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg";
+
+      $.msg("获取成功", "请安装SenPlayer播放器", "已安装请忽略", {
+        "open-url": senPlayerUrl,
+        "media-url": mediaUrl,
+      });
     }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
 }
+
 $.done({});
 
 
