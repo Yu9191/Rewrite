@@ -1,0 +1,41 @@
+{
+    "id": "iu",
+    "name": "iu",
+    "author": "@iu",
+    "icon": "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg",
+    "repo": "https://github.com/Yu9191",
+    "apps": [
+      {
+        "id": "TryNode",
+        "name": "节点尝试请求",
+        "keys": [
+          "try_sign",
+          "try_uid"
+        ],
+        "settings": [
+          {
+            "id": "try_sign",
+            "name": "签名",
+            "val": "c3e7254f65b8c39e9d6391fd422140f3",
+            "type": "text",
+            "desc": "请求签名"
+          },
+          {
+            "id": "try_uid",
+            "name": "用户UID",
+            "val": "3690911436885991424",
+            "type": "text",
+            "desc": "用户ID"
+          }
+        ],
+        "author": "@iu",
+        "repo": "https://github.com/Yu9191",
+        "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/main/TryNode.js",
+        "icons": [
+          "https://raw.githubusercontent.com/xzxxn777/Surge/main/Script/WYYX/WYYX.png",
+          "https://raw.githubusercontent.com/xzxxn777/Surge/main/Script/WYYX/WYYX.png"
+        ]
+      }
+    ]
+  }
+  
