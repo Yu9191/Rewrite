@@ -5,7 +5,7 @@
 
 [rewrite_local]
 
-^http:\/\/api\.xiguavpn\.xyz\/hot\/m_net_server_node_vmess url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/xg.js
+^http:\/\/api\.xiguavpn\.xyz\/hot\/m_net_server_node_vmess url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/xgvpn.js
 
 [mitm]
 
