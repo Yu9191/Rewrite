@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Unfold':{name:'FF2_STORY',id:'UNFOLD_PRO_YEARLY'},//11.2
     'Origami':{name:'Premium',id:'origami_499_1m'},//11.1
     'Reader':{name:'standard',id:'vd_monthly_999'},//10.27
     'Vocai-iOS':{name:'AI Pro',id:'vocabAI_900_1m'},//10.27
