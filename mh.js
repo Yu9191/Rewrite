@@ -1,21 +1,21 @@
 /*
 1.添加脚本 
-2.复制URL地址:http://nmmp.com/custom/subscribe
+2.复制URL地址:https://www.zju.edu.cn
 3.添加节点 定时更新
 4.节点和脚本仅测试qx
 
 [rewrite_local]
-http://nmmp\.com/custom/subscribe url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mh.js
+https://www.zju.edu.cn url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mh.js
 
 [mitm]
-hostname = nmmp.com
+hostname = www.zju.edu.cn
 */
 
 const a = "https://momu.coocs.lol/api/v1/passport/auth/register"; 
 const b = "https://momu.coocs.lol"; 
 const c = `${Math.floor(100000 + Math.random() * 900000)}@qq.com`; 
 const d = "Aa10086."; // 原作者密码可随机
-const e = "http://example.com/custom/subscribe"; // 自定义订阅地址
+const e = "https://www.zju.edu.cn"; // 自定义订阅地址
 
 const f = {
   "Sec-Fetch-Dest": "empty",
