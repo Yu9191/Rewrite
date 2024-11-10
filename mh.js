@@ -8,7 +8,7 @@
 https://www.zju.edu.cn url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mh.js
 
 [mitm]
-hostname = www.zju.edu.cn
+hostname = www.zju.edu.cn, momu.coocs.lol, 172.247.127.105
 */
 
 const a = "https://momu.coocs.lol/api/v1/passport/auth/register"; 
