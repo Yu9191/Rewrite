@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'ainotes':{name:'HoneyNote AI Pro',id:'NCIAP_A_149_99'},//11.14
     'quitnow':{name:'pro_features',id:'pro_features_year_subscription'},//11.12
     'ChatPub':{name:'Unlimited Access',id:'conversationai.year'},//11.11
     'Unfold':{name:'FF2_STORY',id:'UNFOLD_PRO_YEARLY'},//11.2
