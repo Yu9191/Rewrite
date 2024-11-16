@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Remote':{name:'Pro',id:'com.cherpake.macrc.more'},//11.16
     'Chatty':{name:'pro AI Pro',id:'chatty.yearly.1'},//11.15
     'ainotes':{name:'HoneyNote AI Pro',id:'NCIAP_A_149_99'},//11.14
     'quitnow':{name:'pro_features',id:'pro_features_year_subscription'},//11.12
