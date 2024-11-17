@@ -63,6 +63,11 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Finale%E2%80%A2Pad':{name:'Pro',id:'com.cherpake.finale.lt'},//11.16
+    'Sibelius%E2%80%A2Pad':{name:'Premium',id:'com.cherpake.musicpad.all'},//11.16
+    'NumPad':{name:'Pro',id:'com.cherpake.numpad.pro.discount'},//11.16
+    'Drive':{name:'Pro',id:'com.cherpake.drive.viewer.free'},//11.16
+    'TV%20Remote':{name:'Pro',id:'com.cherpake.tvr.all.discount'},//11.16
     'Remote':{name:'Pro',id:'com.cherpake.macrc.more'},//11.16
     'Chatty':{name:'pro AI Pro',id:'chatty.yearly.1'},//11.15
     'ainotes':{name:'HoneyNote AI Pro',id:'NCIAP_A_149_99'},//11.14
