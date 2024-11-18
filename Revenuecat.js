@@ -64,6 +64,7 @@ if (typeof $response == "undefined") {
   const app = '1';
   const UAMappings = {
     'Finale%E2%80%A2Pad':{name:'Pro',id:'com.cherpake.finale.lt'},//11.16
+    'outside':{name:'Outside Pro',id:'outside_sub_yearly_super_cheap_free_trial'},//11.16
     'Sibelius%E2%80%A2Pad':{name:'Premium',id:'com.cherpake.musicpad.all'},//11.16
     'NumPad':{name:'Pro',id:'com.cherpake.numpad.pro.discount'},//11.16
     'Drive':{name:'Pro',id:'com.cherpake.drive.viewer.free'},//11.16
