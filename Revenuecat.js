@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Jellycuts':{name:'pro',id:'standart'},//11.21
     'Finale%E2%80%A2Pad':{name:'Pro',id:'com.cherpake.finale.lt'},//11.16
     'outside':{name:'Outside Pro',id:'outside_sub_yearly_super_cheap_free_trial'},//11.16
     'Sibelius%E2%80%A2Pad':{name:'Premium',id:'com.cherpake.musicpad.all'},//11.16
