@@ -1,5 +1,5 @@
 /*
- * Cam Translator
+ * ‎Impresso
 [rewrite_local]
 
 
