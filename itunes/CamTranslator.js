@@ -12,6 +12,8 @@ hostname = buy.itunes.apple.com
 **/
 
 
+
+
 var objc = JSON.parse($response.body);
 
     objc = {
@@ -33,7 +35,7 @@ var objc = JSON.parse($response.body);
         "is_trial_period": "true",
         "original_transaction_id": "220002179016924",
         "purchase_date": "2024-09-03 08:53:50 Etc\/GMT",
-        "product_id": "co.vulcanlabs.pictranslator.lifetime2",//这里替换成你要解锁的容量id
+        "product_id": "co.vulcanlabs.pictranslator.offlinelifetime1",//这里替换成你要解锁的容量id
         "original_purchase_date_pst": "2024-09-03 01:53:51 America\/Los_Angeles",
         "in_app_ownership_type": "PURCHASED",
         "original_purchase_date_ms": "1725353631000",
@@ -58,9 +60,9 @@ var objc = JSON.parse($response.body);
   },
   "pending_renewal_info": [
     {
-      "product_id": "co.vulcanlabs.pictranslator.lifetime2",//这里替换成你要解锁的容量id
+      "product_id": "co.vulcanlabs.pictranslator.offlinelifetime1",//这里替换成你要解锁的容量id
       "original_transaction_id": "220002179016924",
-      "auto_renew_product_id": "co.vulcanlabs.pictranslator.lifetime2",//这里替换成你要解锁的容量id
+      "auto_renew_product_id": "co.vulcanlabs.pictranslator.offlinelifetime1",//这里替换成你要解锁的容量id
       "auto_renew_status": "1"
     }
   ],
@@ -77,7 +79,7 @@ var objc = JSON.parse($response.body);
       "is_trial_period": "true",
       "original_transaction_id": "220002179016924",
       "purchase_date": "2024-09-03 08:53:50 Etc\/GMT",
-      "product_id": "co.vulcanlabs.pictranslator.lifetime2",//这里替换成你要解锁的容量id
+      "product_id": "co.vulcanlabs.pictranslator.offlinelifetime1",//这里替换成你要解锁的容量id
       "original_purchase_date_pst": "2024-09-03 01:53:51 America\/Los_Angeles",
       "in_app_ownership_type": "PURCHASED",
       "subscription_group_identifier": "21022021",
