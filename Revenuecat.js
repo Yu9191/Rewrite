@@ -63,6 +63,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Relax':{name:'pro',id:'com.happydogteam.relax.lifetimePro'},//12.1
     'Nightcam':{name:'nightcam_pro',id:'com.ahmetserdarkaradeniz.nightcamyearlyalternative'},//11.26
     'Jellycuts':{name:'pro',id:'standart'},//11.21
     'Finale%E2%80%A2Pad':{name:'Pro',id:'com.cherpake.finale.lt'},//11.16
