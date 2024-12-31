@@ -126,3 +126,5 @@ tolerant-spider.treefrog761.one
 alive-polecat.treefrog761.one
 usable-skink.treefrog761.one
 skilled-badger.treefrog761.one
+adequate-narwhal.treefrog761.one
+relaxed-jaybird.treefrog761.one
