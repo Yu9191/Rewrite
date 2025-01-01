@@ -128,3 +128,6 @@ usable-skink.treefrog761.one
 skilled-badger.treefrog761.one
 adequate-narwhal.treefrog761.one
 relaxed-jaybird.treefrog761.one
+
+usable-dolphin.boa152.lol
+powerful-hen.boa152.lol
