@@ -1,0 +1,9 @@
+#!name=linearitcurve
+#!desc=linearitcurve解锁订阅
+
+[URL Rewrite]
+
+https://proxy.linearity.io/v1/receipts https://linearitcurve.lovebabyforever.workers.dev header
+
+[MITM]
+hostname = %APPEND% proxy.linearity.io
