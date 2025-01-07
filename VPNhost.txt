@@ -151,3 +151,6 @@ wealthy-monkey.boa152.lol
 model-oarfish.boa152.lol
 choice-condor.treefrog761.one
 dynamic-tuna.boa152.lol
+dominant-kingfish.treefrog761.one
+assured-fowl.treefrog761.one
+flying-gazelle.boa152.lol
