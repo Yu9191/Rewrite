@@ -91,3 +91,6 @@ complete-leopard.boa152.lol
 square-walleye.treefrog761.one
 adequate-narwhal.treefrog761.one
 national-gar.boa152.lol
+climbing-racer.treefrog761.one
+inspired-gobbler.boa152.lol
+glorious-calf.treefrog761.one
