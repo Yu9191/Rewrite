@@ -17,6 +17,7 @@ if (obj.data) {
     obj.data.is_pro = obj.data.is_pro !== undefined ? 1 : obj.data.is_pro;
     obj.data.unlock_widgets_num = obj.data.unlock_widgets_num !== undefined ? 99999 : obj.data.unlock_widgets_num;
     obj.data.user_id = obj.data.user_id !== undefined ? 888888 : obj.data.user_id; //逼逼的id
+    obj.data.widgets_num = obj.data.widgets_num !== undefined ? 9999 : obj.data.widgets_num;
 }
 
 body = JSON.stringify(obj);
