@@ -11,3 +11,5 @@
 - 白嫖
 
 ## https://iuiu.lovebabyforever.workers.dev/
+
+## https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/Super/trojan.txt
