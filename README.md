@@ -1,4 +1,4 @@
- [只有这一个号其他均是盗版](https://t.me/iuiuiui1)
+ [只有这一个号其他均是盗版](https://t.me/ios151)
 
 
  [目前在Tg创建了频道欢迎你的加入](https://t.me/Jsforbaby)
