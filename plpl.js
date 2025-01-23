@@ -4,11 +4,12 @@
  * 提取高清视频 无限看会员视频
  * 广告未拦截（懒得写了）
 [rewrite_local]
-https:\/\/(?:\S+\/video\/info\/.*\?token=\S+) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/plpl.js
+https:\/\/(?:\S+\/video\/info\/.*\?token=\S+) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/plpl.js
 
 [mitm]
 hostname = apiaws.*.com, apiaws.*.cn, *apiaws*
 */
+
 const $ = new Env("https://web.jwybg.com/", {
     "logLevel": "none" 
 });
