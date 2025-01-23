@@ -2,6 +2,7 @@
  * https://web.jwybg.com/
  * 啪哩啪哩
  * 提取高清视频 无限看会员视频
+ * 需要安装(Senplayer播放器）
  * 广告未拦截（懒得写了）
 [rewrite_local]
 https:\/\/(?:\S+\/video\/info\/.*\?token=\S+) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/plpl.js
