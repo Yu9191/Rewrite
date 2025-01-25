@@ -240,3 +240,28 @@ able-mollusk.goat627.mom|Frankfurt  Pro 5
 eternal-tapir.goat627.mom|Toronto  Pro 3
 nearby-sheep.goat627.mom|Tokyo  Pro 2
 renewing-minnow.goat627.mom|Paris  Pro 2
+adapting-macaw.goat627.mom|Tokyo  Pro 4
+artistic-vulture.goat627.mom|Paris  6
+settling-terrier.goat627.mom|London  2
+useful-honeybee.treefrog761.one|London  Pro 17
+proud-python.goat627.mom|Frankfurt  Pro 9
+worthy-pheasant.goat627.mom|Paris  4
+artistic-snapper.goat627.mom|Seoul  8
+ace-alien.goat627.mom|Seoul  Pro 7
+optimal-owl.goat627.mom|Mumbai  Pro 3
+adapting-macaw.goat627.mom|Tokyo  4
+honest-cow.goat627.mom|Paris  5
+optimal-owl.goat627.mom|Mumbai  3
+harmless-mite.goat627.mom|Stockholm  5
+assuring-roughy.goat627.mom|Frankfurt  7
+proud-python.goat627.mom|Frankfurt  9
+worthy-pheasant.goat627.mom|Paris  Pro 4
+artistic-snapper.goat627.mom|Seoul  Pro 8
+peaceful-shiner.treefrog761.one|Tokyo  Pro 1
+harmless-mite.goat627.mom|Stockholm  Pro 5
+assuring-roughy.goat627.mom|Frankfurt  Pro 7
+ace-alien.goat627.mom|Seoul  7
+settling-terrier.goat627.mom|London  Pro 2
+artistic-vulture.goat627.mom|Paris  Pro 6
+honest-cow.goat627.mom|Paris  Pro 5
+maximum-ant.treefrog761.one|Paris  Pro 2
