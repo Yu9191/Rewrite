@@ -6,9 +6,9 @@
  * 其他代理工具可用
  
 [rewrite_local]
-^https?:\/\/edu\.lezaitizhong\.com\/(shop|vod|tiku|classify|user(?:\/my)?)\/(goods|class_list|getclassifychapter|get_question_media|sheet|get_collection_list|get_course_info|get_cate_vod_list|getuserinfo|get_user_info|get_qtt_info)(?:\/.*)? url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/lanjiyin.js
+^https?:\/\/(?:edu|user)\.lezaitizhong\.com\/(shop|vod|tiku|classify|user(?:\/my)?)\/(goods|class_list|getclassifychapter|get_question_media|sheet|get_collection_list|get_course_info|get_cate_vod_list|getuserinfo|get_user_info|get_qtt_info)(?:\/.*)? url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/lanjiyin.js
 [mitm]
-hostname = edu.lezaitizhong.com
+hostname = *.lezaitizhong.com
 
 */
 const $ = new Env("蓝基因"); 
