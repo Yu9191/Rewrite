@@ -265,3 +265,17 @@ settling-terrier.goat627.mom|London  Pro 2
 artistic-vulture.goat627.mom|Paris  Pro 6
 honest-cow.goat627.mom|Paris  Pro 5
 maximum-ant.treefrog761.one|Paris  Pro 2
+driving-muskox.goat627.mom|Seoul  9
+grown-cardinal.treefrog761.one|Bergamo Pro 3
+uncommon-dory.goat627.mom|London  8
+refined-chipmunk.goat627.mom|Oregon  5
+uncommon-dory.goat627.mom|London  Pro 8
+crucial-grackle.treefrog761.one|Ohio -L22 Pro 2
+warm-rabbit.goat627.mom|Virginia  7
+driving-muskox.goat627.mom|Seoul  Pro 9
+better-lab.goat627.mom|Ohio  4
+possible-macaw.treefrog761.one|Oregon -L22 Pro 16
+refined-chipmunk.goat627.mom|Oregon  Pro 5
+warm-rabbit.goat627.mom|Virginia  Pro 7
+valid-crawdad.treefrog761.one|Seoul  Pro 4
+better-lab.goat627.mom|Ohio  Pro 4
