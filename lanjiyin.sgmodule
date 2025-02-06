@@ -2,7 +2,7 @@
 #!desc=20250126最新
 
 [Script]
-lanjiyin = type=http-response, pattern=^https?:\/\/(?:edu|user)\.lezaitizhong\.com\/(shop|vod|tiku|classify|user(?:\/my)?)\/(?:goods|class_list|getclassifychapter|get_question_media|sheet|get_collection_list|get_course_info|get_cate_vod_list|getuserinfo|get_user_info|get_qtt_info|lecture(?:\/.*)?)(?:\/.*)?, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lanjiyin.js, requires-body=true, max-size=-1, timeout=60
+lanjiyin = type=http-response, pattern=^https?:\/\/(?:edu|user)\.lezaitizhong\.com, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lanjiyin.js, requires-body=true, max-size=-1, timeout=60
 
 [MITM]
 hostname = %APPEND% *.lezaitizhong.com
