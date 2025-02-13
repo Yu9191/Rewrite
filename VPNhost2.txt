@@ -137,3 +137,29 @@ accepted-jennet.adder289.quest|Frankfurt  Pro 16
 fleet-arachnid.treefrog761.one|Lagos Pro 2
 polished-collie.adder289.quest|Mumbai  Pro 3
 inspired-cardinal.insect388.motorcycles|Amsterdam  Pro 6
+simple-toad.adder289.quest|London  5
+popular-pheasant.adder289.quest|Frankfurt  Pro 9
+organic-bluegill.adder289.quest|Frankfurt 2
+logical-longhorn.adder289.quest|Tokyo  6
+concise-quail.adder289.quest|Tokyo  Pro 7
+positive-starling.adder289.quest|Tokyo  Pro 4
+joint-midge.adder289.quest|Frankfurt  Pro 4
+distinct-peacock.adder289.quest|Paris  1
+popular-pheasant.adder289.quest|Frankfurt  9
+logical-longhorn.adder289.quest|Tokyo  Pro 6
+concise-quail.adder289.quest|Tokyo  7
+organic-bluegill.adder289.quest|Frankfurt Pro 2
+distinct-peacock.adder289.quest|Paris  Pro 1
+certain-jaguar.adder289.quest|London  1
+patient-trout.adder289.quest|Seoul  1
+patient-trout.adder289.quest|Seoul  Pro 1
+immortal-mite.adder289.quest|Oregon  5
+coherent-drum.adder289.quest|Seoul  4
+divine-slug.adder289.quest|London  3
+certain-jaguar.adder289.quest|London  Pro 1
+simple-toad.adder289.quest|London  Pro 5
+joint-midge.adder289.quest|Frankfurt  4
+positive-starling.adder289.quest|Tokyo  4
+coherent-drum.adder289.quest|Seoul  Pro 4
+immortal-mite.adder289.quest|Oregon  Pro 5
+divine-slug.adder289.quest|London  Pro 3
