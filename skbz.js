@@ -1,4 +1,4 @@
-const $ = new Env("时空壁纸");
+const $ = new Env("GOGOGOGO");
 let a = $request.url, b = $response.headers;
 
 if (Object.keys(b).some(key => key.toLowerCase() === "x-request-id")) {
@@ -9,13 +9,8 @@ if (Object.keys(b).some(key => key.toLowerCase() === "x-request-id")) {
         const f = c.retData.ext.fileSize;
 
         let g = d.replace(/\\\//g, "/");
-        g = d;
 
-        if ('undefined' !== typeof $task || 'undefined' !== typeof $loon || 'undefined' !== typeof $rocket) {
-            $.msg("图片链接捕获成功", `${e}-${f}`, "", { 'media-url': g });
-        } else {
-            $.msg("图片捕获成功", `${e}-${f}`, "点击此通知查看图片", g);
-        }
+        $.msg("图片捕获成功", `${e}-${f}`, "点击此通知查看图片", g);
     } catch (h) {
         console.error("An error occurred:", h);
     }
