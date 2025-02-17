@@ -163,3 +163,53 @@ positive-starling.adder289.quest|Tokyo  4
 coherent-drum.adder289.quest|Seoul  Pro 4
 immortal-mite.adder289.quest|Oregon  Pro 5
 divine-slug.adder289.quest|London  Pro 3
+amusing-jaybird.treefrog761.one|Seoul  Pro 2
+united-mayfly.adder289.quest|Frankfurt  Pro 6
+cuddly-toucan.adder289.quest|Seoul  6
+inspired-dinosaur.adder289.quest|Tokyo  Pro 8
+equipped-mouse.treefrog761.one|Seoul  Pro 1
+becoming-pheasant.adder289.quest|Warsaw Pro 1
+polite-hyena.adder289.quest|Paris  Pro 2
+polished-ox.treefrog761.one|Oregon  Pro 19
+allowed-gibbon.adder289.quest|Oregon  Pro 6
+trusting-cow.adder289.quest|Warsaw 2
+huge-katydid.treefrog761.one|Stockholm  Pro 3
+fond-moth.treefrog761.one|London  Pro 2
+settled-seal.treefrog761.one|Istanbul  Pro 2
+quality-wolf.adder289.quest|Stockholm  5
+cuddly-toucan.adder289.quest|Seoul  Pro 6
+busy-buffalo.treefrog761.one|Stockholm  Pro 1
+allowed-gibbon.adder289.quest|Oregon  6
+needed-bulldog.adder289.quest|Frankfurt  10
+needed-bulldog.adder289.quest|Frankfurt  Pro 10
+lucky-goose.adder289.quest|Oregon  2
+lucky-goose.adder289.quest|Oregon  Pro 2
+related-hawk.treefrog761.one|Frankfurt  Pro 5
+golden-krill.treefrog761.one|Oregon  Pro 5
+fluent-bat.treefrog761.one|Virginia  Pro 4
+sincere-stud.adder289.quest|Seoul  Pro 7
+brief-squid.adder289.quest|Ohio  Pro 3
+polite-hyena.adder289.quest|Paris  2
+keen-falcon.treefrog761.one|Tokyo  Pro 6
+trusting-cow.adder289.quest|Warsaw Pro 2
+merry-titmouse.adder289.quest|London  Pro 4
+united-mayfly.adder289.quest|Frankfurt  6
+fancy-mudfish.treefrog761.one|Ireland  Pro 2
+humble-mullet.adder289.quest|Ireland  1
+enabling-heron.treefrog761.one|Tokyo  Pro 4
+ethical-dragon.adder289.quest|Tokyo  9
+meet-raven.adder289.quest|Stockholm  4
+becoming-pheasant.adder289.quest|Warsaw 1
+patient-ghost.treefrog761.one|Frankfurt  Pro 7
+humble-mullet.adder289.quest|Ireland  Pro 1
+loved-adder.adder289.quest|Virginia  Pro 7
+meet-raven.adder289.quest|Stockholm  Pro 4
+ethical-dragon.adder289.quest|Tokyo  Pro 9
+brief-squid.adder289.quest|Ohio  3
+inspired-dinosaur.adder289.quest|Tokyo  8
+merry-titmouse.adder289.quest|London  4
+quality-wolf.adder289.quest|Stockholm  Pro 5
+sincere-stud.adder289.quest|Seoul  7
+composed-mustang.treefrog761.one|Frankfurt  Pro 1
+loved-adder.adder289.quest|Virginia  7
+allowed-mustang.treefrog761.one|Ohio  Pro 16
