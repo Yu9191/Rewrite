@@ -18,7 +18,7 @@ hostname = rdp.duetdisplay.com
     success: true,
     products: [{
       vendor: "apple",
-      product: "DuetAirAnnual",
+      product: "DuetStudio",//pro版
       subscriptionId: 391961,
       purchaseDate: "2023-11-14T19:47:25Z",
       cancelled: false,
