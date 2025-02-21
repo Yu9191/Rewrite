@@ -2,12 +2,12 @@
     "id": "scheme",
     "name": "URLscheme",
     "author": "@ios151",
-    "icon": "",
+    "icon": "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg",
     "repo": "https://t.me/Jsforbaby",
     "apps": [
       {
         "id": "video",
-        "name": "video-Eric",
+        "name": "选择你喜欢的播放器",
         "keys": ["scheme"],
         "settings": [
           {
