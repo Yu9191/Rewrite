@@ -34,7 +34,7 @@ if (a.includes("player/common") && $response.body) {
                 } else {
                     k = c.includes("://") ? c + h : c + "://" + h;
                 }
-                $.msg("蓝光视频信息捕获成功", `${title} - ${f.qualityShortName}`, `点击此通知跳转播放器观看: ${k}`);
+                $.msg("蓝光视频信息捕获成功", `${title} - ${f.qualityShortName}`, `点击此通知跳转播放器观看: ${k}`, { 'open-url': k });
             } else {
                 $.log("没有找到蓝光质量的播放地址");
             }
@@ -67,7 +67,7 @@ if (a.includes("i/live/studio/id/v4") && $response.body) {
                     }
 
                     // 通知信息
-                    $.msg("蓝光视频信息捕获成功", `${i} - ${g.qualityShortName}`, `点击此通知跳转播放器观看: ${j}`);
+                    $.msg("蓝光视频信息捕获成功", `${i} - ${g.qualityShortName}`, `点击此通知跳转播放器观看: ${j}`, { 'open-url': j });
                 } else {
                     $.log(`没有找到蓝光质量的播放地址：${f.title}`);
                 }
