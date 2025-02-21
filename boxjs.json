@@ -1,41 +1,51 @@
 {
-    "id": "iu",
-    "name": "iu",
-    "author": "@iu",
-    "icon": "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg",
-    "repo": "https://github.com/Yu9191",
+    "id": "scheme",
+    "name": "URLscheme",
+    "author": "@ios151",
+    "icon": "",
+    "repo": "https://t.me/Jsforbaby",
     "apps": [
       {
-        "id": "TryNode",
-        "name": "节点尝试请求",
-        "keys": [
-          "try_sign",
-          "try_uid"
-        ],
+        "id": "video",
+        "name": "video-Eric",
+        "keys": ["scheme"],
         "settings": [
           {
-            "id": "try_sign",
-            "name": "签名",
-            "val": "c3e7254f65b8c39e9d6391fd422140f3",
-            "type": "text",
-            "desc": "请求签名"
-          },
-          {
-            "id": "try_uid",
-            "name": "用户UID",
-            "val": "3690911436885991424",
-            "type": "text",
-            "desc": "用户ID"
+            "id": "scheme",
+            "name": "浏览器",
+            "val": "Safari",
+            "type": "selects",
+            "items": [
+              {
+                "key": "Safari",
+                "label": "Safari"
+              },
+              {
+                "key": "alook",
+                "label": "alook"
+              },
+              {
+                "key": "SenPlayer",
+                "label": "SenPlayer"
+              },
+              {
+                "key": "yybp",
+                "label": "影音宝"
+              },
+              {
+                "key": "zoeplay",
+                "label": "Zoe播放器"
+              }
+            ],
+            "desc": "请选择浏览器,如果您需要其他的联系作者"
           }
         ],
-        "author": "@iu",
-        "repo": "https://github.com/Yu9191",
-        "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/main/TryNode.js",
+        "author": "@baby",
+        "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kdf.js",
         "icons": [
-          "https://raw.githubusercontent.com/xzxxn777/Surge/main/Script/WYYX/WYYX.png",
-          "https://raw.githubusercontent.com/xzxxn777/Surge/main/Script/WYYX/WYYX.png"
+          "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg",
+          "https://raw.githubusercontent.com/Yu9191/-/main/dingdangmao.jpg"
         ]
       }
     ]
   }
-  
