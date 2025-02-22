@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-https://notability.com/global url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kdf.js
+https://notability.com/global url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/Not.js
 
 [mitm]
 hostname = notability.com
