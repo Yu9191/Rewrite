@@ -20,9 +20,9 @@ if (a.includes("player/common") && $response.body) {
         const d = JSON.parse($response.body);
         const e = d.dt.currentMedias;
         if (e && e.qualitys) {
-            const f = e.qualitys.find(g => g.qualityName === "蓝光");
-            if (f && f.originalUrl) {
-                const h = f.originalUrl.replace(/\\/g, "");
+            const f = e.qualitys.find(g => g.qualityName === "蓝光" || g.qualityName === "蓝光265");
+            if (f && (f.originalUrl || f.qualityUrl)) {
+                const h = (f.originalUrl || f.qualityUrl).replace(/\\/g, "");
                 const i = `${e.mediaName}`;
                 const j = e.mediaSubTitle;
                 const title = i || j || "未命名";
@@ -36,7 +36,7 @@ if (a.includes("player/common") && $response.body) {
                 }
                 $.msg("蓝光视频信息捕获成功", `${title} - ${f.qualityShortName}`, `点击此通知跳转播放器观看: ${k}`, { 'open-url': k });
             } else {
-                $.log("没有找到蓝光质量的播放地址");
+                $.log("没有找到蓝光或蓝光265质量的播放地址");
             }
         } else {
             $.log("当前媒体数据中没有找到质量列表");
@@ -53,23 +53,23 @@ if (a.includes("i/live/studio/id/v4") && $response.body) {
 
         if (e) {
             e.forEach(f => {
-                const g = f.qualitys.find(h => h.qualityName === "蓝光");
+                const g = f.qualitys.find(h => h.qualityName === "蓝光" || h.qualityName === "蓝光265");
 
-                if (g && g.qualityUrl) {
+                if (g && (g.qualityUrl || g.originalUrl)) {
                     const i = f.title;
                     let j;
                     if (c === "SenPlayer") {
-                        j = "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(g.qualityUrl);
+                        j = "SenPlayer://x-callback-url/play?url=" + encodeURIComponent(g.qualityUrl || g.originalUrl);
                     } else if (c === "Safari") {
-                        j = g.qualityUrl;
+                        j = g.qualityUrl || g.originalUrl;
                     } else {
-                        j = c.includes("://") ? c + g.qualityUrl : c + "://" + g.qualityUrl;
+                        j = c.includes("://") ? c + (g.qualityUrl || g.originalUrl) : c + "://" + (g.qualityUrl || g.originalUrl);
                     }
 
                     // 通知信息
                     $.msg("蓝光视频信息捕获成功", `${i} - ${g.qualityShortName}`, `点击此通知跳转播放器观看: ${j}`, { 'open-url': j });
                 } else {
-                    $.log(`没有找到蓝光质量的播放地址：${f.title}`);
+                    $.log(`没有找到蓝光或蓝光265质量的播放地址：${f.title}`);
                 }
             });
         } else {
