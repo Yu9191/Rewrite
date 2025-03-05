@@ -9,7 +9,7 @@
 # 会员
 https:\/\/(dd38dkt7dfvyr|d2x03a61ogs2x5)\.cloudfront\.net\/api\/(video\/getVideoById|user\/base\/info) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
 # 广告 开屏广告没处理（会报错）
-^https:\/\(dd38dkt7dfvyr|d2x03a61ogs2x5)\.net\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
+^https:\/\/(dd38dkt7dfvyr|d2x03a61ogs2x5)\.cloudfront\.net\/api\/(sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
 
 [mitm]
 hostname = *.cloudfront.net
