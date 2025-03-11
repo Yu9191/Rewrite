@@ -1,13 +1,15 @@
+
 /* 
  * 淫荡猫 & 母狗圈 & 成人版
  * 解锁会员视频
  * 去除弹窗广告
  * 解锁付费视频
- * 2025-03-10
+ * 2025-03-12
 [rewrite_local]
-
+# 视频
+https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
 # 会员
-https:\/\/(dd38dkt7dfvyr|d2x03a61ogs2x5|d3lijns9322mkl)\.cloudfront\.net\/api\/(video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
+https:\/\/(dd38dkt7dfvyr|d2x03a61ogs2x5|d3lijns9322mkl)\.cloudfront\.net\/api\/(user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
 # 广告 
 ^https:\/\/(?:dd38dkt7dfvyr|d2x03a61ogs2x5|d3lijns9322mkl)\.cloudfront\.net\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
 
