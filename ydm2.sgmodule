@@ -1,0 +1,12 @@
+#!name=淫荡猫
+#!desc=av合集
+
+[URL Rewrite]
+# 广告 开屏广告没处理（会报错）
+^https:\/\/(?:dd38dkt7dfvyr|d2x03a61ogs2x5|d3lijns9322mkl)\.cloudfront\.net\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) - reject
+
+[Script]
+# 会员
+av222 = type=http-request,pattern=https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath,requires-body=1,max-size=0,binary-body-mode=0,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
+[MITM]
+hostname = %APPEND% *.cloudfront.net
