@@ -1,8 +1,9 @@
-#!name=carrot
-#!desc=会员2025.9.26
-
-[Script]
-carrot = type=http-request, pattern=^https:\/\/carrotweather\.herokuapp\.com\/parse\/functions\/findSubscriptionsForUserId, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/carrot2.js, timeout=60
-
-[MITM]
-hostname = %APPEND% carrotweather.herokuapp.com
+ #!name=Carrot解锁订阅
+ #!desc=需要试用或者订阅到期
+  
+  
+  [URL Rewrite]
+  https://carrotweather.herokuapp.com/parse/functions/findSubscriptionsForUserId https://carrot.lovebabyforever.workers.dev header
+  
+  [MITM]
+  hostname = %APPEND% carrotweather.herokuapp.com
