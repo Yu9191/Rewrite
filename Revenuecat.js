@@ -65,6 +65,7 @@ if (typeof $response == "undefined") {
   const app = '1';
   const UAMappings = {
     'ClipyBoard':{name:'premium',id:'clipyboard_yearly'},//2.27
+    'Wake%20Music':{name:'premium',id:'com.OfflineMusic.www.lifetime298'},//3.23
     'Spark':{name:'premium',id:'spark_c_5999_1y_d50'},//2.27
     'Barcodes':{name:'Unlimited',id:'com.barcodesapp.lifetime'},//12.10
     'Relax':{name:'pro',id:'com.happydogteam.relax.lifetimePro'},//12.1
