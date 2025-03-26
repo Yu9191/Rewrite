@@ -9,9 +9,9 @@
 # 视频
 https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
 # 会员
-https://*.cloudfront.net/api/(video/getVideoById|user/base/info|community/dynamic/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
+^https://[a-zA-Z0-9-]+\.cloudfront\.net/api/(video/getVideoById|user/base/info|community/dynamic/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
 # 广告 
-^https://*.cloudfront.net/api/(?:sys/partner/list|activity/indexActs|sys/advertisement/list|sys/getImgAndVideoCdnList|aibox/entranceConfig) url reject
+^https://[a-zA-Z0-9-]+\.cloudfront\.net/api/(?:sys/partner/list|activity/indexActs|sys/advertisement/list|sys/getImgAndVideoCdnList|aibox/entranceConfig) url reject
 
 [mitm]
 hostname = *.cloudfront.net
