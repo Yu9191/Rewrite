@@ -10,9 +10,11 @@
 https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
 # 会员
 ^https:\/\/(?:[a-zA-Z0-9-]+\.cloudfront\.net|snerbnew\.pxyzjmspfl\.work)(?::\d+)?\/api\/(?:video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
-# 广告 
-^https://(?:[a-zA-Z0-9-]+\.cloudfront\.net|snerbnew\.pxyzjmspfl\.work)(?::\d+)?/api/?(?:sys/partner/list|activity/indexActs|sys/advertisement/list|sys/getImgAndVideoCdnList|aibox/entranceConfig)?$ url reject
-#三年二班 
+# cloudfront广告 
+^https?:\/\/(?:[a-z0-9-]+\.)?cloudfront\.net\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
+# 三年二班广告
+^https?:\/\/snerbnew\.pxyzjmspfl\.work\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
+# 三年二班 
 ^https:\/\/snerbnew\.pxyzjmspfl\.work(?::\d+)?\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
 [mitm]
 hostname = *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999
