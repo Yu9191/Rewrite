@@ -1,0 +1,9 @@
+#!name=海角社区
+#!desc=2025-04-01最新版
+#!icon=https://raw.githubusercontent.com/fishdown/Icon/master/app/haijiao.png
+
+[Script]
+http-response ^https:\/\/api2\.upwqjcun\.cc\/api\/(?:mv\/detail|users\/base_info|home\/getconfig|novel\/detail|novel\/recommend|novel\/chaptersList|novel\/chapterDetail|navigation\/index_aw) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiaoshequ.js, requires-body=true, timeout=60, tag=haijiaoshequ
+
+[MITM]
+hostname = *.upwqjcun.cc
