@@ -16,7 +16,7 @@
 # 无水印
 ^http://statica\.xuantu\.pro/x/prod/ReplaceBackgroundWithPrompt/(\d+-\d+)\.jpg\?.* url 302 http://statica.xuantu.pro/x/prod/ReplaceBackgroundWithPrompt/$1.jpg
 [mitm]
-hostname = xuantu.pro
+hostname = xuantu.pro, statica.xuantu.pro
 */
 const a = new Env("炫图生成Token");
 const b = "xuantu_tokens";
