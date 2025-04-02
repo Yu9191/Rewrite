@@ -13,7 +13,8 @@
 ^https:\/\/xuantu\.pro\/(creation\/(generate\/(v2|v3)|memberships|getProgress|imageintent)|file\/aliyun\/sts)\/? url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt2.js
 # 获取会员token 
 ^https:\/\/xuantu\.pro\/creation\/myworks url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt.js
-
+# 无水印
+^http://statica\.xuantu\.pro/x/prod/ReplaceBackgroundWithPrompt/(\d+-\d+)\.jpg\?.* url 302 http://statica.xuantu.pro/x/prod/ReplaceBackgroundWithPrompt/$1.jpg
 [mitm]
 hostname = xuantu.pro
 */
