@@ -150,9 +150,13 @@ function sendNotification(title, type) {
     } else if (isQuanX) {
         $notify(title, "", message, { "open-url": url });
     } else if (isSurge) {
-        $notification.post(title, "", message, { url: url });
+        $notification.post(title, "", message, { 
+            "action": "open-url", 
+            "url": url 
+        });
     }
 }
+
 
 // 渲染视频页面
 function renderVideoPage() {
