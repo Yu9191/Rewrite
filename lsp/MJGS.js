@@ -1,7 +1,7 @@
 
 [rewrite_local]
 #广告
-^https:\/\/((mfjk|gnjk|buyaoda).+\.com|jk\.bnhwq672q3\.com)\/(playerinfo|api\/home\/popup|api\/get_?advert url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/mjgsad.js
+^https:\/\/((mfjk|gnjk|buyaoda).+\.com|jk\.bnhwq672q3\.com)\/(playerinfo|api\/home\/popup|api\/get_?advert).* url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/mjgsad.js
 #游戏
 https:\/\/(mfjk|gnjk|jk|buyaoda).+\.com\/request_game\/v3\/game\/list url reject-dict
 #视频
