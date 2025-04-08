@@ -29,7 +29,7 @@
           "name": "自定义 Scheme",
           "val": "",
           "type": "text",
-          "desc": "如：nplayer-http:// 或 myplayer://x-callback-url/play?url=",
+          "desc": "如：nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
           "show": {
             "scheme_select": "自定义"
           }
