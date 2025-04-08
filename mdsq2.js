@@ -1,3 +1,20 @@
+/* 
+ * 麻豆社区
+ * 解锁站内所有付费及会员视频
+ * 广告及个人页面未作任何处理
+ * 💡 boxjs地址：
+ * https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/boxjs.json
+ * 2025-04-08
+ ******************************
+ 可以在boxjs里面设置播放器
+ ******************************
+[rewrite_local]
+https://d1skbu98kuldnf.cloudfront.net/api/app/media/play url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mdsq2.js
+
+[mitm]
+hostname = *.cloudfront.net
+
+*/
 const $ = new Env("麻豆社区");
 
 // 读取 BoxJs 中的设置：scheme_select 是下拉选择，scheme_custom 是自定义文本
