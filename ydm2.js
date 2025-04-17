@@ -2,15 +2,18 @@
  * 2025-03-11 适配小火箭
  * 2025-03-26 增加新地址
  * 2025-03-27 增加三年二班
+ * 2025-04-17 增加UU视频
 */
 const url = $request.url;
 const isQX = typeof $task !== "undefined";
 
+// 域名映射
 const apiUrls = {
   'd2x03a61ogs2x5.cloudfront.net': 'https://vpn3.lovebabyforever.workers.dev/?videoId=300000',
   'd3lijns9322mkl.cloudfront.net': 'https://vpn2.lovebabyforever.workers.dev',
   'dd38dkt7dfvyr.cloudfront.net': null,
   'd1xwta4tq724e9.cloudfront.net': 'https://vpn4.lovebabyforever.workers.dev',
+  'd11rd8m1pg017m.cloudfront.net': 'https://vpn5.lovebabyforever.workers.dev',  // 👈 新增UU视频
   'snerbnew.pxyzjmspfl.work': 'https://kl.lovebabyforever.workers.dev'
 };
 
@@ -20,6 +23,7 @@ if (url.includes('auth_key=')) {
   let newAuthKey = null;
   let apiUrl = null;
 
+  // 多分支匹配各域名
   if (url.includes('d2x03a61ogs2x5.cloudfront.net')) {
     apiUrl = apiUrls['d2x03a61ogs2x5.cloudfront.net'];
   } else if (url.includes('d3lijns9322mkl.cloudfront.net')) {
@@ -28,6 +32,8 @@ if (url.includes('auth_key=')) {
     newAuthKey = Gu;
   } else if (url.includes('d1xwta4tq724e9.cloudfront.net')) {
     apiUrl = apiUrls['d1xwta4tq724e9.cloudfront.net'];
+  } else if (url.includes('d11rd8m1pg017m.cloudfront.net')) {
+    apiUrl = apiUrls['d11rd8m1pg017m.cloudfront.net'];  // 👈 新增UU视频
   } else if (url.includes('snerbnew.pxyzjmspfl.work')) {
     apiUrl = apiUrls['snerbnew.pxyzjmspfl.work'];
   }
@@ -61,6 +67,10 @@ if (url.includes('auth_key=')) {
   } else {
     $done({});
   }
+} else {
+  $done({});
+}
+
 } else {
   $done({});
 }
