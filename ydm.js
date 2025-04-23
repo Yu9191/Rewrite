@@ -4,7 +4,7 @@
  * 解锁会员视频
  * 去除弹窗广告
  * 解锁付费视频
- * 2025-03-26
+ * 2025-04-23
 [rewrite_local]
 # 视频
 https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
@@ -16,8 +16,12 @@ https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-reques
 ^https?:\/\/snerbnew\.pxyzjmspfl\.work\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
 # 三年二班 
 ^https:\/\/snerbnew\.pxyzjmspfl\.work(?::\d+)?\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
+# gy2025
+^https:\/\/gy2025\.rnuozrryfq\.work(?::\d+)?\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
+# gy2025
+^https:\/\/gy2025\.rnuozrryfq\.work(?::\d+)?\/api\/(?:video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
 [mitm]
-hostname = *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999
+hostname = *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999, *.rnuozrryfq.work
 */
 const $ = new Env("VideoAuthKey", {
     "logLevel": "info"
