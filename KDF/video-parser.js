@@ -1,725 +1,287 @@
 /* 
  * 看东方 
  * 提取会员视频 跳转浏览器HTML页面
- * 2025-04-04
+ * 2025-04-25
  * 
 [rewrite_local]
 # NBA视频和电视剧
 https:\/\/bp-api\.bestv\.com\.cn\/cms\/api\/(live\/studio\/id\/v4|c\/player\/common) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/KDF/video-parser.js
 # HTML页面
-^https:\/\/360\.com\/video url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/KDF/video-parser.js
+^https?:\/\/360\.com\/(?:video|nba\.m3u|dianshi\.m3u)$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/KDF/video-parser.js
 
 [mitm]
 hostname = 360.com, bp-api.bestv.com.cn
 */
+/****************************************************************
+ * 看东方 NBA & 电视剧 → HTML + M3U (v2025-04-25)
+ ****************************************************************/
 
-
-const $originalDone = $done;
+const $origDone = $done;
 $done = (obj = {}) => {
   this.$prefs || (obj.status &&= +obj.status.match(/\b\d{3}\b/)[0]);
-
-  $originalDone(obj);
+  $origDone(obj);
 };
-
-// 存储工具定义
-const storage = {
+const store = {
   get: this.$prefs?.valueForKey ?? $persistentStore.read,
-
-  set: (key, value) =>
-    (this.$prefs?.setValueForKey ?? $persistentStore.write)(value, key),
+  set: (k, v) => (this.$prefs?.setValueForKey ?? $persistentStore.write)(v, k)
 };
 
-// 获取当前请求URL
-const url = $request.url;
+const M3U_HEADER =
+  '#EXTM3U x-tvg-url="https://t.me/GithubYu9191"';
 
-// 处理视频数据拦截
+const extraLines = t => [
+  `#EXTINF:-1 tvg-id="频道说明" tvg-name="频道说明" tvg-logo="https://epg.iill.top/logo/温馨提示.png" group-title="•${t}",欢迎订阅频道：https://t.me/GithubYu9191`,
+  'https://t.me/GithubYu9191'
+];
+
+
+/* ---------- URL路径处理 ---------- */
+const url = $request.url;
 if (
-  url.includes("/api/v1/nba/game/") ||
-  url.includes("/cms/api/live/studio/id/v4") ||
-  url.includes("/cms/api/c/player/common")
+  url.includes('/api/v1/nba/game/') ||
+  url.includes('/cms/api/live/studio/id/v4') ||
+  url.includes('/cms/api/c/player/common')
 ) {
-  handleVideoData();
-}
-// 处理自定义HTML页面请求
-else if (url.includes("360.com/video")) {
-  renderVideoPage();
+  parseVideoApi();
+} else if (url.includes('360.com/nba.m3u')) {
+  renderM3U('nba');
+} else if (url.includes('360.com/dianshi.m3u')) {
+  renderM3U('tv');
+} else if (url.includes('360.com/video')) {
+  renderHtml();
 } else {
   $done({});
 }
 
-// 处理视频数据函数
-function handleVideoData() {
+/* ==============================================================
+ *                大老师建议 数组储存
+ * ============================================================== */
+function parseVideoApi() {
   try {
-    // 解析API返回的JSON数据
     const body = JSON.parse($response.body);
-
-    // 检测内容类型
-    if (body.dt && body.dt.liveStudioStreamRelVoList) {
-      // NBA内容处理逻辑
-      handleNBAContent(body.dt);
-    } else if (body.dt && body.dt.medias) {
-      // 电视剧内容处理逻辑
-      handleTVContent(body.dt);
-    } else {
-      console.log("未知内容类型");
-      $done({});
-    }
-  } catch (error) {
-    console.log("处理视频数据出错: " + error);
-    $done({});
+    if (body.dt?.liveStudioStreamRelVoList) return handleNBA(body.dt);
+    if (body.dt?.medias)                       return handleTV(body.dt);
+    console.log('未知内容类型'); $done({});
+  } catch (e) {
+    console.log('解析失败: ' + e); $done({});
   }
 }
 
-// 处理NBA内容
-function handleNBAContent(gameData) {
-  // 存储基本信息
-  storage.set("content_type", "nba");
-  storage.set("nba_game_title", gameData.title);
-  storage.set("nba_game_description", gameData.description || "");
-  storage.set("nba_game_cover", gameData.sourceCover);
-  storage.set(
-    "nba_game_backgroundCover",
-    gameData.backgroundCover || gameData.sourceCover
-  );
+/* ---------------- NBA ---------------- */
+function handleNBA(dt) {
+  store.set('content_type', 'nba');
+  store.set('nba_game_title', dt.title);
+  store.set('nba_game_description', dt.description || '');
+  store.set('nba_game_cover', dt.sourceCover);
+  store.set('nba_game_background', dt.backgroundCover || dt.sourceCover);
 
-  // 存储视频流数据
-  const streams = gameData.liveStudioStreamRelVoList || [];
-  storage.set("nba_streams_count", streams.length.toString());
-
-  // 循环保存每个视频流的信息
-  streams.forEach((stream, index) => {
-    const streamKey = `nba_stream_${index}`;
-    storage.set(
-      streamKey,
-      JSON.stringify({
-        title: stream.title,
-        cover: stream.cover,
-        canSee: stream.canSee,
-        qualitys: stream.qualitys,
-      })
-    );
+  const streams = (dt.liveStudioStreamRelVoList || []).map(s => {
+    const best =
+      s.qualitys?.find(q => /1080/.test(q.qualityShortName || '')) ??
+      s.qualitys?.[0] ?? {};
+    return {
+      title    : s.title,
+      cover    : s.cover,
+      canSee   : s.canSee,
+      qualitys : s.qualitys || [],
+      playUrl  : best.qualityUrl || ''
+    };
   });
+  store.set('nba_streams', JSON.stringify(streams));
+  if (dt.studioTabVoList) store.set('nba_tabs', JSON.stringify(dt.studioTabVoList));
 
-  // 存储其他标签数据（数据/专家/赛程等）
-  if (gameData.studioTabVoList) {
-    storage.set("nba_tabs", JSON.stringify(gameData.studioTabVoList));
-  }
-
-  // 发送通知
-  sendNotification(gameData.title, "NBA比赛");
-
-  // 返回原始数据不变
+  notify(dt.title, 'NBA比赛');
   $done({});
 }
 
-// 处理电视剧内容
-function handleTVContent(tvData) {
-  // 存储基本信息
-  storage.set("content_type", "tv");
-  storage.set("tv_title", tvData.currentMedias.contentName || "");
-  storage.set("tv_cover", tvData.currentMedias.mediaCover || "");
-  storage.set("tv_description", tvData.currentMedias.shareDesc || "");
-  storage.set("tv_current_episode", tvData.currentMedias.episodeNumber || 1);
+/* ---------------- 电视剧 ---------------- */
+function handleTV(dt) {
+  const cur = dt.currentMedias;
+  /* 基本信息 */
+  store.set('content_type', 'tv');
+  store.set('tv_title', cur.contentName || '');
+  store.set('tv_cover', cur.mediaCover || '');
+  store.set('tv_description', cur.shareDesc || '');
+  store.set('tv_current_ep', cur.episodeNumber || 1);
+  store.set('tv_current_media', JSON.stringify(cur));
 
-  // 存储当前集信息
-  storage.set("tv_current_media", JSON.stringify(tvData.currentMedias));
+  /* ========= 处理两种结构 (数组 / data[]) ========= */
+  const rawEps = Array.isArray(dt.medias) ? dt.medias : (dt.medias?.data || []);
 
-  // 存储剧集信息
-  if (tvData.medias && tvData.medias.data) {
-    storage.set("tv_episodes_count", tvData.medias.data.length.toString());
+  /* 选择最佳清晰度播放地址 */
+  const pickBest = (qArr = [], fallback = '') => {
+    if (!Array.isArray(qArr) || qArr.length === 0) return fallback;
+    return qArr
+      .map(q => ({
+        url   : q.qualityUrl || q.originalUrl || '',
+        score :
+            /1080|FHD/i.test(q.qualityShortName || q.bitrateType) ? 3 :
+            /720|HD/i.test(q.qualityShortName || q.bitrateType)  ? 2 : 1,
+        bw    : +(q.bandWidth || 0)
+      }))
+      .filter(o => o.url)
+      .sort((a,b)=>b.score - a.score || b.bw - a.bw)[0].url;
+  };
 
-    tvData.medias.data.forEach((episode, index) => {
-      const episodeKey = `tv_episode_${index}`;
-      storage.set(
-        episodeKey,
-        JSON.stringify({
-          titleId: episode.titleId,
-          title: episode.mediaName,
-          subTitle: episode.mediaSubTitle,
-          cover: episode.mediaCover,
-          episodeNumber: episode.episodeNumber,
-          duration: episode.duration,
-        })
-      );
-    });
-  }
+  const episodes = rawEps.map(ep => ({
+    episodeNumber : ep.episodeNumber,
+    title         : ep.mediaName,
+    subTitle      : ep.mediaSubTitle,
+    cover         : ep.mediaCover,
+    duration      : ep.duration,
+    qualitys      : ep.qualitys || [],
+    playUrl       : pickBest(ep.qualitys, ep.mediaUrl || '')
+  }));
+  store.set('tv_episodes', JSON.stringify(episodes));
 
-  // 发送通知
-  sendNotification(tvData.currentMedias.contentName, "电视剧");
-
+  notify(cur.contentName, '电视剧');
   $done({});
 }
 
-// 发送通知函数
-function sendNotification(title, type) {
-  const url = "https://360.com/video";
-
+/* ---------- 系统通知 ---------- */
+function notify(title, type) {
+  const link = 'https://360.com/video';
   (this.$notify ?? $notification.post)(
-    title,
-    "",
-    type === "NBA比赛" ? "点击查看比赛直播和集锦" : "点击查看剧集",
-    {
-      "open-url": url,
-       openUrl: url,
-       url,
-    }
+    title, '', type === 'NBA比赛' ? '点击查看比赛直播和集锦' : '点击查看剧集',
+    { 'open-url': link, openUrl: link, url: link }
   );
 }
 
-// 渲染视频页面
-function renderVideoPage() {
-  try {
-    // 获取内容类型
-    const contentType = storage.get("content_type") || "nba";
+/* ==============================================================
+ *                生成 M3U 订阅
+ * ============================================================== */
+function buildM3U(kind) {
+  const lines = [M3U_HEADER];
 
-    if (contentType === "nba") {
-      renderNBAPage();
-    } else if (contentType === "tv") {
-      renderTVPage();
-    } else {
-      throw new Error("未知内容类型");
-    }
-  } catch (error) {
-    // 错误处理
-    $done({
-      status: "HTTP/1.1 500 Internal Server Error",
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-      body: `<html><body><h1>发生错误</h1><p>${error}</p></body></html>`,
+  if (kind === 'nba') {
+    const title = store.get('nba_game_title') || 'NBA';
+    lines.push(...extraLines(title));
+    JSON.parse(store.get('nba_streams') || '[]').forEach(s => {
+      if (!s.playUrl) return;
+      lines.push(`#EXTINF:-1 tvg-id="${s.title}" tvg-name="${s.title}" tvg-logo="${s.cover}" group-title="${s.title}「1080」",${s.title}`);
+      lines.push(s.playUrl);
+    });
+  } else {  /* tv */
+    const title = store.get('tv_title') || '电视剧';
+    lines.push(...extraLines(title));
+    JSON.parse(store.get('tv_episodes') || '[]').forEach(ep => {
+      const url = ep.playUrl ||
+                  (ep.qualitys?.find(q=>q.qualityUrl)?.qualityUrl) ||
+                  ep.mediaUrl || '';
+      if (!url) return;
+      const name = `${title} - 第${ep.episodeNumber}集`;
+      lines.push(`#EXTINF:-1 tvg-id="${name}" tvg-name="${name}" tvg-logo="${ep.cover}" group-title="${title}",${name}`);
+      lines.push(url);
     });
   }
+  return lines.join('\n');
+}
+function renderM3U(kind){
+  $done({status:'HTTP/1.1 200 OK',headers:{'Content-Type':'audio/x-mpegurl; charset=utf-8'},body:buildM3U(kind)});
 }
 
-// 渲染NBA页面
-function renderNBAPage() {
-  // 获取存储的数据
-  const title = storage.get("nba_game_title") || "NBA 比赛";
-  const description = storage.get("nba_game_description") || "";
-  const cover = storage.get("nba_game_cover") || "";
-  const backgroundCover = storage.get("nba_game_backgroundCover") || cover;
-  const streamsCount = parseInt(storage.get("nba_streams_count") || "0");
-  const tabsData = JSON.parse(storage.get("nba_tabs") || "[]");
-
-  // 构建视频流HTML
-  let streamsHTML = "";
-  for (let i = 0; i < streamsCount; i++) {
-    const streamKey = `nba_stream_${i}`;
-    const streamData = storage.get(streamKey);
-
-    if (streamData) {
-      const stream = JSON.parse(streamData);
-
-      // 为每个质量选项构建按钮
-      let qualityBtns = "";
-      if (stream.qualitys && stream.qualitys.length > 0) {
-        qualityBtns = stream.qualitys
-          .map(
-            (q) =>
-              `<a href="${q.qualityUrl}" class="quality-btn" target="_blank">${q.qualityShortName}</a>`
-          )
-          .join("");
-      }
-
-      // 对于需要会员的视频，添加标签
-      const vipBadge = !stream.canSee
-        ? '<span class="vip-badge">会员</span>'
-        : "";
-
-      // 构建单个视频项目的HTML
-      streamsHTML += `
-            <div class="video-item ${!stream.canSee ? "vip-content" : ""}">
-                <div class="video-thumbnail">
-                    <img src="${stream.cover}" alt="${
-        stream.title
-      }" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMTAwIDE1MCIgZmlsbD0iIzMzMyI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiMyMjIiLz48dGV4dCB4PSI1MCIgeT0iNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2FhYSI+无封面</dGV4dD48L3N2Zz4=';">
-                    ${vipBadge}
-                </div>
-                <h3>${stream.title}</h3>
-                <div class="quality-options">
-                    ${qualityBtns}
-                </div>
-            </div>
-            `;
-    }
+/* ==============================================================
+ *                 HTML
+ * ============================================================== */
+function renderHtml(){
+  try{
+    const type = store.get('content_type') || 'nba';
+    type==='nba' ? htmlNBA() : htmlTV();
+  }catch(e){
+    $done({status:'HTTP/1.1 500',headers:{'Content-Type':'text/html; charset=utf-8'},body:`<h1>Error</h1><p>${e}</p>`});
   }
-
-  // 构建标签页HTML
-  let tabsHTML = "";
-  tabsData.forEach((tab) => {
-    if (tab.address) {
-      tabsHTML += `<a href="${tab.address}" class="tab-btn" target="_blank">${tab.name}</a>`;
-    }
-  });
-
-  // 完整的HTML页面
-  const html = `
-    <!DOCTYPE html>
-    <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>${title}</title>
-        <style>
-            ${getCommonStyles()}
-            
-            /* NBA特有样式 */
-            .videos-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 15px;
-                margin-top: 10px;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- 顶部背景区域 -->
-        <div class="header">
-            <div class="header-bg" style="background-image: url('${backgroundCover}');"></div>
-            <div class="header-overlay"></div>
-            <div class="header-content">
-                <h1>${title}</h1>
-                ${
-                  description ? `<p class="description">${description}</p>` : ""
-                }
-            </div>
-        </div>
-        
-        <!-- 导航标签区域 -->
-        ${
-          tabsData.length > 0
-            ? `
-        <div class="tabs">
-            ${tabsHTML}
-        </div>
-        `
-            : ""
-        }
-        
-        <!-- 视频内容区域 -->
-        <div class="container">
-            <h2 class="section-title">比赛视频</h2>
-            <div class="videos-grid">
-                ${streamsHTML}
-            </div>
-        </div>
-    </body>
-    </html>
-    `;
-
-  // 返回HTML页面
-  $done({
-    status: "HTTP/1.1 200 OK",
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-    body: html,
-  });
 }
 
-// 渲染电视剧页面
-function renderTVPage() {
-  // 获取存储的数据
-  const title = storage.get("tv_title") || "电视剧";
-  const description = storage.get("tv_description") || "";
-  const cover = storage.get("tv_cover") || "";
-  const currentEpisode = parseInt(storage.get("tv_current_episode") || "1");
-  const episodesCount = parseInt(storage.get("tv_episodes_count") || "0");
-  const currentMedia = JSON.parse(storage.get("tv_current_media") || "{}");
+/* ---- NBA 页面 ---- */
+function htmlNBA(){
+  const title = store.get('nba_game_title') || 'NBA';
+  const desc  = store.get('nba_game_description') || '';
+  const cover = store.get('nba_game_cover') || '';
+  const bg    = store.get('nba_game_background') || cover;
+  const streams = JSON.parse(store.get('nba_streams') || '[]');
+  const tabs    = JSON.parse(store.get('nba_tabs')   || '[]');
 
-  // 构建剧集HTML
-  let episodesHTML = "";
-  for (let i = 0; i < episodesCount; i++) {
-    const episodeKey = `tv_episode_${i}`;
-    const episodeData = storage.get(episodeKey);
+  const streamsHTML = streams.map(s=>{
+    const badge = !s.canSee ? '<span class="vip-badge">会员</span>' : '';
+    const qBtns = s.qualitys.map(q=>`<a href="${q.qualityUrl}" class="quality-btn" target="_blank">${q.qualityShortName}</a>`).join('');
+    return `<div class="video-item ${!s.canSee?'vip-content':''}">
+      <div class="video-thumbnail"><img src="${s.cover}" alt="${s.title}" onerror="this.src=''">${badge}</div>
+      <h3>${s.title}</h3><div class="quality-options">${qBtns}</div></div>`;
+  }).join('');
 
-    if (episodeData) {
-      const episode = JSON.parse(episodeData);
+  const tabsHTML = tabs.filter(t=>t.address).map(t=>`<a href="${t.address}" class="tab-btn" target="_blank">${t.name}</a>`).join('');
 
-      const isActive = episode.episodeNumber === currentEpisode;
-
-      // 构建单个剧集的HTML
-      episodesHTML += `
-            <div class="episode-item ${isActive ? "active" : ""}">
-                <div class="episode-thumbnail">
-                    <img src="${episode.cover}" alt="${
-        episode.title
-      }" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMTAwIDE1MCIgZmlsbD0iIzMzMyI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiMyMjIiLz48dGV4dCB4PSI1MCIgeT0iNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2FhYSI+无封面</dGV4dD48L3N2Zz4=';">
-                </div>
-                <h3>${episode.title}</h3>
-                <p class="subtitle">${episode.subTitle}</p>
-            </div>
-            `;
-    }
-  }
-
-  // 构建当前集的质量选择
-  let qualityBtns = "";
-  if (currentMedia.qualitys && currentMedia.qualitys.length > 0) {
-    qualityBtns = currentMedia.qualitys
-      .map(
-        (q) =>
-          `<a href="${q.qualityUrl}" class="quality-btn" target="_blank">${q.qualityShortName}</a>`
-      )
-      .join("");
-  }
-
-  // 完整的HTML页面
-  const html = `
-    <!DOCTYPE html>
-    <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>${title}</title>
-        <style>
-            ${getCommonStyles()}
-            
-            /* 电视剧特有样式 */
-            .episodes-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 15px;
-                margin-top: 20px;
-            }
-            
-            .episode-item {
-                position: relative;
-                background: var(--card-bg);
-                border-radius: 8px;
-                overflow: hidden;
-                transition: transform 0.2s;
-                padding-bottom: 10px;
-                cursor: pointer;
-            }
-            
-            .episode-item.active {
-                border: 2px solid var(--primary-color);
-            }
-            
-            .episode-item:hover {
-                transform: translateY(-5px);
-            }
-            
-            .episode-thumbnail {
-                position: relative;
-                width: 100%;
-                padding-top: 56.25%;
-                overflow: hidden;
-            }
-            
-            .episode-thumbnail img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            
-            .subtitle {
-                color: #aaa;
-                font-size: 12px;
-                margin: 0 10px 8px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                height: 32px;
-            }
-            
-            .current-episode {
-                padding: 20px;
-                background: rgba(26, 26, 26, 0.6);
-                border-radius: 10px;
-                margin-bottom: 30px;
-            }
-            
-            .current-episode h2 {
-                color: var(--primary-color);
-                margin-top: 0;
-            }
-            
-            .current-episode p {
-                color: #ddd;
-                margin-bottom: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- 顶部背景区域 -->
-        <div class="header">
-            <div class="header-bg" style="background-image: url('${cover}');"></div>
-            <div class="header-overlay"></div>
-            <div class="header-content">
-                <h1>${title}</h1>
-                ${
-                  description ? `<p class="description">${description}</p>` : ""
-                }
-            </div>
-        </div>
-        
-        <!-- 当前剧集区域 -->
-        <div class="container">
-            <div class="current-episode">
-                <h2>${currentMedia.mediaName || ""} - ${
-    currentMedia.mediaSubTitle || ""
-  }</h2>
-                <p>选择清晰度:</p>
-                <div class="quality-options">
-                    ${qualityBtns}
-                </div>
-            </div>
-            
-            <h2 class="section-title">全部剧集</h2>
-            <div class="episodes-grid">
-                ${episodesHTML}
-            </div>
-        </div>
-    </body>
-    </html>
-    `;
-
-  // 返回HTML页面
-  $done({
-    status: "HTTP/1.1 200 OK",
-    headers: { "Content-Type": "text/html; charset=utf-8" },
-    body: html,
-  });
+  $done({status:'HTTP/1.1 200 OK',headers:{'Content-Type':'text/html; charset=utf-8'},body:`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>${title}</title><style>${css()}
+    .videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:15px;margin-top:10px}
+    .m3u-btn{margin-left:10px;padding:4px 12px;border:0;border-radius:4px;background:var(--primary-color);color:#fff;font-size:12px;cursor:pointer}
+    .m3u-btn:active{opacity:.8}</style></head><body>
+    <div class="header"><div class="header-bg"style="background-image:url('${bg}')"></div><div class="header-overlay"></div>
+    <div class="header-content"><h1>${title}</h1>${desc?`<p class="description">${desc}</p>`:''}</div></div>
+    ${tabsHTML?`<div class="tabs">${tabsHTML}</div>`:''}
+    <div class="container"><h2 class="section-title">比赛视频 <button class="m3u-btn"onclick="copyM3U('nba')">复制 M3U 源</button></h2>
+      <div class="videos-grid">${streamsHTML}</div></div>
+    <script>function copyM3U(k){navigator.clipboard.writeText(k==='nba'?'https://360.com/nba.m3u':'https://360.com/dianshi.m3u').then(()=>alert('已复制 M3U 源'));}</script></body></html>`});
 }
 
-// 获取通用样式
-function getCommonStyles() {
-  return `
-    /* 全局样式 */
-    :root {
-        --primary-color: #f39c12;
-        --bg-color: #0c0c0c;
-        --card-bg: #1a1a1a;
-        --text-color: #fff;
-        --secondary-bg: #333;
-        --hover-bg: #555;
-    }
-    
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.5;
-    }
-    
-    /* 顶部区域 */
-    .header {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 20px;
-    }
-    
-    .header-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        filter: blur(2px);
-        z-index: 1;
-    }
-    
-    .header-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8));
-        z-index: 2;
-    }
-    
-    .header-content {
-        position: relative;
-        z-index: 3;
-        width: 100%;
-        max-width: 800px;
-    }
-    
-    h1 {
-        margin: 0 0 10px;
-        font-size: 24px;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-    
-    .description {
-        margin: 0;
-        font-size: 16px;
-        opacity: 0.8;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    }
-    
-    /* 标签区域 */
-    .tabs {
-        display: flex;
-        overflow-x: auto;
-        padding: 15px;
-        background: rgba(26, 26, 26, 0.8);
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-    }
-    
-    .tabs::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .tab-btn {
-        flex: 0 0 auto;
-        padding: 10px 20px;
-        margin-right: 10px;
-        background-color: var(--secondary-bg);
-        color: var(--text-color);
-        text-decoration: none;
-        border-radius: 5px;
-        white-space: nowrap;
-        font-size: 14px;
-        transition: background-color 0.2s;
-    }
-    
-    .tab-btn:hover, .tab-btn:active {
-        background-color: var(--hover-bg);
-    }
-    
-    /* 内容区域 */
-    .container {
-        padding: 15px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .section-title {
-        margin: 0 0 20px;
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--primary-color);
-        text-align: center;
-    }
-    
-    /* 视频项目样式 */
-    .video-item {
-        position: relative;
-        background: var(--card-bg);
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-    
-    .video-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 7px 10px rgba(0,0,0,0.2);
-    }
-    
-    .video-thumbnail {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 宽高比 */
-        overflow: hidden;
-    }
-    
-    .video-thumbnail img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    /* 会员标记 */
-    .vip-badge {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: var(--primary-color);
-        color: white;
-        font-size: 12px;
-        padding: 3px 6px;
-        border-radius: 3px;
-        font-weight: bold;
-        z-index: 2;
-    }
-    
-    .vip-content {
-        position: relative;
-    }
-    
-    .vip-content::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1;
-        pointer-events: none;
-    }
-    
-    /* 视频标题和画质选择 */
-    .video-item h3 {
-        margin: 10px;
-        font-size: 14px;
-        height: 40px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-    }
-    
-    .quality-options {
-        display: flex;
-        justify-content: space-around;
-        padding: 0 10px 10px;
-        gap: 5px;
-    }
-    
-    .quality-btn {
-        flex: 1;
-        display: inline-block;
-        padding: 6px 0;
-        background: var(--secondary-bg);
-        color: var(--text-color);
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 12px;
-        transition: background 0.2s;
-    }
-    
-    .quality-btn:hover, .quality-btn:active {
-        background: var(--hover-bg);
-    }
-    
-    /* 移动端优化 */
-    @media (max-width: 600px) {
-        .videos-grid, .episodes-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .header {
-            height: 150px;
-        }
-        
-        h1 {
-            font-size: 20px;
-        }
-    }
-    `;
+/* ---- 电视剧 页面 ---- */
+function htmlTV(){
+  const title = store.get('tv_title') || '电视剧';
+  const desc  = store.get('tv_description') || '';
+  const cover = store.get('tv_cover') || '';
+  const curEp = +store.get('tv_current_ep') || 1;
+  const episodes = JSON.parse(store.get('tv_episodes') || '[]');
+  const curMedia = JSON.parse(store.get('tv_current_media') || '{}');
+
+  const epsHTML = episodes.map(ep=>`
+    <div class="episode-item ${ep.episodeNumber===curEp?'active':''}">
+      <div class="episode-thumbnail"><img src="${ep.cover}" alt="${ep.title}" onerror="this.src=''"></div>
+      <h3>${ep.title}</h3><p class="subtitle">${ep.subTitle}</p></div>`).join('');
+
+  const qBtns = curMedia.qualitys?.map(q=>`<a href="${q.qualityUrl}" class="quality-btn" target="_blank">${q.qualityShortName}</a>`).join('') || '';
+
+  $done({status:'HTTP/1.1 200 OK',headers:{'Content-Type':'text/html; charset=utf-8'},body:`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport"content="width=device-width,initial-scale=1"><title>${title}</title><style>${css()}
+    .episodes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px;margin-top:20px}
+    .episode-item{position:relative;background:var(--card);border-radius:8px;overflow:hidden;transition:.2s;padding-bottom:10px;cursor:pointer}
+    .episode-item.active{border:2px solid var(--primary-color)}.episode-item:hover{transform:translateY(-5px)}
+    .episode-thumbnail{position:relative;width:100%;padding-top:56.25%}.episode-thumbnail img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .subtitle{color:#aaa;font-size:12px;margin:0 10px 8px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;height:32px}
+    .current-episode{padding:20px;background:rgba(26,26,26,.6);border-radius:10px;margin-bottom:30px}
+    .m3u-btn{margin-left:10px;padding:4px 12px;border:0;border-radius:4px;background:var(--primary-color);color:#fff;font-size:12px;cursor:pointer}
+    .m3u-btn:active{opacity:.8}</style></head><body>
+    <div class="header"><div class="header-bg"style="background-image:url('${cover}')"></div><div class="header-overlay"></div>
+      <div class="header-content"><h1>${title}</h1>${desc?`<p class="description">${desc}</p>`:''}</div></div>
+    <div class="container">
+      <div class="current-episode"><h2>${curMedia.mediaName||''} - ${curMedia.mediaSubTitle||''}</h2>
+        <p>选择清晰度:</p><div class="quality-options">${qBtns}</div></div>
+      <h2 class="section-title">全部剧集 <button class="m3u-btn"onclick="copyM3U('tv')">复制 M3U 源</button></h2>
+      <div class="episodes-grid">${epsHTML}</div></div>
+    <script>function copyM3U(k){navigator.clipboard.writeText(k==='nba'?'https://360.com/nba.m3u':'https://360.com/dianshi.m3u').then(()=>alert('已复制 M3U 源'));}</script></body></html>`});
 }
+
+/* ---------- CSS ---------- */
+function css(){
+  return`
+:root{--primary-color:#f39c12;--bg:#0c0c0c;--card:#1a1a1a;--text:#fff;--sec:#333;--hover:#555}
+*{box-sizing:border-box}body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.header{position:relative;height:200px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.header-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(2px);z-index:1}
+.header-overlay{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.8));z-index:2}
+.header-content{position:relative;z-index:3;width:100%;max-width:800px}h1{margin:0 0 10px;font-size:24px;font-weight:700;text-shadow:0 2px 4px rgba(0,0,0,.5)}
+.description{margin:0;font-size:16px;opacity:.8;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.tabs{display:flex;overflow-x:auto;padding:15px;background:rgba(26,26,26,.8);-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:0;z-index:10}
+.tabs::-webkit-scrollbar{display:none}.tab-btn{flex:0 0 auto;padding:10px 20px;margin-right:10px;background:var(--sec);color:var(--text);text-decoration:none;border-radius:5px;font-size:14px;transition:.2s}
+.tab-btn:hover{background:var(--hover)}.container{padding:15px;max-width:1200px;margin:0 auto}
+.section-title{margin:0 0 20px;font-size:18px;font-weight:600;color:var(--primary-color);text-align:center}
+.video-item{position:relative;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.1);transition:.2s}
+.video-item:hover{transform:translateY(-5px);box-shadow:0 7px 10px rgba(0,0,0,.2)}
+.video-thumbnail{position:relative;width:100%;padding-top:56.25%}.video-thumbnail img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vip-badge{position:absolute;top:5px;right:5px;background:var(--primary-color);color:#fff;font-size:12px;padding:3px 6px;border-radius:3px;font-weight:bold;z-index:2}
+.vip-content::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:1;pointer-events:none}
+.video-item h3{margin:10px;font-size:14px;height:40px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.quality-options{display:flex;justify-content:space-around;padding:0 10px 10px;gap:5px}
+.quality-btn{flex:1;padding:6px 0;background:var(--sec);color:var(--text);text-align:center;text-decoration:none;border-radius:4px;font-size:12px;transition:.2s}
+.quality-btn:hover{background:var(--hover)}
+@media(max-width:600px){.header{height:150px}h1{font-size:20px}}
+`;
+}
+
