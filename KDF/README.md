@@ -90,4 +90,4 @@
 
 ## 🔖 License
 
-MIT License © 2025 [YourName or GithubYu9191]
+MIT License © 2025 [MyName or GithubYu9191]
