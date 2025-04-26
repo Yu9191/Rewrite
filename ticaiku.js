@@ -9,11 +9,11 @@
 [rewrite_local]
 
 
-https://miniapp.guniuniu.com/api/app/user$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/ticaiku.js
+https://app.txcfgl.com/api/app/user$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/ticaiku.js
 
 [mitm] 
 
-hostname = miniapp.guniuniu.com
+hostname = app.txcfgl.com
 
 
 
