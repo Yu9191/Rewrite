@@ -2,7 +2,7 @@
  *
 脚本功能：加藤视频vip解锁,付费视频,下载,会员线路,去广告+
 软件版本：3.1.3
-脚本作者：
+脚本作者：伟人& baby
 [rewrite_local]
 # > 加藤视频vip解锁,付费视频解锁,下载,会员线路,去广告++
 ^https?:\/\/.+\/shorter\/(video\/longvideoinfo|resource\/adInfoPageList\?adSpaceId|user\/getUser|resource\/getWindowNotice|tabIconConfigView|user\/getVipPvg|video\/home|video\/search).*$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/jtsp.js
