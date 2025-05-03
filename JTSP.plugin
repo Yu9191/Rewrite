@@ -1,7 +1,8 @@
-#!name=jtsp
-#!desc=jtsp
+#!name=加藤视频
+#!author= @ios151
+#!desc=加藤视频vip解锁,付费视频解锁,下载,会员线路,去广告++
 #!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1031.png
-
+#!date = 2025.5.3
 [Rewrite]
 # > 去广告
 ^https?://.+/shorter/resource/getAdInfoBySpaceId\?ad - reject
