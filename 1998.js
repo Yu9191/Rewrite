@@ -7,7 +7,7 @@
 ^https:\/\/.*\.1998xuexi\.com\/source-gateway\/store-web-new\/app\/(course\/getCurrCatalogue\.action|material\/getMaterialCateLog\.action|vip\/getMemberVipInfo\.action|vip\/getVipInfomationAll\.action) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/1998.js
 
 [mitm]
-hostname = *.1998xuexi.com, *.1997xuexi.com
+hostname = *.1998xuexi.com, *.1998xuexi.com
 */
 
 
