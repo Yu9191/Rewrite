@@ -5,7 +5,7 @@
   * 可以支持外部下载（导出）
   * http可弃用主机名 此处只是记录（无视 https也有）
 [rewrite_local]
-https://https://api-app-v2.wangpaiyixue.cn/v2/goods/detail url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/wpyx.js
+https://api-app-v2.wangpaiyixue.cn/v2/goods/detail url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/wpyx.js
 #^http:\/\/(119\.36\.175\.\d+|104\.251\.228\.\d+|hw-dl\.videocc\.net).*\.zip$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/wpxz.js
 #如果下面这个误杀用上面这个
 ^https?:\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|hw-dl\.videocc\.net).*\.zip$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/wpxz.js
