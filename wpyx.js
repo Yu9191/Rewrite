@@ -12,7 +12,7 @@ https://https://api-app-v2.wangpaiyixue.cn/v2/goods/detail url script-response-b
 [mitm]
 hostname = api-app-v2.wangpaiyixue.cn, 119.36.175.*, hw-dl.videocc.net
 * */
-const $ = new Env("王派医学5.1最新版", {
+const $ = new Env("王派医学5.22最新版", {
     "logLevel": "info"
 });
 
