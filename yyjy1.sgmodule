@@ -1,0 +1,8 @@
+#!name=yyjy1
+#!desc=yyjy1
+
+[Script]
+yyjy1 = type=http-response, pattern=https://api.douyinggongchang.com/v1, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/yyjy1.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% api.douyinggongchang.com
