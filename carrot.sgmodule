@@ -1,9 +1,9 @@
- #!name=Carrot解锁订阅
- #!desc=需要试用或者订阅到期
+#!name=Carrot解锁订阅
+#!desc=需要试用或者订阅到期
   
   
-  [URL Rewrite]
-  https://carrotweather.herokuapp.com/parse/functions/findSubscriptionsForUserId https://carrot.lovebabyforever.workers.dev header
+[URL Rewrite]
+https://carrotweather.herokuapp.com/parse/functions/findSubscriptionsForUserId https://carrot.lovebabyforever.workers.dev header
   
-  [MITM]
-  hostname = %APPEND% carrotweather.herokuapp.com
+[MITM]
+hostname = %APPEND% carrotweather.herokuapp.com
