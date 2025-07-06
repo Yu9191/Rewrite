@@ -5,6 +5,7 @@
  * 去除弹窗广告
  * 解锁付费视频
  * 2025-04-23
+ * 2025-07-06 修复两个接口
 [rewrite_local]
 # 视频
 https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
