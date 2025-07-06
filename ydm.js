@@ -20,8 +20,11 @@ https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath url script-reques
 ^https:\/\/gy2025\.rnuozrryfq\.work(?::\d+)?\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
 # gy2025
 ^https:\/\/gy2025\.rnuozrryfq\.work(?::\d+)?\/api\/(?:video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
+^https:\/\/aw0702\.x5t5d5a4c\.work(?::\d+)?\/api\/(?:video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js
+^https:\/\/aw0702\.x5t5d5a4c\.work(?::\d+)?\/api\/m3u8\/decode\/authPath url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js
+^https?:\/\/aw0702\.x5t5d5a4c\.work\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) url reject
 [mitm]
-hostname = *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999, *.rnuozrryfq.work
+hostname = *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999, *.rnuozrryfq.work, aw0702.x5t5d5a4c.work
 */
 const $ = new Env("VideoAuthKey", {
     "logLevel": "info"
