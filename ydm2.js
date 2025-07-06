@@ -18,7 +18,7 @@ const apiMap = {
   'd1xwta4tq724e9.cloudfront.net': 'https://vpn4.lovebabyforever.workers.dev', // 阵亡
   'd11rd8m1pg017m.cloudfront.net': 'https://vpn5.lovebabyforever.workers.dev',
   'snerbnew.pxyzjmspfl.work': 'https://kl.lovebabyforever.workers.dev',
-  'aw0702.x5t5d5a4c.work': 'https://kl.lovebabyforever.workers.dev',// 母狗园更换域名 07-06
+  'aw0702.x5t5d5a4c.work': 'https://vpn2.lovebabyforever.workers.dev',// 母狗园更换域名 07-06
   'gy2025.rnuozrryfq.work': 'https://vpn2.lovebabyforever.workers.dev' // 母狗园更换域名
 };
 
