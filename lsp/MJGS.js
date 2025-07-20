@@ -8,4 +8,4 @@
 ^https?:\/\/(mfjk|gnjk\d*|buyaoda|gnjk2\.kzfbz|jk\.bnhwq672q3)\..*\.com\/(api\/(comic|video|short_movie_info|novel|gallery|vip|index|video\/info)|request_rust_video\/ai\/init_info).*$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/mjgshd.js
 
 [mitm]
-hostname = gnjk.*.com, mfjk.*.com, buyaoda.*.com, jk.*.com, gnjk3.*.com, 
+hostname = gnjk.*.com, mfjk.*.com, buyaoda.*.com, jk.*.com, gnjk3.*.com, gnjk1.*.com, gnjk2.*.com
