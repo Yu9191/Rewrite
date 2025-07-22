@@ -6,7 +6,7 @@
 [rewrite_local]
 ^https?:\/\/[^\/]+\/index\.php\/vod\/play\/id\/\d+\/sid\/\d+\/nid\/\d+\.html url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/zimuquan.js
 [mitm]
-hostname = zimuquan.top, *.zimuquan.top, *.zimuquan3.top, *.zimuquan10.uk
+hostname = zimuquan.top, *.zimuquan.top, *.zimuquan3.top, *.zimuquan10.uk, www.zimuquan12.uk
 
 */
 
