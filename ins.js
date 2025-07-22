@@ -3,7 +3,7 @@ ins社区
 
 [rewrite_local]
 
-https:\/\/x2\.ins620\.com\/post\/app\/p\/post\/private\/(info|page|similar\/page) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insck.js
+https:\/\/x2\.ins620\.com\/post\/app\/p\/post\/private\/(video\/recommend|info|page|similar\/page) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insck.js
 https://x2.ins620.com/party/common/advertising/public/adv/list url reject
 https://x2.ins620.com/user/app/u/user/private/info url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ins.js
 [mitm]
