@@ -1,4 +1,4 @@
-const token = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoiMjUwNzIzMDAwMDE3MyIsImxvZ2luX3R5cGUiOjMsImlzcyI6ImgiLCJ1c2VyX2tleSI6IjI1MDcyMzAwMDAxNzMiLCJpYXQiOjE3NTMyMDA2MDMsInVzZXJuYW1lIjoiYmFieWk4c3J5In0.JEFVjMlw68xkeoVOIxG97rF9RJjO63Uu1V7Srl-aZM0SKsD1PXFZt12KbWgcHQc4I-s12-WiEeGOGhdhCrEmCw';
+const token = 'eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjoiMjUwNzI0MDAwMDE5MiIsImxvZ2luX3R5cGUiOjMsImlzcyI6ImgiLCJ1c2VyX2tleSI6IjI1MDcyNDAwMDAxOTIiLCJpYXQiOjE3NTMyODcwMDEsInVzZXJuYW1lIjoiYmFieTJuOXc5In0.fUi1i3i4kVgc-xsZUngAvZjWzTSoI-K_3Eb8W2_4kiE8Yh6eeMZpzcHfC0O4Bdpv2kfvIzsDMppQaLnAesZ2iQ';
 let headers = $request.headers;
 
 if ('authorization' in headers || 'Authorization' in headers) {
