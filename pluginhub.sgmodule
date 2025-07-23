@@ -1,5 +1,5 @@
 #!name=适配可莉插件中心
-#!desc=支持可莉插件中心的插件给Surge使用，非Loon用户切勿反馈插件任何问题，尊重原创
+#!desc=支持可莉插件中心的插件给Surge使用; 非Loon用户切勿反馈插件任何问题，尊重原创; 使用前请先添加ScriptHub模块. 插件中心网址 https://pluginhub.kelee.one
 #!system= ios
 #!category= 可莉插件中心
 #!author=原作者@iKeLee
