@@ -4,12 +4,12 @@
  * 去除局部广告 
  * 解锁社区部分视频 
  * [暗网] [书城]未解锁
- * 2025-04-01最新版
+ * 2025-07-24最新版
 [rewrite_local]
-^https:\/\/api2\.upwqjcun\.cc\/api\/(?:mv\/detail|users\/base_info|home\/getconfig|novel\/detail|novel\/recommend|novel\/chaptersList|novel\/chapterDetail|navigation\/index_aw) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiaoshequ.js
+^https:\/\/api2\.xivjndn\.xyz\/api\/(?:mv\/detail|users\/base_info|home\/getconfig|novel\/detail|novel\/recommend|novel\/chaptersList|novel\/chapterDetail|navigation\/index_aw) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiaoshequ.js
 
 [mitm]
-hostname = *.upwqjcun.cc
+hostname = *.upwqjcun.cc, api2.xivjndn.xyz
 */
 
 const $ = new Env("海角社区");
