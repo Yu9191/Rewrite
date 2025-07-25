@@ -1,11 +1,10 @@
 #!name=适配可莉插件中心
 #!desc=支持可莉插件中心的插件给Surge使用; 非Loon用户切勿反馈插件任何问题，尊重原创; 使用前请先添加ScriptHub模块. 插件中心网址 https://pluginhub.kelee.one
-#!system= ios
 #!category= 可莉插件中心
 #!author=原作者@iKeLee
 
 [Body Rewrite]
-http-response https://kelee.one/Tool/Loon/Lpx_list.json "loon://import\?plugin=(https://kelee.one/Tool/Loon/Lpx/(.+).lpx)" "surge:///install-module?url=http://script.hub/file/_start_/$1/_end_/$2.sgmodule%3Ftype%3Dloon-plugin%26target%3Dsurge-module%26del%3Dtrue%26jqEnabled%3Dtrue%26pm%3D.%26sni%3D."
+http-response https://pluginhub.kelee.one/Lpx_list.json "loon://import\?plugin=(https://kelee.one/Tool/Loon/Lpx/(.+).lpx)" "surge:///install-module?url=http://script.hub/file/_start_/$1/_end_/$2.sgmodule%3Ftype%3Dloon-plugin%26target%3Dsurge-module%26del%3Dtrue%26jqEnabled%3Dtrue%26pm%3D.%26sni%3D."
 
 [MITM]
-hostname = %APPEND% kelee.one
+hostname = %APPEND% pluginhub.kelee.one
