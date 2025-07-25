@@ -87,7 +87,7 @@ if (typeof $response == "undefined") {
     'Reader':{name:'standard',id:'vd_monthly_999'},//10.27
     'Vocai-iOS':{name:'AI Pro',id:'vocabAI_900_1m'},//10.27
     'Treering':{name:'Pro',id:'Treering.pro.yearly1'},//10.26
-    'AmazingWidget':{name:'pro',id:'moyo_subcription_yearly'},//10.22
+    'AmazingWidget':{name:'pro',id:'com.moyo.forever.vip'},//10.22
     'dtdVibe':{name:'pro',id:'com.dtd.aroundu.year'},//9.26
     'DtdVibe':{name:'pro',id:'com.dtd.playlist.premium.subscription.yearr'},//9.26
     'AdGuard%20Home%20Remote':{name:'aghrpro',id:'adguard.home.remote.pro'},//9.25
