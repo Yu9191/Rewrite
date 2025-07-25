@@ -64,6 +64,7 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Pocket%20Widgets':{name:'Subscription',id:'com.niko.PocketWidgetsApp.lifetimePlus'},//7.26
     'ClipyBoard':{name:'premium',id:'clipyboard_yearly'},//2.27
     'Wake%20Music':{name:'premium',id:'com.OfflineMusic.www.lifetime298'},//3.23
     'Spark':{name:'premium',id:'spark_c_5999_1y_d50'},//2.27
