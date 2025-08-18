@@ -4,7 +4,11 @@
 #!author=原作者@iKeLee
 
 [Body Rewrite]
-http-response https://pluginhub.kelee.one/Lpx_list.json "loon://import\?plugin=(https://kelee.one/Tool/Loon/Lpx/(.+).lpx)" "surge:///install-module?url=http://script.hub/file/_start_/$1/_end_/$2.sgmodule%3Ftype%3Dloon-plugin%26target%3Dsurge-module%26del%3Dtrue%26jqEnabled%3Dtrue%26pm%3D.%26sni%3D."
+http-response https://pluginhub.kelee.one/list.json "loon://import\?plugin=(https://kelee.one/Tool/Loon/Lpx/(.+).lpx)" "surge:///install-module?url=http://script.hub/file/_start_/$1/_end_/$2.sgmodule%3Ftype%3Dloon-plugin%26target%3Dsurge-module%26del%3Dtrue%26jqEnabled%3Dtrue%26pm%3D.%26sni%3D."
+# 清理缓存
+[Header Rewrite]
+http-request https://pluginhub.kelee.one/list.json header-del if-none-match
+
 
 [MITM]
 hostname = %APPEND% pluginhub.kelee.one
