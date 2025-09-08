@@ -3,7 +3,7 @@ JVID大陆版
 
 [rewrite_local]
 ^https?://[^/]+/front/(?:system/(?:banner/bannerListByMAcct|bannersetting/userGetBannerSet)|cluser/c/user/info/get)(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid.js
-^https:\/\/kmfhb0n\.cdv6x4x6\.cc\/front\/(media\/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system\/vipsetting\/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
+^https?://[^/]+/front/(media/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system/vipsetting/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
 
 [mitm]
 hostname = *.cdv6x4x6.cn, *.uywhqqxp.cc
