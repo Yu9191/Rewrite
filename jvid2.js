@@ -1,17 +1,73 @@
-let headers = $request.headers;
-
-const newToken = "61981bd5255e494ba01f29eb95ce6c91.lWOs/qEepIZ5bOz5YM3NwlUAuzsWunb4HgjNZ0DRzsUEuTKYRPwHYOu2+nixOWpYa5X1+l2e2f9pKKQJNsJFVtjf7PQGURvSaASEJJ+NY8qQ9nHspJZm6TT4GZCl4cvfF4qa0sIO9h+6gNYAcqsODhWpUIuNt4x2.02a004138c9f8c86dbece0fd52d77381";
-const newUUID = "1964696261994479616";
-const newUserInfo = "%7B%22userId%22%3A%221964696261994479616%22%2C%22merchantAcct%22%3A%22sf113%22%2C%22masterAcct%22%3A%22sf113_m%22%2C%22agentAcct%22%3A%22sf113_m_agent%22%2C%22userAcct%22%3A%22JTJ0E9ZD%22%2C%22acctType%22%3A3%2C%22referCode%22%3Anull%2C%22shareCode%22%3A%22JTJ0E9ZD%22%2C%22isPartner%22%3A0%2C%22phoneNumber%22%3Anull%2C%22background%22%3Anull%2C%22headUrl%22%3A%22%2Femp%2Fhead%2Fc2c33789bed84becb77dfe4d513f5c13%22%2C%22nickName%22%3A%22JTJ0E9ZD%22%2C%22signature%22%3Anull%2C%22loginType%22%3Anull%2C%22coinBalance%22%3A0%2C%22balance%22%3A0%2C%22exp%22%3A0%2C%22expLevel%22%3A0%2C%22iconFree%22%3A1%2C%22vipBegin%22%3A%222025-09-08%2009%3A33%3A55%22%2C%22vipEnd%22%3A%222025-12-19%2009%3A33%3A55%22%2C%22vipFlag%22%3Atrue%2C%22vipTitle%22%3Anull%2C%22vipPackageId%22%3Anull%2C%22userStatus%22%3A0%2C%22followers%22%3Anull%2C%22followed%22%3Anull%2C%22lastLoginDate%22%3A%222025-09-08%22%2C%22currentLoginDate%22%3A%222025-09-08%22%2C%22city%22%3A%22%E9%A6%99%E6%B8%AF%22%2C%22gender%22%3A0%2C%22videoFreeBegin%22%3Anull%2C%22videoFreeEnd%22%3Anull%2C%22actorFreeBegin%22%3Anull%2C%22actorFreeEnd%22%3Anull%2C%22expand%22%3Anull%2C%22levelIcon%22%3Anull%2C%22headIcon%22%3Anull%7D";
-if (headers["token"]) {
-  headers["token"] = newToken;
+// ======= 环境适配封装 =======
+function isQuanX() {
+  return typeof $task !== "undefined";
+}
+function isSurge() {
+  return typeof $httpClient !== "undefined" && typeof $loon === "undefined";
+}
+function isLoon() {
+  return typeof $loon !== "undefined";
+}
+function isNode() {
+  return typeof require == "function" && !isQuanX() && !isSurge() && !isLoon();
 }
 
-if (headers["Cookie"]) {
-  headers["Cookie"] = headers["Cookie"]
-  .replace(/CLSQ-Token=[^;]+/, `CLSQ-Token=${newToken}`)
-  .replace(/CLSQ-UUID=[^;]+/, `CLSQ-UUID=${newUUID}`)
-  .replace(/CLSQ-UserInfo=[^;]+/, `CLSQ-UserInfo=${newUserInfo}`);
+
+function httpGet(url, callback) {
+  if (isQuanX()) {
+    $task.fetch({ url }).then(
+      resp => callback(null, resp, resp.body),
+      err => callback(err, null, null)
+    );
+  } else if (isSurge() || isLoon()) {
+    $httpClient.get(url, (err, resp, body) => {
+      callback(err, resp, body);
+    });
+  } else if (isNode()) {
+    const https = require("https");
+    https.get(url, (resp) => {
+      let data = "";
+      resp.on("data", (chunk) => (data += chunk));
+      resp.on("end", () => {
+        callback(null, resp, data);
+      });
+    }).on("error", (err) => {
+      callback(err, null, null);
+    });
+  } else {
+    callback(new Error("未知环境"), null, null);
+  }
 }
 
-$done({ headers });
+const url = "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvidtoken.txt";
+
+httpGet(url, (error, response, data) => {
+  if (error) {
+    console.log(" 获取远程数据失败: " + error);
+    $done({});
+    return;
+  }
+
+  try {
+    const json = JSON.parse(data);
+    let headers = $request.headers;
+
+    if (json.newToken && headers["token"]) {
+      headers["token"] = json.newToken;
+    }
+
+    if (headers["Cookie"]) {
+      headers["Cookie"] = headers["Cookie"]
+        .replace(/CLSQ-Token=[^;]+/, `CLSQ-Token=${json.newToken}`)
+        .replace(/CLSQ-UUID=[^;]+/, `CLSQ-UUID=${json.newUUID}`)
+        .replace(/CLSQ-UserInfo=[^;]+/, `CLSQ-UserInfo=${json.newUserInfo}`);
+    }
+
+    console.log("Headers 已替换成功");
+    $done({ headers });
+
+  } catch (e) {
+    console.log("JSON 解析失败: " + e.message);
+    $done({});
+  }
+});
