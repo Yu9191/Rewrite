@@ -6,7 +6,7 @@ JVID大陆版
 ^https:\/\/kmfhb0n\.cdv6x4x6\.cc\/front\/(media\/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system\/vipsetting\/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
 
 [mitm]
-hostname = *.cdv6x4x6.cn
+hostname = *.cdv6x4x6.cn, *.uywhqqxp.cc
 */
 const $ = new Env('JVID大陆版', {
     "logLevel": "info"
