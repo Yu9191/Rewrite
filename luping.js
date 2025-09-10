@@ -1,9 +1,9 @@
 /* 
  抖音快手直播录屏 
  解锁完整视频地址
- 2025-09-10
+ 2025-09-10 14:39
 [rewrite_local]
-^https:\/\/(www\.)?lupingik\.top\/vod\/play\/id\/.*\.html$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luping.js
+^https?:\/\/(www\.)?lupingik\.top\/(?:vod\/)?play\/id\/.*\.html$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luping.js
 
 [mitm]
 hostname = www.lupingik.top, lupingik.top
