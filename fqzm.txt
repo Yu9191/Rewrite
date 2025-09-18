@@ -1,5 +1,22 @@
 {
-  "token": "f-PmlvI90lcg3UpCSKgHZqz2_H3Zor7h_1758178054",
-  "is_vip": true,
-  "expire_at": "2025-09-19 14:47:33"
+  "errorCode": 0,
+  "msg": "登录成功",
+  "data": {
+    "token": "nBY1vXuMotNW9thccMrFG32Jx9H6m94a_1758194777",
+    "user": {
+      "id": 131165,
+      "nickname": "",
+      "mobile": "",
+      "email": "bu54qjx@temailz.com",
+      "gender": "男",
+      "location": "",
+      "birthday": null,
+      "birth_sign": "",
+      "avatar": "",
+      "code": "ZWpGOe",
+      "total_money": "0.00",
+      "expire_at": "2025-09-19 19:26:16",
+      "is_vip": true
+    }
+  }
 }
