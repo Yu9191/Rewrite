@@ -3,9 +3,12 @@
 2. 移除应用内所有广告
 3. 精简底部导航栏，只保留常用分类
 
+2025-09-30 疑似官方下架vip视频
 [rewrite_local]
 ^https?://[^/]+/front/(?:system/(?:banner/bannerListByMAcct|bannersetting/userGetBannerSet|datadictionary/getDicByKeys)|cluser/c/user/info/get|media/category/listAllCategory)(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid.js
-^https?://[^/]+/front/(media/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system/vipsetting/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
+# 2025-09-30 疑似官方下架vip视频
+# 后续如果还有vip视频 则开启
+#^https?://[^/]+/front/(media/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system/vipsetting/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
 
 [mitm]
 hostname = *.cdv6x4x6.cc, *.cdv6x4x6.cn, *.dgpes3dp.cc, *.gatcxuck.cc, *.pkuse74e.cc, *.uywhqqxp.cc
