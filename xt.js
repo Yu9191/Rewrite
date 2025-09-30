@@ -3,6 +3,8 @@
  * 解锁ai功能 无限制
  * 2025-04-02 
  * 2025-05-14 修复设备id限制
+ * 2025-09-30 适配最新版
+ 功能：打开app-正常微信登录-个人页面-等待token生成-日志提示成功-可以开始了
  获取会员token ：我这里用的匹配URL 自动完成注册逻辑
  也可以使用Cron定时任务获取 自行配置选择
 
@@ -10,7 +12,7 @@
 # 个人中心 
 ^https:\/\/xuantu\.pro\/user\/getUserInfo url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt3.js
 # 会员
-^https:\/\/xuantu\.pro\/(creation\/(generate\/(v2|v3)|memberships|getProgress|imageintent)|file\/aliyun\/sts)\/? url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt2.js
+^https:\/\/xuantu\.pro\/(creation\/(generate\/(v2|v3)|memberships|getProgress|imageintent)|file\/aliyun\/sts|community\/comment\/pub)\/? url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt2.js
 # 获取会员token 
 ^https:\/\/xuantu\.pro\/creation\/myworks url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xt.js
 # 无水印
