@@ -12,7 +12,7 @@ const $ = new Env("炫图token");
     "authorization": currentToken
   });
   
-  $.log(`✅ 已添加Token到请求头: ${currentToken.substring(0, 15)}...`);
+  // $.log(`✅ 已添加Token到请求头: ${currentToken.substring(0, 15)}...`);
   $.done({ headers: newHeaders });
 })();
 
