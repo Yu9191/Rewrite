@@ -1,21 +1,13 @@
 /**
- * App: 蜜*语 
- * 功能: 无限制使用
- * 
- * - QuanX:
- * [rewrite_local]
- * https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/open\/chat_stream url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js
- * https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/account\?version url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js
- * 
- * [mitm]
- * hostname = api.honey.zzzs888.com
- *
- * - Surge:
- * [Script]
- * 会员 = http-request,pattern=https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/open\/chat_stream,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js,requires-body=0,timeout=10
- * 个人 = http-response,pattern=https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/account\?version,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js,requires-body=1,timeout=10
- * [MITM]
- * hostname = %APPEND% api.honey.zzzs888.com
+ App: 蜜*语 
+ 功能: 无限制使用
+[rewrite_local]
+https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/open\/chat_stream url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js
+https:\/\/api\.honey\.zzzs888\.com\/api\/apple\/account\?version url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mxy.js
+ 
+[mitm]
+hostname = api.honey.zzzs888.com
+
 **/
 
 const $ = new Env('蜜语');
