@@ -1,0 +1,15 @@
+#!name=Lovekey键盘
+#!desc=更新日期2025-10-05
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1015.png
+
+[Script]
+# 聊天
+http-request https://sea.api.lovekeyboard.com/v1/chat/keyboard-stream-msg script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60, tag=lovekey
+
+# 开场白
+http-request https://sea.api.lovekeyboard.com/v1/chat/keyboard-ow-msg script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60, tag=lovekey
+
+http-response https://sea.api.lovekeyboard.com/v2/account script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, requires-body=true, timeout=60, tag=lovekey
+
+[MITM]
+hostname = sea.api.lovekeyboard.com
