@@ -6,10 +6,10 @@ https://d1orururfggatt.cloudfront.net/api/app/mine/info
 
 [rewrite_local]
 # 避免和其他脚本冲突
-^https?:\/\/(dpa1uunqzg4g8|dlqrowpypqqsg|d2d03hqzmqybra)\.cloudfront\.net\/api\/app\/(?:mine\/info|ping\/domain\/h5) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xvideos.js
+^https?:\/\/(d28mt\.com|(dpa1uunqzg4g8|dlqrowpypqqsg|d2d03hqzmqybra)\.cloudfront\.net)\/api\/app\/(?:mine\/info|ping\/domain\/h5) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xvideos.js
 
 [mitm]
-hostname = *.cloudfront.net
+hostname = *.cloudfront.net, d28mt.com
 
 */
 // 2025.10.13
