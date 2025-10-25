@@ -11,7 +11,7 @@
 #^https?://[^/]+/front/(media/(?:listCommentByMediaId|getMediaById|listMediaBySearchType|listAllBySecondCategoryIdNew)|system/vipsetting/getVipSetWithPayType)$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/jvid2.js
 
 [mitm]
-hostname = *.cdv6x4x6.cc, *.cdv6x4x6.cn, *.d5qbfu75.top, *.dgpes3dp.cc, *.k3cn6rmw.top, *.uywhqqxp.cc
+hostname = *.cdv6x4x6.cc, *.cdv6x4x6.cn, *.dgpes3dp.cc, *.uvfgucau.top, *.uywhqqxp.cc, *.v7f6znj9.top
 */
 const $ = new Env('JVID大陆版', {
     "logLevel": "info"
