@@ -13,7 +13,7 @@ hostname = gateway.kugou.com
 
 **************************************************/
 
-const STORE_KEY = 'kugou_h5_accounts'; // 多账号存储  
+const STORE_KEY = 'kugou_h5_accounts'; // 多账号存储 
 const LOG_PREFIX = 'KuGou 签到';
 const H5_SECRET = 'NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt'; 
 
