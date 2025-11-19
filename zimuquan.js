@@ -2,7 +2,7 @@
  字母圈
  解锁会员及金币视频
  原作者@chmg2025
- 2025-09-20
+ 2025-11-19
 [rewrite_local]
 ^https?:\/\/[^\/]+\/index\.php\/vod\/play\/id\/\d+\/sid\/\d+\/nid\/\d+\.html url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/zimuquan.js
 [mitm]
