@@ -11,13 +11,15 @@ TG频道：@Jsforbaby
 
 致敬lsp @onz3v
 [rewrite_local]
-
+# 付费帖子
+^https?:\/\/[^\/]+\/data\/topic\/details-\d+-\d+\.js(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
 ^https?:\/\/(?:ma|albmjs)\.xianlh\.top\/api\/user\/(?:loginByUsername|register)$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
 # 照抄原作者Yuheng移除广告逻辑 致敬"前辈"@onz3v
 https://337tc.com url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
-https://www.fz320kahx00nj.com url script-response-body https://gist.githubusercontent.com/Yu9191/1c1209c15f83db3f7c647535d74ca7a3/raw/mmav.js
+#https://www.fz320kahx00nj.com url script-response-body https://gist.githubusercontent.com/Yu9191/1c1209c15f83db3f7c647535d74ca7a3/raw/mmav.js
+https://www.fz320kahx00nj.com url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
 [mitm]
-hostname = *.xianlh.top, 337tc.com, www.fz320kahx00nj.com
+hostname = *.xianlh.top, 337tc.com, www.fz320kahx00nj.com, bvbvbvssu.a63qv1sy.com
 */
 //11.30 0:32
 
