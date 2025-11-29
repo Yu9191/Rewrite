@@ -9,10 +9,11 @@ TG频道：@Jsforbaby
 2.域名变化导致正则匹配失败 可手动更新
 3.联系作者更新脚本
 
+致敬lsp @onz3v
 [rewrite_local]
 
 ^https?:\/\/(?:ma|albmjs)\.xianlh\.top\/api\/user\/(?:loginByUsername|register)$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
-# 照抄原作者Yuheng移除广告逻辑
+# 照抄原作者Yuheng移除广告逻辑 致敬"前辈"@onz3v
 https://337tc.com url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mmav.js
 
 [mitm]
