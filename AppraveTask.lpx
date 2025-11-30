@@ -1,0 +1,14 @@
+#!name=AppRaven 邀请助手
+#!desc=自动注册小号并填写 AppRaven 邀请码。安装后请点击插件配置填写参数。
+#!author=@ios151
+#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/appraven.png
+#!tag=Tool
+#!system=ios.ipad,mac
+
+[Argument]
+UserId = input, 12345678, tag=邀请码, desc=填写主账号的数字ID
+RunCount = input, 2, tag=刷取次数, desc=填写运行次数(Max 20)
+
+[Script]
+# 注意：每周1四点运行
+cron "0 4 * * 1" script-path=https://gist.githubusercontent.com/Yu9191/4a63832303c5a8f094e379dc6e4ca5b8/raw/AppraveTask.js, timeout=600, tag=AppRaven刷取, argument=userId={UserId}&count={RunCount}
