@@ -3,7 +3,7 @@
 #!author=@ios151
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/appraven.png
 #!category=AppRaven
-#!arguments=UserId:79084636,RunCount:5
+#!arguments=UserId:12345678,RunCount:2
 #!arguments-desc=1. UserId: 主账号的数字ID。\n2. RunCount: 单次运行次数 (建议 < 5)。
 
 [Script]
