@@ -27,32 +27,45 @@ function Env(name) {
     const isLoon = typeof $loon !== "undefined";
     const isQX = typeof $task !== "undefined";
     const isSurge = typeof $httpClient !== "undefined" && !isLoon;
+
     const log = (message) => console.log(`[${name}] ${message}`);
+    
     const msg = (title, sub, desc) => {
-        if (isQX) $notify(title, sub, desc);
-        if (isSurge || isLoon) $notification.post(title, sub, desc);
+        try {
+            if (isQX) $notify(title, sub, desc);
+            if (isSurge || isLoon) $notification.post(title, sub, desc);
+        } catch (e) { log(e); }
         log(`${title}\n${sub}\n${desc}`);
     };
-    const http = {
-        post: (opts) => {
-            return new Promise((resolve, reject) => {
-                const method = "POST";
-                if (isQX) {
-                    opts.method = method;
-                    $task.fetch(opts).then(
-                        resp => resolve({ status: resp.statusCode, headers: resp.headers, body: resp.body }),
-                        err => reject(err.error || err)
-                    );
-                } else if (isSurge || isLoon) {
-                    $httpClient.post(opts, (err, resp, body) => {
-                        if (err) reject(err);
-                        else if (!resp) reject("No Response");
-                        else resolve({ status: resp.status, headers: resp.headers, body: body || "" });
-                    });
-                }
-            });
-        }
+
+    const httpPost = (url, headers, body) => {
+        return new Promise((resolve, reject) => {
+            const opts = { url, headers, body, timeout: 10000 };
+            
+            if (isQX) {
+                opts.method = "POST";
+                $task.fetch(opts).then(
+                    (resp) => resolve({ status: resp.statusCode, headers: resp.headers, body: resp.body }),
+                    (err) => reject(err.error || err)
+                );
+            } else if (isSurge || isLoon) {
+                $httpClient.post(opts, (err, resp, body) => {
+                    if (err) {
+                        reject(err);
+                    } else if (!resp) {
+                        // Loon报错resp undefined
+                        reject("No Response"); 
+                    } else {
+                        resolve({ status: resp.status, headers: resp.headers, body: body || "" });
+                    }
+                });
+            }
+        });
     };
-    const done = (val) => { $done(val); };
-    return { name, log, msg, http, done };
+
+    const done = (val) => { 
+        try { $done(val); } catch(e) {} 
+    };
+
+    return { name, log, msg, httpPost, done };
 }
