@@ -9,5 +9,5 @@
 
 http-request ^https?:\/\/api\.rrmj\.plus\/m-station\/drama\/(?:page|play) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/RRSP.js, requires-body=true, timeout=60, tag=RRTV_4K, argument=token={{{Token}}}&umid={{{UMID}}}&player={{{播放器名称}}}&scheme={{{自定义Scheme}}}
 
-[Mitm]
+[MITM]
 hostname = %APPEND% api.rrmj.plus
