@@ -8,11 +8,11 @@
 token = input, "", tag=Token, desc=抓包获取的Token (必填)
 umid = input, "", tag=UMID, desc=抓包获取的umid (必填)
 player = select, "SenPlayer", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "IINA", "Safari", tag=播放器, desc=选择跳转的播放器 (默认SenPlayer)
-custom_scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高
+scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高
 
 [Script]
 
-http-request ^https?:\/\/api\.rrmj\.plus\/m-station\/drama\/(?:page|play) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/RRSP.js, requires-body=true, timeout=60, tag=RRTV_4K, argument=[{token},{umid},{player},{custom_scheme}]
+http-request ^https?:\/\/api\.rrmj\.plus\/m-station\/drama\/(?:page|play) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/RRSP.js, requires-body=true, timeout=60, tag=RRTV_4K, argument=[{token},{umid},{player},{scheme}]
 
 [Mitm]
 hostname = api.rrmj.plus
