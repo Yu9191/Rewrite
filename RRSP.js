@@ -39,7 +39,7 @@ const PLAYER_MAP = {
     "Alook": "Alook://",
     "VLC": "vlc://",
     "KMPlayer": "kmplayer://",
-    "VidHub": "vidhub://x-callback-url/play?url=",
+    "VidHub": "open-vidhub://x-callback-url/open?url=",
     "IINA": "iina://weblink?url=",
     "NPlayer": "nplayer-http://", 
     "Safari": "http://"
