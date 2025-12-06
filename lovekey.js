@@ -1,6 +1,7 @@
 /**
  App: lovekey
  2025-10-05：无限制使用
+支持1.6.5版本
 [rewrite_local]
 # 聊天
 https://sea.api.lovekeyboard.com/v1/chat/keyboard-stream-msg url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js
