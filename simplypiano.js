@@ -7,6 +7,7 @@ Simply Draw	绘画和素描基础	draw-accounts.joytunes.com
 [rewrite_local]
 # Simply Piano (alicdn.joytunescn.com)
 ^https:\/\/alicdn\.joytunescn\.com\/server\/asla\/accounts\/accountAuthenticate$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/simplypiano.js
+https://asla.joytunes.com/server/asla/accounts/accountAuthenticate url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/simplypiano.js
 ^https:\/\/alicdn\.joytunescn\.com\/server\/asla\/accounts\/getAppleSubscriptionGroupInfo$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/simplypiano.js
 
 # Simply Guitar (guitaralicdn.joytunescn.com)
