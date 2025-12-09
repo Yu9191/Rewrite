@@ -1,6 +1,9 @@
 /*
  simplypiano
-
+Simply Piano	钢琴演奏课程	alicdn.joytunescn.com
+Simply Guitar	吉他演奏课程	guitaralicdn.joytunescn.com
+Simply Sing	唱歌和声乐训练	sing.joytunes.com
+Simply Draw	绘画和素描基础	draw-accounts.joytunes.com
 [rewrite_local]
 # Simply Piano (alicdn.joytunescn.com)
 ^https:\/\/alicdn\.joytunescn\.com\/server\/asla\/accounts\/accountAuthenticate$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/simplypiano.js
