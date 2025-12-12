@@ -39,11 +39,11 @@
 
 ## Repo Map
 
-> 用一张结构图说明“仓库内容是什么”——高级但不花哨（GitHub 原生支持 Mermaid）
+
 
 ```mermaid
 flowchart TD
-  A[Rewrite / Rules / Scripts] --> B[按域名/功能分类]
+  A[Rewrite / Rules / Rewrite] --> B[按域名/功能分类]
   A --> C[合集入口 BabyScript.txt]
   A --> D[历史存档区域]
   B --> E[常用规则片段]
