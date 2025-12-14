@@ -52,5 +52,8 @@ IP-CIDR, 111.206.99.202/32, REJECT, no-resolve
 # > 处理开屏数据(部分)、支付中心弹窗
 酷狗_杂项净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?|ads\.service)\.kugou\.com\/(v4\/mobile_splash(_sort)?|pxy\/v1\/combo\/startup|v3\/vip_center), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
+# > K歌
+酷狗_K歌 = type=http-response, pattern=^https?:\/\/(nacsing\.kugou\.com|acsing\.service\.kugou\.com|vipos\.kugou\.com|gateway\.kugou\.com|gamecenter\.kugou\.com|acsing\.tx\.kugou\.com)\/(sing7\/json\/v2\/user\/login|ccktv\/v1\/ktv_room\/room\/room_config|fxsing\/vip\/member\/info|sing7\/homepage\/json\/v3\/vip\/tip|v4\/price\/get_tips|vipenergy\/v2\/entrance\/vip_center_user_info|fxsing\/vip\/user\/info|sing7\/homepage\/json\/v3\/cdn\/kroom_tab_enter|v1\/home\/member_game|sing7\/homepage\/json\/v3\/cdn\/kroom_tab\/banners), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugouksong.js
+
 [MITM]
-hostname = m.kugou.com, gateway.kugou.com, gatewayretry.kugou.com, gateway3.kugou.com, ads.service.kugou.com, welfare.kugou.com, fx.service.kugou.com, hwstore.kugou.com, loginservice.kugou.com, expendablekmrcdnretry.kugou.com, adservice.kugou.com
+hostname = m.kugou.com, gateway.kugou.com, gatewayretry.kugou.com, gateway3.kugou.com, ads.service.kugou.com, welfare.kugou.com, fx.service.kugou.com, hwstore.kugou.com, loginservice.kugou.com, expendablekmrcdnretry.kugou.com, adservice.kugou.com, nacsing.kugou.com, acsing.service.kugou.com, vipos.kugou.com, gamecenter.kugou.com, acsing.tx.kugou.com
