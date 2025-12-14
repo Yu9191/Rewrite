@@ -28,29 +28,28 @@ IP-CIDR, 111.206.99.202/32, REJECT, no-resolve
 
 [Script]
 # > 用户信息
-酷狗_用户信息 = type=http-response, pattern=^https?:\/\/(m|gateway(retry)?|loginservice|expendablekmrcdnretry)\.kugou\.com\/(v5\/login_by_token|v2\/get_login_extend_info|mobile\/vipinfoV2|v2\/get_vip_config|updateservice\/v1\/get_dev_user|v1\/login_by_quick_token|flow\/user_config\/get_level_config_ios|promotionvip\/v3\/vip_level\/detail), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_用户信息 = type=http-response, pattern=^https?:\/\/(m|gateway(retry)?|loginservice|expendablekmrcdnretry)\.kugou\.com\/(v5\/login_by_token|v2\/get_login_extend_info|mobile\/vipinfoV2|v2\/get_vip_config|updateservice\/v1\/get_dev_user|v1\/login_by_quick_token|flow\/user_config\/get_level_config_ios|promotionvip\/v3\/vip_level\/detail), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
-# > 播放权限
-酷狗_播放res = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(v1\/get_res_privilege\/lite|v1\/union\/audio_info), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+酷狗_播放res = type=http-response, pattern=^https?:\/\/(m\.kugou\.com|gateway(retry)?\.kugou\.com|ads\.service\.kugou\.com|welfare\.kugou\.com|fx\.service\.kugou\.com|hwstore\.kugou\.com|loginservice\.kugou\.com|expendablekmrcdnretry\.kugou\.com)\/(ssr\/decocenter\/home|v5\/login_by_token|v2\/get_login_extend_info|card\/v1\/pxy\/top|ads\.gateway\/v2\/sidebar_link|ads\.gateway\/v2\/sidebar_top_card|ads\.gateway\/v2\/home_card|mobile\/vipinfoV2|v4\/mobile_splash(_sort)?|v2\/get_vip_config|ads\.gateway\/v5\/task_video\/qualification|els\.abt\/v1\/tmeab|pxy\/v1\/combo\/startup|mstc\/musicsymbol\/v1\/system\/profile|pendant\/v2\/get_user_pendant|v1\/blindbox_cabinet\/client_cabinet|ads\.gateway\/v2\/mobile_link|card\/v1\/pxy\/listen|flow\/user_config\/get_level_config_ios|v1\/starlight\/get_campaign_infos|searchnofocus\/v1\/search_no_focus_word|updateservice\/v1\/get_dev_user|v1\/login_by_quick_token|card\/v1\/pxy\/recommend_stream(_v2)?|v1\/get_res_privilege\/lite|v1\/union\/audio_info|ads\.gateway\/v2\/task_center_entrance|ocean\/v6\/theme\/category|tools\.mobile\/v2\/theme\/info|promotionvip\/v3\/vip_level\/detail), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 酷狗_播放v5 = type=http-response, pattern=^https?:\/\/gateway\.kugou\.com\/tracker\/v5\/url, requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugouv5.js
 
 # > 移除首页横幅、侧边栏推广、顶部卡片
-酷狗_首页净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(ssr\/decocenter\/home|ads\.gateway\/v2\/sidebar_link|ads\.gateway\/v2\/sidebar_top_card|ads\.gateway\/v2\/home_card|ads\.gateway\/v2\/mobile_link|card\/v1\/pxy\/top|card\/v1\/pxy\/recommend_stream(_v2)?), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_首页净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(ssr\/decocenter\/home|ads\.gateway\/v2\/sidebar_link|ads\.gateway\/v2\/sidebar_top_card|ads\.gateway\/v2\/home_card|ads\.gateway\/v2\/mobile_link|card\/v1\/pxy\/top|card\/v1\/pxy\/recommend_stream(_v2)?), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > 播放页去广告 
-酷狗_播放页净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(playerpxy\/v1\/combo\/play_page_index|adp\/ad\/v1\/playpage_combine|els\.abt\/v1\/tmeab), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_播放页净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(playerpxy\/v1\/combo\/play_page_index|adp\/ad\/v1\/playpage_combine|els\.abt\/v1\/tmeab), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > 移除搜索栏插图、短剧视频流、任务中心视频
-酷狗_搜索短剧 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(searchnofocus\/v1\/search_no_focus_word|ads\.gateway\/v4\/search_banner|card\/v1\/pxy\/listen|ads\.gateway\/v5\/task_video\/qualification), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_搜索短剧 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(searchnofocus\/v1\/search_no_focus_word|ads\.gateway\/v4\/search_banner|card\/v1\/pxy\/listen|ads\.gateway\/v5\/task_video\/qualification), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > 移除个人中心横幅、星光卡活动、盲盒弹窗
-酷狗_我的页面 = type=http-response, pattern=^https?:\/\/(gateway(retry)?|gateway3)\.kugou\.com\/(adp\/ad\/v1\/mine_top_banner|v1\/starlight\/get_campaign_infos|pendant\/v2\/get_user_pendant|v1\/blindbox_cabinet\/client_cabinet), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_我的页面 = type=http-response, pattern=^https?:\/\/(gateway(retry)?|gateway3)\.kugou\.com\/(adp\/ad\/v1\/mine_top_banner|v1\/starlight\/get_campaign_infos|pendant\/v2\/get_user_pendant|v1\/blindbox_cabinet\/client_cabinet), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > App图标与金币中心
-酷狗_图标 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(ads\.gateway\/v2\/task_center_entrance|ocean\/v6\/theme\/category|tools\.mobile\/v2\/theme\/info), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_图标 = type=http-response, pattern=^https?:\/\/(gateway(retry)?)\.kugou\.com\/(ads\.gateway\/v2\/task_center_entrance|ocean\/v6\/theme\/category|tools\.mobile\/v2\/theme\/info), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > 处理开屏数据(部分)、支付中心弹窗
-酷狗_杂项净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?|ads\.service)\.kugou\.com\/(v4\/mobile_splash(_sort)?|pxy\/v1\/combo\/startup|v3\/vip_center), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+#酷狗_杂项净化 = type=http-response, pattern=^https?:\/\/(gateway(retry)?|ads\.service)\.kugou\.com\/(v4\/mobile_splash(_sort)?|pxy\/v1\/combo\/startup|v3\/vip_center), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > K歌/唱唱 
 酷狗_K歌 = type=http-response, pattern=^https?:\/\/(nacsing\.kugou\.com|acsing\.service\.kugou\.com|vipos\.kugou\.com|gateway\.kugou\.com|gamecenter\.kugou\.com|acsing\.tx\.kugou\.com)\/(sing7\/json\/v2\/user\/login|ccktv\/v1\/ktv_room\/room\/room_config|fxsing\/vip\/member\/info|sing7\/homepage\/json\/v3\/vip\/tip|v4\/price\/get_tips|vipenergy\/v2\/entrance\/vip_center_user_info|fxsing\/vip\/user\/info|sing7\/homepage\/json\/v3\/cdn\/kroom_tab_enter|v1\/home\/member_game|sing7\/homepage\/json\/v3\/cdn\/kroom_tab\/banners), requires-body=true, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugouksong.js
