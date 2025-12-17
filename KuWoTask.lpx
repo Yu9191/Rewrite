@@ -1,10 +1,10 @@
 #!name=酷我音乐签到助手
 #!desc=交互式登录与自动签到
 #!author=bb
-#!icon=https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/67/f6/58/67f658c7-d4e7-316c-ee36-797223c89fe7/AppIcon-1x_U007emarketing-0-7-0-0-sRGB-85-220-0.png/180x180bb.png
+#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png
 #!tag=酷我音乐
 #!system=ios
-#!arguments-desc=手机号: 酷我登录手机号，用于面板自动填充; OCR密钥: 填写 ocr.space 的 API Key (留空则不用)
+
 
 [Argument]
 phone=input,12345678910,tag=手机号,desc=手机号
