@@ -7,11 +7,11 @@
 #!arguments-desc=手机号: 酷我登录手机号，用于面板自动填充; OCR密钥: 填写 ocr.space 的 API Key (留空则不用)
 
 [Argument]
-手机号=input,12345678910,tag=手机号, desc=手机号
-OCR密钥=input,K***,tag=OCR密钥, desc=OCR密钥
+phone=input,12345678910,tag=手机号,desc=手机号
+ocr=input,K***,tag=OCR密钥,desc=OCR密钥
 
 [Script]
-http-request ^https?:\/\/360\.com\/kuwo script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, requires-body=true, timeout=120, tag=酷我登录控制台, argument=[phone={手机号}&ocr={OCR密钥}]
+http-request ^https?:\/\/360\.com\/kuwo script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, requires-body=true, timeout=120, tag=酷我登录控制台, argument=[{phone},{ocr}]
 
 cron "15 7-23/1 * * *" script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, timeout=120, tag=酷我自动签到
 
