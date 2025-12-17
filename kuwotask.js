@@ -2,6 +2,7 @@
  * * [修复内容]
  * 修复 getNickname 函数调用方式错误
  * 全局异常捕获
+ * 原作者不分先后：@General74110 @mcdasheng688
  */
 
 const $ = new Env("酷我音乐签到");
