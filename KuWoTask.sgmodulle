@@ -1,0 +1,15 @@
+#!name=酷我音乐签到助手
+#!desc=交互式登录与自动签到
+#!category=酷我音乐
+#!author=bb
+#!system=ios
+#!arguments=手机号:12345678910, OCR密钥:K***
+#!arguments-desc=手机号: 酷我登录手机号，用于面板自动填充; OCR密钥: 填写 ocr.space 的 API Key (留空则不用)
+
+[Script]
+酷我登录控制台 = type=http-request, pattern=^https?:\/\/360\.com\/kuwo, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, requires-body=true, timeout=120, tag=酷我登录控制台, argument=phone={{{手机号}}}&ocr={{{OCR密钥}}}
+
+酷我自动签到 = type=cron, cronexp="15 7-23/1 * * *", script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, timeout=120, tag=酷我自动签到
+
+[MITM]
+hostname = %APPEND% 360.com
