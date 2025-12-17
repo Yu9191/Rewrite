@@ -1,3 +1,6 @@
+/* 
+原作者 @mcdasheng688 @General74110
+*/
 const $ = new Env("酷我音乐");
 const ARGS=(()=>{let e={phone:"",ocr:""},t=null;"undefined"!=typeof $argument?t=$argument:"undefined"!=typeof $environment&&$environment.sourcePath&&(t=$environment.sourcePath.split(/[?#]/)[1]);if(!t)return e;if("object"==typeof t){Array.isArray(t)?(e.phone=t[0],e.ocr=t[1]||""):(e.phone=t.phone||t.sj||"",e.ocr=t.ocr||"");return e.phone=String(e.phone||""),e.ocr=String(e.ocr||""),e}let n=String(t).trim().replace(/^\[|\]$/g,"").replace(/^"|"$/g,"");return n.includes("=")||n.includes("&")?n.split(/&|,/).forEach(t=>{let[n,r]=t.split("=");n&&r&&(e[n.trim()]=decodeURIComponent(r.trim()))}):n.includes(",")?(t=n.split(","),e.phone=t[0].trim(),e.ocr=(t[1]||"").trim()):e.phone=n,e})();console.log(`手机号: ${ARGS.phone}`),console.log(`OCR 密钥: ${ARGS.ocr}`);
 const C={PATH:"/kuwo",WWW:"https://www.kuwo.cn",API:"https://wapi.kuwo.cn",PH:ARGS.phone||"",OCR:ARGS.ocr||"",KEY:"cookie_kuwo_v2"},H={Origin:"https://h5app.kuwo.cn",Host:"integralapi.kuwo.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 KWMusic/11.2.3.0 DeviceModel/iPhone13,2 NetType/WIFI kuwopage",Referer:"https://h5app.kuwo.cn/","Accept-Language":"zh-CN,zh-Hans;q=0.9"};let NM=[],SS=new Map,sleep=e=>new Promise(t=>setTimeout(t,e));
