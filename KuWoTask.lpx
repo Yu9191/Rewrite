@@ -1,19 +1,19 @@
-#!name=酷我音乐签到助手
-#!desc=交互式登录与自动签到
-#!author=bb
-#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png
-#!tag=酷我音乐
-#!system=ios
-
+#!name = 酷我音乐签到
+#!desc = 酷我音乐自动签到、领金币、抽奖等任务
+#!author = bb
+#!homepage = https://360.com/kuwo
+#!icon = https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png
+#!date = 2025-12-18
 
 [Argument]
-phone=input,12345678910,tag=手机号,desc=手机号
-ocr=input,K***,tag=OCR密钥,desc=OCR密钥
+phone = input,"",tag=手机号,desc=用于Web登录的手机号(可留空)
+ocr = input,"",tag=OCR密钥,desc=验证码识别API密钥(可留空)
+notify = switch,true,tag=每次通知,desc=关闭后仅在23点发送汇总通知
 
 [Script]
-http-request ^https?:\/\/360\.com\/kuwo script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, requires-body=true, timeout=120, tag=酷我登录控制台, argument=[{phone},{ocr}]
+cron "15 7-23/1 * * *" script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, timeout=120, tag=酷我音乐签到, argument=[{phone},{ocr},{notify}]
 
-cron "15 7-23/1 * * *" script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, timeout=120, tag=酷我自动签到
+http-request ^https?:\/\/360\.com\/kuwo script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, requires-body=true, timeout=60, tag=酷我助手面板, argument=[{phone},{ocr},{notify}]
 
 [MITM]
 hostname = 360.com
