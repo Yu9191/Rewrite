@@ -1,9 +1,26 @@
+
 /* 
-原作者 @mcdasheng688 @General74110
-// Loon示例: [Argument]
-// kuwo_phone = input,手机号,tag=酷我-手机号
-// kuwo_ocr = input,OCR密钥,tag=酷我-OCR密钥  
-// kuwo_notify = switch,true,false,tag=酷我-每次通知
+* 原作者 @mcdasheng688 @General74110
+* 酷我音乐签到 
+* 更新: 2025-12-18
+* 说明: 
+*  - phone: 手机号 (用于Web登录)
+*  - ocr: OCR密钥 (用于验证码识别)
+*  - notify: 1=每次通知(默认), 0=仅23点汇总通知
+*
+* 参数配置方式: 在脚本URL后添加
+* 示例: .js?phone=138xxxx&ocr=Kxxx&notify=0
+* 示例: .js?phone=138xxx
+* 示例: .js?notify=0 可以不填写手机号和OCR密钥
+[task_local]
+15 7-23/1 * * * https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, tag=酷我音乐签到, img-url=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png, enabled=true
+
+[rewrite_local]
+^https?:\/\/360\.com\/kuwo url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwo.js
+
+[mitm]
+hostname = *.kuwo.cn，360.com
+*/v
 */
 
 const $ = new Env("酷我音乐");
