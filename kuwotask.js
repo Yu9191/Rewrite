@@ -20,7 +20,7 @@
 
 [mitm]
 hostname = *.kuwo.cn，360.com
-*/v
+
 */
 
 const $ = new Env("酷我音乐");
