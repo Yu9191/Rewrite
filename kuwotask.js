@@ -16,7 +16,7 @@
 15 7-23/1 * * * https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js, tag=酷我音乐签到, img-url=https://raw.githubusercontent.com/deezertidal/private/main/icons/kuwosvip.png, enabled=true
 
 [rewrite_local]
-^https?:\/\/360\.com\/kuwo url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwo.js
+^https?:\/\/360\.com\/kuwo url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kuwotask.js
 
 [mitm]
 hostname = *.kuwo.cn，360.com
