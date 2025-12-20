@@ -6,7 +6,7 @@
 #!arguments-desc = Client: Telegram/Swiftgram/Turrit/iMe/Nicegram/Lingogram 或 tg/sg/turrit/ime/ng/lingo
 
 [Script]
-tme_redirect = type=http-request, pattern=^https?:\/\/t\.me\/.+, requires-body=0, script-path=https://gist.githubusercontent.com/Yu9191/1e1370f3814c69478cc4b9f5bbe4f7ea/raw/8614fb7fc3692257aa4b404993b787fc813c7d89/t.me_redirect, argument=client={{{Client}}}
+tme_redirect = type=http-request, pattern=^https?:\/\/t\.me\/.+, requires-body=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/TgRedirect.js, argument=client={{{Client}}}
 
 [MITM]
 hostname = %APPEND% t.me
