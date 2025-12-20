@@ -5,81 +5,60 @@
  * - client=tg / sg / turrit / ime / ng / lingo
  * - 纯值：tg / ng ...
  */
-
-function parseArgs() {
+function parseArg() {
   const a = typeof $argument === "undefined" ? "" : $argument;
   if (!a) return {};
   if (typeof a === "object") return a;
   const s = String(a).trim();
   if (!s) return {};
   if (!s.includes("=") && !s.includes("&")) return { client: s };
-  const out = {};
-  s.split("&").forEach(p => {
+  return s.split("&").reduce((o, p) => {
     const i = p.indexOf("=");
-    if (i > -1) out[p.slice(0, i).trim()] = decodeURIComponent(p.slice(i + 1).trim());
-  });
-  return out;
+    if (i > -1) o[p.slice(0, i).trim()] = decodeURIComponent(p.slice(i + 1).trim());
+    return o;
+  }, {});
 }
 
-const mapping = {
-  Telegram: "tg",
-  Swiftgram: "sg",
-  Turrit: "turrit",
-  iMe: "ime",
-  Nicegram: "ng",
-  Lingogram: "lingo",
-};
+const map = { Telegram: "tg", Swiftgram: "sg", Turrit: "turrit", iMe: "ime", Nicegram: "ng", Lingogram: "lingo" };
 
-function buildDeepLink(scheme, reqUrl) {
-  const u = new URL(reqUrl);
-  let path = (u.pathname || "").replace(/^\/+/, "");
+function qget(qs, k) {
+  if (!qs) return "";
+  const m = qs.match(new RegExp("(?:^|&)" + k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^&]*)"));
+  return m ? decodeURIComponent(m[1]) : "";
+}
 
-  if (path.startsWith("s/")) path = path.slice(2);
+(function () {
+  if (typeof $request === "undefined" || !$request.url) return $done({});
+  const m = String($request.url).match(/^https?:\/\/t\.me\/(.+)$/i);
+  if (!m) return $done({});
+
+  const a = parseArg();
+  let scheme = String(a.client || a["t.me_redirect"] || "").trim();
+  scheme = map[scheme] || scheme || "tg";
+
+  let tail = m[1];
+  if (tail.startsWith("s/")) tail = tail.slice(2);
+
+  const parts = tail.split("?");
+  const path = parts[0] || "";
+  const qs = parts[1] || "";
   const seg = path.split("/").filter(Boolean);
 
-  // +xxxx / joinchat/xxxx
-  if (seg[0] && seg[0][0] === "+") return `${scheme}://join?invite=${encodeURIComponent(seg[0].slice(1))}`;
-  if (seg[0] === "joinchat" && seg[1]) return `${scheme}://join?invite=${encodeURIComponent(seg[1])}`;
-
-  // addstickers/pack
-  if (seg[0] === "addstickers" && seg[1]) return `${scheme}://addstickers?set=${encodeURIComponent(seg[1])}`;
-
-  // share/url?url=...&text=...
-  if (seg[0] === "share" && seg[1] === "url") {
-    const shareUrl = u.searchParams.get("url") || "";
-    const text = u.searchParams.get("text") || "";
-    return `${scheme}://msg_url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(text)}`;
+  let loc = "";
+  if (seg[0] && seg[0][0] === "+") loc = `${scheme}://join?invite=${encodeURIComponent(seg[0].slice(1))}`;
+  else if (seg[0] === "joinchat" && seg[1]) loc = `${scheme}://join?invite=${encodeURIComponent(seg[1])}`;
+  else if (seg[0] === "addstickers" && seg[1]) loc = `${scheme}://addstickers?set=${encodeURIComponent(seg[1])}`;
+  else if (seg[0] === "share" && seg[1] === "url") {
+    const u = qget(qs, "url"), t = qget(qs, "text");
+    loc = `${scheme}://msg_url?url=${encodeURIComponent(u)}&text=${encodeURIComponent(t)}`;
+  } else if (seg[0]) {
+    loc = seg[1] && /^\d+$/.test(seg[1])
+      ? `${scheme}://resolve?domain=${encodeURIComponent(seg[0])}&post=${encodeURIComponent(seg[1])}`
+      : `${scheme}://resolve?domain=${encodeURIComponent(seg[0])}`;
   }
 
-  const domain = seg[0];
-  if (!domain) return "";
+  if (!loc) return $done({});
 
-  // t.me/user/123 
-  if (seg[1] && /^\d+$/.test(seg[1])) {
-    return `${scheme}://resolve?domain=${encodeURIComponent(domain)}&post=${encodeURIComponent(seg[1])}`;
-  }
-  return `${scheme}://resolve?domain=${encodeURIComponent(domain)}`;
-}
-
-(function main() {
-  if (typeof $request === "undefined" || !$request.url) return $done({});
-  const url = $request.url;
-  if (!/^https?:\/\/t\.me\/.+/i.test(url)) return $done({});
-
-  const args = parseArgs();
-  let scheme = (args.client || args["t.me_redirect"] || "").trim();
-  scheme = mapping[scheme] || scheme;
-  if (!scheme) scheme = "tg";
-
-  const deep = buildDeepLink(scheme, url);
-  if (!deep) return $done({});
-
-  // 302
-  $done({
-    response: {
-      status: 302,
-      headers: { Location: deep },
-      body: ""
-    }
-  });
+  if (typeof $task !== "undefined") return $done({ status: "HTTP/1.1 302 Found", headers: { Location: loc }, body: "" });
+  return $done({ response: { status: 302, headers: { Location: loc }, body: "" } });
 })();
