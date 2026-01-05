@@ -2,20 +2,20 @@
   "errorCode": 0,
   "msg": "登录成功",
   "data": {
-    "token": "YQmhlswEcO9DnMKzbkpIZe5O0_2X8Js8_1767543138",
+    "token": "LtqF9m-ShK22_I7HbPyFlMaDLfNyCOej_1767629726",
     "user": {
-      "id": 146316,
+      "id": 146413,
       "nickname": "",
       "mobile": "",
-      "email": "f3fro91@snapbx.com",
+      "email": "507oarlv@temailz.com",
       "gender": "男",
       "location": "",
       "birthday": null,
       "birth_sign": "",
       "avatar": "",
-      "code": "jt1ahs",
+      "code": "LL7M7X",
       "total_money": "0.00",
-      "expire_at": "2026-01-05 00:12:18",
+      "expire_at": "2026-01-06 00:15:25",
       "is_vip": false
     }
   }
