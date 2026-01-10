@@ -1,8 +1,8 @@
 #!name=酷狗音乐会员解锁
-#!desc=解锁酷狗音乐会员功能，包括VIP歌曲、无损音质、去广告等
+#!desc=解锁酷狗音乐会员功能，包括VIP歌曲、无损音质、去广告、皮肤等
 #!category=KuGouMusic
 #!author=bb
-#!version=1.2.2.5
+#!version=1.2.2.6
 #!homepage=https://github.com/Yu9191/Rewrite
 
 [Rule]
@@ -117,6 +117,15 @@ IP-CIDR, 111.206.99.202/32, REJECT, no-resolve
 酷狗主题分类 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/ocean\/v6\/theme\/category, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 酷狗主题信息 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/tools\.mobile\/v2\/theme\/info, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+
+酷狗皮肤权限 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/ocean\/v6\/theme\/get_res_privilege, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+
+# > 唱片架/装扮相关
+酷狗唱片架校验 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/vipdress\/v1\/record_rack\/set_record_rack_check, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+
+酷狗设置唱片架 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/vipdress\/v1\/record_rack\/set_user_record_rack, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
+
+酷狗获取唱片架 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/vipdress\/v1\/record_rack\/get_user_record_rack, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
 
 # > 广告播放页面组合
 酷狗广告播放页面组合 = type=http-response, pattern=^https:\/\/.*\.kugou\.com\/adp\/ad\/v1\/playpage_combine, requires-body=1, max-size=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/kugou.js
