@@ -2,7 +2,7 @@
  * 会员视频动漫视频解析 金币无解
  * 感谢@qiumoxixia提供会员
 [rewrite_local]
-^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserColl|LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend)\/ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend)\/ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
 ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
 ^https?:\/\/[^\/]+\/api\/movie\/ShopProduct url reject-dict
 [mitm]
