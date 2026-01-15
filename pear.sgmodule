@@ -23,4 +23,4 @@ PearVIP伪装 = type=http-response, pattern=^https?:\/\/[^\/]+\/api\/(account\/(
 
 
 [MITM]
-hostname = %APPEND% *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
+hostname = %APPEND% *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, souhu.mett.me
