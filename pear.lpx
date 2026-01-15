@@ -29,4 +29,4 @@ http-response ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/Vi
 
 
 [Mitm]
-hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
+hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, souhu.mett.me
