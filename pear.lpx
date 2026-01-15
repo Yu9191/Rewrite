@@ -8,6 +8,11 @@ player = select, "lenna", "SenPlayer", "Infuse", "Fileball", "VidHub", "Alook", 
 scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高
 encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)
 
+
+[Rewrite]
+^https?:\/\/[^\/]+\/api\/movie\/ShopProduct - reject-dict
+^https?:\/\/[^\/]+\/api\/adv\/index - reject-dict
+
 [Script]
 # 视频/动漫解析
 http-request ^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=false, timeout=60, tag=Pear视频解析, argument=[{player},{scheme},{encode}]
@@ -21,10 +26,7 @@ http-request ^https?:\/\/[^\/]+\/api\/download\/MovieWithTorrentInfo script-path
 # VIP伪装
 http-response ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=true, timeout=60, tag=PearVIP伪装
 
-[Rule]
-# 去广告
-URL-REGEX,^https?:\/\/[^\/]+\/api\/movie\/ShopProduct,REJECT
-URL-REGEX,^https?:\/\/[^\/]+\/api\/adv\/index,REJECT
+
 
 [Mitm]
 hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
