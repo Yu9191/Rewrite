@@ -21,6 +21,8 @@ Pear磁力下载 = type=http-request, pattern=^https?:\/\/[^\/]+\/api\/download\
 
 PearVIP伪装 = type=http-response, pattern=^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent), requires-body=1, max-size=0, timeout=60, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
 
+Pear种子详情 = type=http-request, pattern=^https?:\/\/[^\/]+\/api\/Search\/TorrentDetail\/, requires-body=0, max-size=0, timeout=60, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, argument=player={{{播放器名称}}}&scheme={{{自定义Scheme}}}&encode={{{URL编码}}}
+
 
 [MITM]
 hostname = %APPEND% *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, souhu.mett.me
