@@ -1,9 +1,9 @@
 /*
 [rewrite_local]
-^https?:\/\/tx.*.com\/h5\/(user\/info|system\/info|movie\/(detail|block|search)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/txxxxx.js
+^https?:\/\/([a-z0-9-]+\.)*tx[a-z0-9-]*\.com\/h5\/(user\/info|system\/info|movie\/(detail|block|search)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/txxxxx.js
 
 [mitm]
-hostname = txh066.com,txh067.com
+hostname = txh066.com, txh067.com, tth.txh069.com, tth.*.com
 */
 //2025:
 //12-08
