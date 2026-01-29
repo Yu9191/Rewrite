@@ -8,17 +8,17 @@
  * 支持通过 BoxJS 配置播放器设置，无需在脚本参数中手动填写
  * 在 BoxJS 中添加订阅：https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
  * 
- * [rewrite_local]
- * ^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
- * ^https?:\/\/[^\/]+\/api\/video\/(watch|Detail) url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
- * ^https?:\/\/[^\/]+\/api\/download\/MovieWithTorrentInfo url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
- * ^https?:\/\/[^\/]+\/api\/Search\/TorrentDetail\/ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
- * ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
- * ^https?:\/\/[^\/]+\/api\/movie\/ShopProduct url reject-dict
- * ^https?:\/\/[^\/]+\/api\/adv\/index url reject-dict
- * 
- * [mitm]
- * hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
+[rewrite_local]
+^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/video\/(watch|Detail) url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/download\/MovieWithTorrentInfo url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/Search\/TorrentDetail\/ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js
+^https?:\/\/[^\/]+\/api\/movie\/ShopProduct url reject-dict
+^https?:\/\/[^\/]+\/api\/adv\/index url reject-dict
+
+[mitm]
+hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
  * 
  */
 
