@@ -1,0 +1,149 @@
+{
+    "id": "PearVideo.app",
+    "name": "PearVideo",
+    "author": "@Jsforbaby",
+    "icon": "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
+    "apps": [
+        {
+            "id": "PearVideoSettings",
+            "name": "PearVideo",
+            "keys": [
+                "pear_player_code",
+                "pear_custom_scheme",
+                "pear_url_encode"
+            ],
+            "settings": [
+                {
+                    "id": "pear_player_code",
+                    "name": "播放器",
+                    "val": "",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna",
+                            "label": "Lenna"
+                        },
+                        {
+                            "key": "SenPlayer",
+                            "label": "SenPlayer"
+                        },
+                        {
+                            "key": "VidHub",
+                            "label": "VidHub"
+                        },
+                        {
+                            "key": "KMPlayer",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "VLC",
+                            "label": "VLC"
+                        },
+                        {
+                            "key": "Alook",
+                            "label": "Alook"
+                        },
+                        {
+                            "key": "Fileball",
+                            "label": "Fileball"
+                        },
+                        {
+                            "key": "IINA",
+                            "label": "IINA"
+                        },
+                        {
+                            "key": "NPlayer",
+                            "label": "NPlayer"
+                        },
+                        {
+                            "key": "Safari",
+                            "label": "Safari"
+                        }
+                    ],
+                    "desc": "选择播放器（用于标识）"
+                },
+                {
+                    "id": "pear_custom_scheme",
+                    "name": "播放器 Scheme",
+                    "val": "",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna://x-callback-url/play?url=",
+                            "label": "Lenna视频库"
+                        },
+                        {
+                            "key": "SenPlayer://x-callback-url/play?url=",
+                            "label": "SenPlayer播放器"
+                        },
+                        {
+                            "key": "infuse://x-callback-url/play?url=",
+                            "label": "Infuse播放器"
+                        },
+                        {
+                            "key": "filebox://play?url=",
+                            "label": "Fileball文件管理"
+                        },
+                        {
+                            "key": "Alook://",
+                            "label": "Alook浏览器"
+                        },
+                        {
+                            "key": "vlc://",
+                            "label": "VLC播放器"
+                        },
+                        {
+                            "key": "kmplayer://",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "open-vidhub://x-callback-url/open?url=",
+                            "label": "VidHub影库"
+                        },
+                        {
+                            "key": "iina://weblink?url=",
+                            "label": "IINA播放器"
+                        },
+                        {
+                            "key": "nplayer-http://",
+                            "label": "nPlayer"
+                        },
+                        {
+                            "key": "http://",
+                            "label": "Safari浏览器"
+                        }
+                    ],
+                    "desc": "对应播放器的打开协议前缀（选择后可直接拼接URL）"
+                },
+                {
+                    "id": "pear_url_encode",
+                    "name": "是否URL编码",
+                    "val": "auto",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "yes",
+                            "label": "是（强制编码）"
+                        },
+                        {
+                            "key": "no",
+                            "label": "否（不编码）"
+                        },
+                        {
+                            "key": "auto",
+                            "label": "自动（推荐，根据播放器默认）"
+                        }
+                    ],
+                    "desc": "决定拼接URL时参数是否进行URL编码（大部分x-callback-url需要编码）"
+                }
+            ],
+            "author": "@Jsforbaby",
+            "repo": "https://t.me/GithubYu9191",
+            "icons": [
+                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
+                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/GitHub.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js"
+        }
+    ]
+}
