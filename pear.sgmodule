@@ -1,9 +1,9 @@
 #!name=Pear视频解析
-#!desc=会员视频解析，支持选择播放器
+#!desc=会员视频解析，支持选择播放器（支持BoxJS配置）
 #!author=@Jsforbaby
 #!category=18+
 #!arguments=播放器名称:lenna, 自定义Scheme:完整的URLscheme, URL编码:auto
-#!arguments-desc=播放器支持: lenna, SenPlayer, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)
+#!arguments-desc=播放器支持: lenna, SenPlayer, SenPlayer-dl, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)\n\n推荐使用BoxJS配置，无需填写参数！\nBoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json\n\nSenPlayer: 直接播放\nSenPlayer-dl: 下载模式，自动添加文件名.mp4
 
 
 [Map Local]
