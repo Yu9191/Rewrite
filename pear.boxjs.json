@@ -9,71 +9,81 @@
             "id": "PearVideoSettings",
             "name": "PearVideo 播放器设置",
             "keys": [
+                "pear_player_select",
                 "pear_custom_scheme",
                 "pear_url_encode"
             ],
             "settings": [
                 {
-                    "id": "pear_custom_scheme",
-                    "name": "播放器 Scheme",
-                    "val": "",
+                    "id": "pear_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
                     "type": "selects",
-                    "autoGrow": true,
                     "items": [
                         {
-                            "key": "",
-                            "label": "默认 (Lenna)"
-                        },
-                        {
-                            "key": "lenna://x-callback-url/play?url=",
+                            "key": "lenna",
                             "label": "Lenna 视频库"
                         },
                         {
-                            "key": "SenPlayer://x-callback-url/play?url=",
+                            "key": "SenPlayer",
                             "label": "SenPlayer (播放)"
                         },
                         {
-                            "key": "SenPlayer://x-callback-url/download?url=",
+                            "key": "SenPlayer-dl",
                             "label": "SenPlayer (下载+命名.mp4)"
                         },
                         {
-                            "key": "infuse://x-callback-url/play?url=",
+                            "key": "Infuse",
                             "label": "Infuse 播放器"
                         },
                         {
-                            "key": "filebox://play?url=",
+                            "key": "Fileball",
                             "label": "Fileball 文件管理"
                         },
                         {
-                            "key": "vidhub://x-callback-url/play?url=",
+                            "key": "VidHub",
                             "label": "VidHub 影库"
                         },
                         {
-                            "key": "iina://weblink?url=",
+                            "key": "IINA",
                             "label": "IINA 播放器"
                         },
                         {
-                            "key": "nplayer-http://",
+                            "key": "NPlayer",
                             "label": "nPlayer"
                         },
                         {
-                            "key": "vlc://",
+                            "key": "VLC",
                             "label": "VLC 播放器"
                         },
                         {
-                            "key": "kmplayer://",
+                            "key": "KMPlayer",
                             "label": "KMPlayer"
                         },
                         {
-                            "key": "Alook://",
+                            "key": "Alook",
                             "label": "Alook 浏览器"
                         },
                         {
-                            "key": "http://",
+                            "key": "Safari",
                             "label": "Safari 浏览器"
+                        },
+                        {
+                            "key": "custom",
+                            "label": "🛠 自定义播放器"
                         }
                     ],
-                    "desc": "选择播放器 Scheme，或在下方输入自定义 Scheme（例如: myplayer://play?url=）"
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "pear_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "pear_player_select": "custom"
+                    }
                 },
                 {
                     "id": "pear_url_encode",
