@@ -18,7 +18,7 @@
 ^https?:\/\/[^\/]+\/api\/adv\/index url reject-dict
 
 [mitm]
-hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
+hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, *.supdogth.com
  * 
  */
 
