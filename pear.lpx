@@ -30,4 +30,4 @@ URL-REGEX,^https?:\/\/[^\/]+\/api\/movie\/ShopProduct,REJECT
 URL-REGEX,^https?:\/\/[^\/]+\/api\/adv\/index,REJECT
 
 [Mitm]
-hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com
+hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, *.supdogth.com
