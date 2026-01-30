@@ -25,4 +25,4 @@ Pear种子详情 = type=http-request, pattern=^https?:\/\/[^\/]+\/api\/Search\/T
 
 
 [MITM]
-hostname = %APPEND% *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, souhu.mett.me
+hostname = %APPEND% *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, souhu.mett.me, *.supdogth.com
