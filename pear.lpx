@@ -9,8 +9,9 @@ scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url
 encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)。SenPlayer: 直接播放 | SenPlayer-dl: 下载模式，自动添加文件名.mp4
 
 [Rewrite]
-^https?:\/\/[^\/]+\/api\/movie\/ShopProduct mock-response-body data-type=text data="{}" status-code=200
-^https?:\/\/[^\/]+\/api\/adv\/index mock-response-body data-type=text data="{}" status-code=200
+^https?:\/\/[^\/]+\/api\/movie\/ShopProduct - reject-dict
+^https?:\/\/[^\/]+\/api\/adv\/index - reject-dict
+
 
 [Script]
 # 视频/动漫解析
