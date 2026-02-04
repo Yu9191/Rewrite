@@ -8,6 +8,10 @@ player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "Vi
 scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高。BoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)。SenPlayer: 直接播放 | SenPlayer-dl: 下载模式，自动添加文件名.mp4
 
+[Rewrite]
+^https?:\/\/[^\/]+\/api\/movie\/ShopProduct mock-response-body data-type=text data="{}" status-code=200
+^https?:\/\/[^\/]+\/api\/adv\/index mock-response-body data-type=text data="{}" status-code=200
+
 [Script]
 # 视频/动漫解析
 http-request ^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=false, timeout=60, tag=Pear视频解析, argument=[{player},{scheme},{encode}]
@@ -24,10 +28,6 @@ http-request ^https?:\/\/[^\/]+\/api\/Search\/TorrentDetail\/ script-path=https:
 # VIP伪装
 http-response ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=true, timeout=60, tag=PearVIP伪装
 
-[Rule]
-# 去广告
-URL-REGEX,^https?:\/\/[^\/]+\/api\/movie\/ShopProduct,REJECT
-URL-REGEX,^https?:\/\/[^\/]+\/api\/adv\/index,REJECT
 
 [Mitm]
 hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, *.supdogth.com
