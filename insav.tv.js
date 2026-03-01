@@ -1,12 +1,13 @@
 /*
- * 无码平台不支持
+ * 
 [rewrite_local]
-^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|.*\.rftn469\.com|.*\.pbfk364\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
+^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|.*\.r[a-z]{3}\d{3}\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
 
-^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|.*\.rftn469\.com|.*\.pbfk364\.com)\/api\/video\/getVideoUrl url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
+^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|.*\.r[a-z]{3}\d{3}\.com)\/api\/video\/getVideoUrl url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
 
 [mitm]
-hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com
+
 
 *
 */
