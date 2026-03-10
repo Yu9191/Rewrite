@@ -1,6 +1,6 @@
 /*
 [rewrite_local]
-^https?:\/\/.*\.mypep\.cn\/(thirdPartyService\/book_init_v3\.json|user\/ak\/pep_click\/user\/.*\/userinfo\.json) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/rjdd.js
+^https?:\/\/.*\.mypep\.cn\/(thirdPartyService\/book_init(_v3)?\.json|user\/ak\/pep_click\/user\/.*\/userinfo\.json|loginvcode|unit\/encrypt\/detail) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/rjdd.js
 
 [mitm]
 hostname = *.mypep.cn
