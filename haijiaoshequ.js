@@ -6,11 +6,12 @@
  * [暗网] [书城]未解锁
  * 2025-07-24最新版
  * 2025-11-16最新版
+ * 2026-03-16最新版
 [rewrite_local]
-^https:\/\/api2\.xivjndn\.xyz\/(?:api\.php\/api|api)\/(?:mv\/detail|users\/base_info|home\/getconfig|novel\/detail|novel\/recommend|novel\/chaptersList|novel\/chapterDetail|navigation\/index(?:_aw)?|tabnew\/list_construct|porngame\/nav)(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiaoshequ.js
+^https:\/\/api2\.khnqucvm\.cc\/(?:api\.php\/api|api)\/(?:mv\/detail|users\/base_info|home\/getconfig|novel\/detail|novel\/recommend|novel\/chaptersList|novel\/chapterDetail|navigation\/index(?:_aw)?|tabnew\/list_construct|porngame\/nav)(?:\?.*)?$ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiaoshequ.js
 
 [mitm]
-hostname = *.upwqjcun.cc, api2.xivjndn.xyz
+hostname = *.khnqucvm.cc, api2.xivjndn.xyz
 */
 
 const $ = new Env("海角社区");
