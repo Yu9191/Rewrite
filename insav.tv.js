@@ -9,7 +9,7 @@
 hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.com, wuma.jkfa588.com
 
 
-*
+*, *.jkfa588.com
 */
 //03.02 14点06分
 //03.03 23点35分
