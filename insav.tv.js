@@ -6,7 +6,7 @@
 ^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|wuma\..*\.com|.*\.[a-z]{4}\d{3}\.com)\/api\/video\/getVideoUrl url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
 
 [mitm]
-hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.afvc953.com, *.brqs396.com, *.fpuf378.com, *.jkfa588.com, *.jrtr374.com, *.mejj577.com, *.pbfk364.com, *.qhcf928.com, *.rahc448.com, *.rftn469.com, *.tqnh257.com, *.ypzm727.com, wuma.*.com, wuma.jkfa588.com
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.afvc953.com, *.brqs396.com, *.fpuf378.com, *.jkfa588.com, *.jrtr374.com, *.mejj577.com, *.pbfk364.com, *.qhcf928.com, *.rahc448.com, *.rftn469.com, *.tqnh257.com, *.ypzm727.com, *.zabk927.com, wuma.*.com, wuma.jkfa588.com
 
 
 *
