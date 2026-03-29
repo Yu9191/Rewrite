@@ -1,0 +1,14 @@
+#!name=insav
+#!desc=解锁insav全部VIP功能，去除所有广告，支持选择播放器跳转（支持BoxJS配置）
+#!author=@Jsforbaby
+
+[Argument]
+player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "IINA", "NPlayer", "Safari", tag=播放器, desc=选择跳转的播放器 (默认lenna)。个人爱好使用BoxJS配置，无需填写参数！
+scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高。BoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/boxjs.json
+encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)
+
+[Script]
+http-request ^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|wuma\..*\.com|.*\.[a-z]{4}\d{3}\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/getVideoUrl) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js, requires-body=true, timeout=60, tag=insav解锁, argument=[{player},{scheme},{encode}]
+
+[Mitm]
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.com
