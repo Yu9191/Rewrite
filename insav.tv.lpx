@@ -4,7 +4,7 @@
 
 [Argument]
 player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "IINA", "NPlayer", "Safari", tag=播放器, desc=选择跳转的播放器 (默认lenna)。个人爱好使用BoxJS配置，无需填写参数！
-scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高。BoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/boxjs.json
+scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高。BoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)
 
 [Script]
