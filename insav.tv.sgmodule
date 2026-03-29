@@ -3,7 +3,7 @@
 #!category=18+
 #!author=@Jsforbaby
 #!arguments=播放器名称:lenna, 自定义Scheme:完整的URLscheme, URL编码:auto
-#!arguments-desc=播放器支持: lenna, SenPlayer, SenPlayer-dl, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)\n\n推荐使用BoxJS配置，无需填写参数！\nBoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/boxjs.json
+#!arguments-desc=播放器支持: lenna, SenPlayer, SenPlayer-dl, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)\n\n推荐使用BoxJS配置，无需填写参数！\nBoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 
 [Script]
 insav解锁 = type=http-request, pattern=^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|wuma\..*\.com|.*\.[a-z]{4}\d{3}\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/getVideoUrl), requires-body=1, max-size=0, timeout=60, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js, argument=player={{{播放器名称}}}&scheme={{{自定义Scheme}}}&encode={{{URL编码}}}
