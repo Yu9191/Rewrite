@@ -1,26 +1,26 @@
 {
-  "token": "5f2d0b5ecc0d8f8c0f9a981f2c906f3a",
-  "updateTime": "2026/4/5 05:53:08",
+  "token": "1f43d9f2ccd8b0a862445243c9b53086",
+  "updateTime": "2026/4/5 06:53:02",
   "vip": {
     "vip1": {
       "status": true,
-      "expireTime": "2026/4/5 06:53:03",
-      "expireTimestamp": 1775343183
+      "expireTime": "2026/4/5 07:53:02",
+      "expireTimestamp": 1775346782
     },
     "vip2": {
       "status": true,
-      "expireTime": "2026/4/5 06:53:12",
-      "expireTimestamp": 1775343192
+      "expireTime": "2026/4/5 07:53:07",
+      "expireTimestamp": 1775346787
     },
     "vip3": {
       "status": true,
-      "expireTime": "2026/4/5 06:53:17",
-      "expireTimestamp": 1775343197
+      "expireTime": "2026/4/5 07:53:11",
+      "expireTimestamp": 1775346791
     },
     "vip4": {
       "status": true,
-      "expireTime": "2026/4/5 06:53:21",
-      "expireTimestamp": 1775343201
+      "expireTime": "2026/4/5 07:53:16",
+      "expireTimestamp": 1775346796
     }
   }
 }
