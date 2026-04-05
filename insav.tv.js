@@ -4,7 +4,7 @@
 ^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|wuma\..*\.com|.*\.[a-z]{4}\d{3}\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/getVideoUrl) url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.tv.js
 
 [mitm]
-hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.afvc953.com, *.brqs396.com, *.ekev559.com, *.fevm887.com, *.fpuf378.com, *.gkgx769.com, *.hgps876.com, *.hrtx662.com, *.jkfa588.com, *.jrtr374.com, *.mejj577.com, *.nmdw785.com, *.nvqm727.com, *.parn938.com, *.pbfk364.com, *.qgrg858.com, *.qhcf928.com, *.rahc448.com, *.rftn469.com, *.rhaq298.com, *.rmdq875.com, *.sadn969.com, *.stfj583.com, *.tkyc824.com, *.tpzh827.com, *.tqnh257.com, *.ttks976.com, *.urdr998.com, *.wbdy462.com, *.weze432.com, *.ygfr384.com, *.ypzm727.com, *.yqfe877.com, *.zabk927.com, wuma.*.com, wuma.jkfa588.com
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.afvc953.com, *.brqs396.com, *.ekev559.com, *.fevm887.com, *.fpuf378.com, *.gkgx769.com, *.hgps876.com, *.hrtx662.com, *.jkfa588.com, *.jrtr374.com, *.mejj577.com, *.nmdw785.com, *.nvqm727.com, *.parn938.com, *.pbfk364.com, *.qgrg858.com, *.qhcf928.com, *.rahc448.com, *.rftn469.com, *.rhaq298.com, *.rmdq875.com, *.sadn969.com, *.smge456.com, *.stfj583.com, *.tkyc824.com, *.tpzh827.com, *.tqnh257.com, *.ttks976.com, *.urdr998.com, *.wbdy462.com, *.weze432.com, *.ygfr384.com, *.ypzm727.com, *.yqfe877.com, *.zabk927.com, wuma.*.com, wuma.jkfa588.com
 
 
 *
