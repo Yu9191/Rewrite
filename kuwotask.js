@@ -2,7 +2,7 @@
 /* 
 * 原作者 @mcdasheng688 @General74110
 * 酷我音乐签到 
-* 更新: 2025-12-18
+* 更新: 2026-04-19
 * 说明: 
 *  - phone: 手机号 (用于Web登录)
 *  - ocr: OCR密钥 (用于验证码识别)
@@ -177,14 +177,14 @@ async function h_cap() {
         const r1 = await $.http.get({ url: CONFIG.WWW, headers: ua });
         let kv = "", kn = "";
         const sc = r1.headers['set-cookie'] || r1.headers['Set-Cookie'];
-        const arr = Array.isArray(sc) ? sc : [sc];
+        const arr = (Array.isArray(sc) ? sc : [sc]).filter(Boolean);
         for (let c of arr) {
             if (c && (c.includes('Hm_Iuvt') || c.includes('kw_token') || c.length > 20)) {
                 let parts = c.split(';')[0].split('=');
                 if (parts.length >= 2) { kn = parts[0]; kv = parts[1]; break; }
             }
         }
-        if (!kv && arr.length > 0) { let p = arr[0].split(';')[0].split('='); kn = p[0]; kv = p[1]; }
+        if (!kv && arr.length > 0 && arr[0]) { let p = arr[0].split(';')[0].split('='); kn = p[0]; kv = p[1]; }
         if (!kv) return ret({ code: -1, msg: "Step1: Cookie获取失败" });
         const r2 = await $.http.get({ url: `${CONFIG.WWW}/api/common/captcha/getcode?reqId=${uuid()}&httpsStatus=1`, headers: { 'Cookie': `${kn}=${kv}`, 'Secret': sec(kv, kn), 'Referer': CONFIG.WWW, ...ua } });
         const j = JSON.parse(r2.body);
