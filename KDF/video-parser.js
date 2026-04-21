@@ -3,6 +3,7 @@
  * 提取会员视频 跳转浏览器HTML页面
  * 2025-04-25
  * 2025-11-15
+ * 2026-04-21
  *
 [rewrite_local]
 # NBA视频和电视剧
@@ -14,7 +15,7 @@ https:\/\/bp-api\.bestv\.com\.cn\/cms\/api\/(live\/studio\/id\/v8|c\/player\/com
 hostname = 360.com, bp-api.bestv.com.cn
 */
 /****************************************************************
- * 看东方 NBA & 电视剧 → HTML + M3U (v2025-11-15)
+ * 看东方 NBA & 电视剧 → HTML + M3U (v2026-04-21)
  ****************************************************************/
 
 const $origDone = $done;
@@ -285,13 +286,14 @@ function handleTV(dt) {
 /* ---------- 系统通知 ---------- */
 function notify(title, type) {
   const link = 'https://360.com/video';
-  (this.$notify ?? $notification.post)(
-    title || '看东方',
-    '',
-    type === 'NBA比赛' ? '点击查看比赛直播和集锦' : '点击查看剧集',
-    { 'open-url': link, openUrl: link, url: link }
-  );
+  const msg = type === 'NBA比赛' ? '点击查看比赛直播和集锦' : '点击查看剧集';
+  if (typeof $notify !== 'undefined') {
+    $notify(title || '看东方', '', msg, { 'open-url': link, url: link });
+  } else if (typeof $notification !== 'undefined') {
+    $notification.post(title || '看东方', '', msg, { 'open-url': link, openUrl: link, url: link });
+  }
 }
+
 function buildM3U(kind) {
   const lines = [M3U_HEADER];
 
