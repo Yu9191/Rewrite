@@ -1,27 +1,16 @@
 #!name= 含羞草去广告 & 视频解锁
 #!desc= 去广告 / 视频解锁 (m3u8 请求去除时间限制 → 完整播放)
 #!system= ios
-#!category= 含羞草
+#!category= 18+
 #!date= 2026-04-27
 
 [Script]
-# ── 广告拦截 (响应修改) ──
-# banner广告 / 公告弹窗 / 面板广告位
+# ── 广告拦截 (API 响应修改) ──
 含羞草_广告 = type=http-response,pattern=^https?:\/\/[a-z0-9]+\.wt33k\.com\/(home\/getAds|base\/getBulletin|panel\/(list|get)),requires-body=1,max-size=262144,timeout=15,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/Hanxiucao/6lpu5.response.js
 
-# ── 视频解锁 (请求URL重写) ──
-# 拦截 m3u8 请求，去掉 start/end 参数 → 完整播放
-含羞草_视频 = type=http-request,pattern=^https?:\/\/[^/]+\.frist-art\.com\/play\/m3u8\/.+\.m3u8\?.+(?:start|end)=,timeout=15,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/Hanxiucao/6lpu5.request.js
-
-[Rule]
-# 广告图片 (AES加密图片服务器)
-DOMAIN-SUFFIX,yhsggjc.com,REJECT-NO-DROP
-# 自建统计
-DOMAIN-KEYWORD,n4e4.com,REJECT-NO-DROP
-
-[Map Local]
-# 在线统计上报 → 空响应
-^https?:\/\/[a-z0-9]+\.n4e4\.com\/analyse\/online data-type=text data="{}" status-code=200
+# ── 视频解锁 (播放页 HTML 注入) ──
+# hook fetch/XHR 截获 getPreUrl 响应，去掉 start/end → 完整播放
+含羞草_视频 = type=http-response,pattern=^https?:\/\/www\.6lpu5\.com\/play\/video\/,requires-body=1,max-size=0,timeout=15,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/Hanxiucao/6lpu5.response.js
 
 [MITM]
-hostname = %APPEND% *.wt33k.com, *.frist-art.com
+hostname = %APPEND% *.wt33k.com, www.6lpu5.com
