@@ -1,4 +1,4 @@
-name: 直推 main 自动加 fix: 前缀
+name: "直推 main 自动加 fix: 前缀"
 
 # 触发条件：push 到 main 分支
 # 行为：检查最新提交，如果不是 conventional 格式，且不是 bot/已知噪声提交，
