@@ -5,23 +5,22 @@ import { shouldNotify } from "../utils/notify.mjs";
 import { buildLaunchUrl } from "../utils/player.mjs";
 import { getVideoMeta } from "../utils/videoCache.mjs";
 
-/** 取标签前 N 项拼成副标题 */
+/** 副标题：演员 + 标签 */
 function buildSubtitle(meta) {
-	if (!meta) return "🎬 点击通知跳转播放器";
-	const tags = (meta.tags || []).slice(0, 6);
-	if (tags.length === 0 && !meta.actor) return "🎬 点击通知跳转播放器";
-	const parts = [];
-	if (meta.actor) parts.push(`👩 ${meta.actor}`);
-	if (tags.length) parts.push(`🏷️ ${tags.join(" · ")}`);
-	return parts.join("    ");
+	if (!meta) return "点击通知跳转播放器";
+	const tags = (meta.tags || []).slice(0, 5);
+	const segs = [];
+	if (meta.actor) segs.push(meta.actor);
+	if (tags.length) segs.push(tags.join(" / "));
+	return segs.length ? segs.join(" · ") : "点击通知跳转播放器";
 }
 
-/** 拼正文：发行日期 + 播放器 */
+/** 正文：发行日期 + 播放器 */
 function buildBody(meta, settings) {
-	const parts = [];
-	if (meta?.publishDate) parts.push(`📅 ${meta.publishDate}`);
-	parts.push(`▶️ ${settings.player}`);
-	return parts.join("    ");
+	const segs = [];
+	if (meta?.publishDate) segs.push(meta.publishDate);
+	segs.push(settings.player);
+	return segs.join(" · ");
 }
 
 /**
