@@ -32,20 +32,43 @@ function pickHandler(url) {
  * @returns {string|null} 改写后的 body；不需改写返回 null
  */
 function rewriteEncryptedBody(body, handler) {
+	if (!body) {
+		Console.warn("body 为空");
+		return null;
+	}
 	const outer = safeJson(body);
-	if (!outer?.data || !outer?.suffix) return null;
+	if (!outer) {
+		Console.warn(`body 不是 JSON: ${String(body).slice(0, 120)}`);
+		return null;
+	}
+	if (!outer.data || !outer.suffix) {
+		Console.warn(`body 不含 data/suffix: ${JSON.stringify(outer).slice(0, 120)}`);
+		return null;
+	}
 
 	const decrypted = decryptAES(outer.data, outer.suffix);
-	if (!decrypted) return null;
+	if (!decrypted) {
+		Console.error("解密失败");
+		return null;
+	}
 
 	const inner = safeJson(decrypted);
-	if (!inner) return null;
+	if (!inner) {
+		Console.error(`解密后非 JSON: ${String(decrypted).slice(0, 120)}`);
+		return null;
+	}
 
 	const changed = handler(inner);
-	if (!changed) return null;
+	if (!changed) {
+		Console.debug("handler 未修改 payload");
+		return null;
+	}
 
 	const encrypted = encryptAES(JSON.stringify(inner), outer.suffix);
-	if (!encrypted) return null;
+	if (!encrypted) {
+		Console.error("重加密失败");
+		return null;
+	}
 
 	return JSON.stringify({ data: encrypted, suffix: outer.suffix });
 }
@@ -58,40 +81,38 @@ function rewriteEncryptedBody(body, handler) {
  * @returns {Promise<Object>} 处理后的 $response
  */
 export async function Response($request, $response, settings) {
-	Console.log("\n🚀 ========== Response 处理开始 ==========");
-
 	const url = $request.url || "";
 	const body = $response.body;
+	Console.group(`Response ${url}`);
 
-	// video/info：旁路缓存元数据，body 原样返回
-	if (/\/api\/video\/info/.test(url)) {
-		handleVideoInfo(body);
-		Console.log("🏁 ========== Response 处理结束 (video/info) ==========\n");
+	try {
+		// video/info：旁路缓存元数据，body 原样返回
+		if (/\/api\/video\/info/.test(url)) {
+			handleVideoInfo(body);
+			return $response;
+		}
+
+		// getVideoUrl：旁路触发跳转通知，body 原样返回
+		if (/\/api\/video\/getVideoUrl/.test(url)) {
+			await handleVideoUrl(body, settings, $request.__insavVid);
+			return $response;
+		}
+
+		const handler = pickHandler(url);
+		if (!handler) {
+			Console.debug("无匹配 handler，body 原样返回");
+			return $response;
+		}
+
+		const newBody = rewriteEncryptedBody(body, handler);
+		if (newBody) {
+			$response.body = newBody;
+			Console.info("已改写响应");
+		} else {
+			Console.warn("改写失败或未变更");
+		}
 		return $response;
+	} finally {
+		Console.groupEnd();
 	}
-
-	// getVideoUrl：旁路触发跳转通知，body 原样返回
-	if (/\/api\/video\/getVideoUrl/.test(url)) {
-		await handleVideoUrl(body, settings, $request.__insavVid);
-		Console.log("🏁 ========== Response 处理结束 (getVideoUrl) ==========\n");
-		return $response;
-	}
-
-	const handler = pickHandler(url);
-	if (!handler) {
-		Console.log(`⏭️ 无匹配 handler，body 原样返回: ${url}`);
-		Console.log("🏁 ========== Response 处理结束 ==========\n");
-		return $response;
-	}
-
-	const newBody = rewriteEncryptedBody(body, handler);
-	if (newBody) {
-		$response.body = newBody;
-		Console.log(`✅ 已改写响应: ${url}`);
-	} else {
-		Console.log(`⚠️ 改写失败或未变更: ${url}`);
-	}
-
-	Console.log("🏁 ========== Response 处理结束 ==========\n");
-	return $response;
 }

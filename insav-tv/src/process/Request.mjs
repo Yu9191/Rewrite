@@ -51,24 +51,25 @@ async function rewriteVideoUrlBody(body) {
  * @returns {Promise<Object>} 处理后的 $request
  */
 export async function Request($request) {
-	Console.log("\n🚀 ========== Request 处理开始 ==========");
-
 	$request.headers = stripZstd($request.headers || {});
 
 	const url = $request.url || "";
 	const method = ($request.method || "GET").toUpperCase();
+	Console.group(`Request ${method} ${url}`);
 
-	if (method === "POST" && /\/api\/video\/getVideoUrl/.test(url)) {
-		const result = await rewriteVideoUrlBody($request.body || "");
-		if (result) {
-			$request.body = result.body;
-			$request.__insavVid = result.vid;
-			Console.log(`✅ getVideoUrl 请求体已替换 Token (vid=${result.vid})`);
-		} else {
-			Console.log("⚠️ getVideoUrl 请求体无需改写或改写失败");
+	try {
+		if (method === "POST" && /\/api\/video\/getVideoUrl/.test(url)) {
+			const result = await rewriteVideoUrlBody($request.body || "");
+			if (result) {
+				$request.body = result.body;
+				$request.__insavVid = result.vid;
+				Console.info(`getVideoUrl 请求体已替换 Token (vid=${result.vid})`);
+			} else {
+				Console.warn("getVideoUrl 请求体无需改写或改写失败");
+			}
 		}
+		return $request;
+	} finally {
+		Console.groupEnd();
 	}
-
-	Console.log("🏁 ========== Request 处理结束 ==========\n");
-	return $request;
 }

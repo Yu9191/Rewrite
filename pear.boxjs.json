@@ -121,7 +121,8 @@
             "keys": [
                 "insav_player_select",
                 "insav_custom_scheme",
-                "insav_url_encode"
+                "insav_url_encode",
+                "insav_log_level"
             ],
             "settings": [
                 {
@@ -215,6 +216,21 @@
                         }
                     ],
                     "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                },
+                {
+                    "id": "insav_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        { "key": "off",   "label": "off (静默)" },
+                        { "key": "error", "label": "error" },
+                        { "key": "warn",  "label": "warn" },
+                        { "key": "info",  "label": "info (默认)" },
+                        { "key": "debug", "label": "debug" },
+                        { "key": "all",   "label": "all" }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
                 }
             ],
             "author": "@Jsforbaby",

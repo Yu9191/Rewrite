@@ -11,7 +11,11 @@ export const BOXJS_KEYS = Object.freeze({
 	player: "insav_player_select",
 	scheme: "insav_custom_scheme",
 	encode: "insav_url_encode",
+	logLevel: "insav_log_level",
 });
+
+/** 默认日志级别（off / error / warn / info / debug / all） */
+export const DEFAULT_LOG_LEVEL = "info";
 
 /** getVideoUrl 通知去重缓存键 */
 export const CACHE_KEY = "insav_last_video_id";

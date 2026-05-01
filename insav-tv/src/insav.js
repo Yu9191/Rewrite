@@ -6,20 +6,51 @@
  *   2. Request() 改写请求（去 zstd / 替换 getVideoUrl token）
  *   3. fetch() 实际向上游发起请求
  *   4. Response() 改写响应（解密 → 各 handler → 再加密）
- *   5. done() 把改写后的响应回传给客户端
+ *   5. 按平台调用原生 $done 短路返回（Surge/Loon/Stash 必须 { response: ... } 包装）
  */
-import { $app, Console, done, fetch } from "@nsnanocat/util";
+import { $app, Console, fetch } from "@nsnanocat/util";
 import { Request } from "./process/Request.mjs";
 import { Response } from "./process/Response.mjs";
 import { resolveSettings } from "./utils/settings.mjs";
 
-(async () => {
-	Console.log(`Current App: ${$app}`);
+/**
+ * 平台兼容的 $done：Surge/Loon/Stash 必须用 { response: {...} } 包装才能短路返回；
+ * 否则会被当成"修改后的请求"再发上游导致签名不匹配。
+ */
+function finishResponse(payload) {
+	const baseHeaders = {
+		"Content-Type": "application/json; charset=utf-8",
+		Connection: "keep-alive",
+		...(payload.headers || {}),
+	};
+	const status = payload.status || 200;
+	const body = payload.body;
 
+	switch ($app) {
+		case "Surge":
+		case "Loon":
+		case "Stash":
+		case "Shadowrocket":
+		case "Egern":
+			$done({ response: { status, headers: baseHeaders, body } });
+			break;
+		case "Quantumult X":
+			$done({ status: `HTTP/1.1 ${status} OK`, headers: baseHeaders, body });
+			break;
+		default:
+			$done({ status, headers: baseHeaders, body });
+			break;
+	}
+}
+
+(async () => {
 	const settings = resolveSettings();
+	Console.logLevel = settings.logLevel;
+	Console.debug(`Current App: ${$app}, logLevel=${Console.logLevel}`);
+
 	await Request($request);
 
-	// 跳过自身回环：在 Surge/Loon/Stash 上声明 X-Surge-Skip-Scripting
+	// 跳过自身回环：Surge/Loon/Stash 上声明 X-Surge-Skip-Scripting
 	const upstreamHeaders = { ...($request.headers || {}) };
 	if ($app === "Surge" || $app === "Loon" || $app === "Stash") {
 		upstreamHeaders["X-Surge-Skip-Scripting"] = "true";
@@ -33,22 +64,21 @@ import { resolveSettings } from "./utils/settings.mjs";
 	if ($request.body !== undefined && $request.body !== null && $request.method !== "GET") {
 		upstreamReq.body = $request.body;
 	}
+	if ($app === "Quantumult X") {
+		upstreamReq.opts = { hints: false };
+	}
 
 	let $response = await fetch(upstreamReq);
 	if (!$response) $response = { status: 200, headers: {}, body: "" };
 
 	$response = await Response($request, $response, settings);
 
-	done({
+	finishResponse({
 		status: $response.status || 200,
-		headers: {
-			"Content-Type": "application/json; charset=utf-8",
-			Connection: "keep-alive",
-			...($response.headers || {}),
-		},
+		headers: $response.headers || {},
 		body: $response.body,
 	});
 })().catch(e => {
 	Console.error(`[insav] 入口异常: ${e?.stack || e?.message || e}`);
-	done({});
+	$done({});
 });

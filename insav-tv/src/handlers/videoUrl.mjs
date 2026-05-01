@@ -43,7 +43,7 @@ export async function handleVideoUrl(body, settings, vid) {
 	if (!inner) return;
 
 	if (inner.code !== 1) {
-		Console.log(`getVideoUrl 非成功: ${inner.msg || ""}`);
+		Console.warn(`getVideoUrl 非成功: ${inner.msg || ""}`);
 		return;
 	}
 

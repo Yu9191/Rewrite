@@ -26,5 +26,5 @@ export function handleVideoInfo(body) {
 		publishDate: publish_date || "",
 	});
 
-	Console.log(`📥 缓存视频元数据 vid=${id}: ${title}`);
+	Console.debug(`缓存视频元数据 vid=${id}: ${title}`);
 }
