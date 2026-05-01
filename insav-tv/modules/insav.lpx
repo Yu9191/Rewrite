@@ -3,7 +3,7 @@
 #!openUrl=http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2FYu9191%2FRewrite%2Frefs%2Fheads%2Fmain%2Fpear.boxjs.json
 #!author=@Jsforbaby
 #!homepage=https://github.com/Yu9191/Rewrite
-#!icon=
+#!icon=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.png
 
 [Argument]
 player = input, "lenna", tag=播放器代号, desc=lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / NPlayer / Alook / VLC / KMPlayer / Safari
