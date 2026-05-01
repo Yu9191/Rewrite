@@ -1,0 +1,43 @@
+name: PR 提交规范校验
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 写入 commitlint 配置
+        run: |
+          cat > commitlint.config.cjs <<'EOF'
+          module.exports = {
+            rules: {
+              'type-enum': [2, 'always', [
+                'feat', 'fix', 'docs', 'chore', 'refactor',
+                'perf', 'test', 'style', 'build', 'ci', 'revert'
+              ]],
+              'type-empty':    [2, 'never'],
+              'subject-empty': [2, 'never'],
+              'subject-case':  [0],
+            }
+          };
+          EOF
+
+      - name: 安装 commitlint
+        run: npm i -D @commitlint/cli @commitlint/config-conventional
+
+      - name: 校验 PR 内全部提交
+        run: |
+          npx commitlint \
+            --from "${{ github.event.pull_request.base.sha }}" \
+            --to   "${{ github.event.pull_request.head.sha }}" \
+            --verbose
