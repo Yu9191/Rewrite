@@ -18,10 +18,11 @@ import { resolveSettings } from "./utils/settings.mjs";
  * 否则会被当成"修改后的请求"再发上游导致签名不匹配。
  */
 function finishResponse(payload) {
+	// 仅保留最小必要响应头：util.fetch 已自动解压 body，
+	// 若回带 Content-Encoding / Content-Length，App 会按"压缩态"再解压一次导致失败
 	const baseHeaders = {
 		"Content-Type": "application/json; charset=utf-8",
 		Connection: "keep-alive",
-		...(payload.headers || {}),
 	};
 	const status = payload.status || 200;
 	const body = payload.body;
@@ -75,7 +76,6 @@ function finishResponse(payload) {
 
 	finishResponse({
 		status: $response.status || 200,
-		headers: $response.headers || {},
 		body: $response.body,
 	});
 })().catch(e => {
