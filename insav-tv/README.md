@@ -3,6 +3,37 @@
 VIP 解锁 + 去广告 + getVideoUrl Token 替换 + 第三方播放器跳转。
 基于 `script-analyze-echo-response` 模式（Surge / Loon / Stash / Quantumult X 通用）。
 
+## 订阅地址
+
+### Surge / Egern 模块
+
+```
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.sgmodule
+```
+
+### Quantumult X 远程重写
+
+```
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.conf
+```
+
+### Loon 插件
+
+```
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.lpx
+```
+
+### 其他平台（Stash / Shadowrocket 等）
+
+请用 [Script-Hub](https://github.com/Script-Hub-Org/Script-Hub) 把上面的 `.sgmodule` 转换为目标平台格式后订阅。
+
+### BoxJS 订阅（三端通用配置面板）
+
+```
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
+```
+
+
 ## 目录结构
 
 ```
@@ -51,21 +82,23 @@ npm run build:watch
 
 ## 引用方式
 
-打包后将 `dist/insav.js` 传到 GitHub raw / jsDelivr，再在配置里引用。
+直接用 `modules/` 下的模块文件导入对应代理工具，或自行写规则指向：
+
+```
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/dist/insav.js
+```
+
+### Surge
+
+导入 [`modules/insav.sgmodule`](./modules/insav.sgmodule)。
 
 ### Quantumult X
 
-```ini
-[rewrite_local]
-^https?:\/\/(insav\.tv|4k\.insav\.tv|dm\.insav\.tv|wuma\..*\.com|.*\.[a-z]{4}\d{3}\.com)\/api\/(extend\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/getVideoUrl) url script-analyze-echo-response https://你的域名/insav.js
+导入 [`modules/insav.conf`](./modules/insav.conf)。
 
-[mitm]
-hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.com
-```
+### Loon
 
-### Surge / Loon
-
-模板写法见参考脚本，将原 `script-analyze-echo-response` 的 URL 改成 `dist/insav.js` 的远端地址。
+导入 [`modules/insav.lpx`](./modules/insav.lpx)。
 
 ## BoxJS 配置
 
