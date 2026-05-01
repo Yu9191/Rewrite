@@ -1,6 +1,5 @@
 #!name=insav 解锁
 #!desc=VIP 解锁 + 去广告 + getVideoUrl Token 替换 + 第三方播放器跳转
-#!openUrl=http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2FYu9191%2FRewrite%2Frefs%2Fheads%2Fmain%2Fpear.boxjs.json
 #!author=@Jsforbaby
 #!homepage=https://github.com/Yu9191/Rewrite
 #!icon=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.png
