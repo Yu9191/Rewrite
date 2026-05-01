@@ -1,5 +1,5 @@
 #!name=insav 解锁
-#!desc=点击下方链接一键添加boxjs订阅
+#!desc=去除广告,解锁视频
 #!openUrl=http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2FYu9191%2FRewrite%2Frefs%2Fheads%2Fmain%2Fpear.boxjs.json
 #!author=@Jsforbaby
 #!homepage=https://github.com/Yu9191/Rewrite
