@@ -1,0 +1,11 @@
+#!name=CADReader VIP
+#!author=@ios151
+#!desc=看图王VIP解锁,全功能解锁
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/cad.png
+#!date=2025.5.4
+
+[Script]
+http-request ^https?://cad\.everdrawing\.com/(mobile/verifyVip|.*authorize/(verify-vip|query)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js, requires-body=true, timeout=60, tag=CADReader
+
+[MITM]
+hostname = cad.everdrawing.com
