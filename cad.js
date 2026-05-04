@@ -1,9 +1,6 @@
 /*
-CAD快速看图
-
-
 [rewrite_local]
-^https?://cad\.everdrawing\.com/(mobile/verifyVip|.*authorize/(verify-vip|query)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js
+^https?://cad\.everdrawing\.com/(mobile/verifyVip|.*authorize/(verify-vip|query)) url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js
 
 [mitm]
 hostname = cad.everdrawing.com
