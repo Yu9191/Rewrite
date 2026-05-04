@@ -1,0 +1,13 @@
+#!name=Cad快速看图
+#!author=@ios151
+#!desc=Cad快速看图
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/cad.png
+#!date=2025.5.4
+
+[Script]
+http-response ^https?://cad\.everdrawing\.com/mobile/verifyVip script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js, requires-body=true, timeout=60, tag=CADReader (国内)
+http-response ^https?://cad\.everdrawing\.com/app/authorize/verify-vip script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js, requires-body=true, timeout=60, tag=CADReader (国际)
+http-response ^https?://cad\.everdrawing\.com/.*authorize/query script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js, requires-body=true, timeout=60, tag=CADReader (个人)
+
+[MITM]
+hostname = cad.everdrawing.com
