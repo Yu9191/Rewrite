@@ -1,0 +1,10 @@
+#!name=1808.online
+#!desc=解锁会员视频
+#!category=18+
+
+[Script]
+1808-page = type=http-response,pattern=^https?://1808\.online/movies/[^/?]+\.html,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/1808/page.js
+1808-fake = type=http-response,pattern=^https?://1808\.online/papi/paidtime/,requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/1808/fake.js
+
+[MITM]
+hostname = %APPEND% 1808.online
