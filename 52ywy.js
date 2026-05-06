@@ -8,12 +8,13 @@
 [mitm]
 hostname = miniapp2.52ywy.com
 */
-
+//15点42分
 const $ = new Env("夜未央");
 const STORE_KEY = "52ywy_r2";
 const DICT_KEY  = "52ywy_dict";
 const TTL_MS    = 24 * 3600000;
 const GIST_URL  = "https://gist.githubusercontent.com/Yu9191/0c88077bc4251d0803810db88334d336/raw/r2-dict.json";
+const BYID_URL  = "https://miniapp2.52ywy.com/ywyminiappbot/getVideoById?id=";
 const LIST_RE   = /\/(getLatest|getLatestAll|getCategoryVideos|getSearch|series|movies|tv|av|getbloger)/;
 const PLAYER_RE = /\/player\/getPlayer(\?|$)/;
 const KEYS_ZERO = new Set(["vip", "dl_ban", "temp", "mob_status"]);
@@ -52,6 +53,7 @@ const KEYS_ZERO = new Set(["vip", "dl_ban", "temp", "mob_status"]);
         const entry = $.getjson(STORE_KEY, {})[vid];
         if (entry && entry.r2 && Date.now() - entry.t < TTL_MS) r2 = entry.r2;
       }
+      if (!r2) r2 = await fetchById(vid);
 
       if (r2) {
         data.r2 = r2; data.isvip = 1; data.user = true;
@@ -93,6 +95,24 @@ async function loadRemoteDict() {
     $.log(`字典拉取失败: ${e && e.message || e}`);
   }
   return cached && cached.data || null;
+}
+
+async function fetchById(vid) {
+  try {
+    const resp = await $.http.get({ url: BYID_URL + vid, timeout: 8000 });
+    const arr = $.toObj(resp.body);
+    if (Array.isArray(arr) && arr[0] && typeof arr[0].r2 === "string" && arr[0].r2) {
+      const r2 = arr[0].r2;
+      const map = $.getjson(STORE_KEY, {});
+      map[vid] = { r2, t: Date.now() };
+      $.setjson(map, STORE_KEY);
+      $.log(`getVideoById 补到 vid=${vid}`);
+      return r2;
+    }
+  } catch (e) {
+    $.log(`getVideoById 失败 vid=${vid} ${e && e.message || e}`);
+  }
+  return null;
 }
 
 function pruneExpired(raw) {
