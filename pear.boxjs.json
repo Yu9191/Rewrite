@@ -236,8 +236,7 @@
             "author": "@Jsforbaby",
             "repo": "https://t.me/GithubYu9191",
             "icons": [
-                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
-                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/GitHub.png"
+                "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.png"
             ],
             "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.js"
         },
@@ -380,8 +379,7 @@
             "author": "Yu9191 Rewrite",
             "repo": "https://github.com/Yu9191/Rewrite",
             "icons": [
-                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
-                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/GitHub.png"
+                "https://raw.githubusercontent.com/Yu9191/-/main/qiyou.png"
             ],
             "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js"
         }
