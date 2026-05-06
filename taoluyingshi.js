@@ -1,6 +1,6 @@
 /*
  套路影视
-2026-05-06 17点36分
+ 2026-05-06 17点42分
 
 [rewrite_local]
 ^https?:\/\/[^\/]*taoluyingshi[^\/]*\/index\.php\/vod\/play\/id\/(\d+)\/sid\/(\d+)\/nid\/(\d+) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/taoluyingshi.js
@@ -47,22 +47,16 @@ const $ = new Env("套路影视");
 
   $.log(`注入 vid=${vid} → ${videoUrl.slice(0, 80)}`);
 
-  const isM3u8 = /\.m3u8/i.test(videoUrl);
-  const vtype = isM3u8 ? "hls" : "normal";
-
   const html = `<!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>${vodName}</title>
-<link rel="stylesheet" href="${host}/static/player/dplayer/DPlayer.min.css">
-<script src="${host}/static/player/dplayer/hls.min.js"><\/script>
-<script src="${host}/static/player/dplayer/DPlayer.min.js"><\/script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#000;color:#fff;font-family:-apple-system,system-ui,sans-serif}
 .wrap{max-width:960px;margin:0 auto}
-#playerCnt{width:100%;height:100vh;max-height:calc(100vw * 9 / 16)}
+video{width:100%;max-height:calc(100vw * 9 / 16);background:#000;display:block}
 .bar{display:flex;gap:8px;padding:10px 12px;flex-wrap:wrap;background:#111}
 .btn{display:inline-block;padding:8px 16px;border-radius:6px;
      font-size:13px;font-weight:500;text-decoration:none;color:#fff;border:none;cursor:pointer}
@@ -76,7 +70,7 @@ body{background:#000;color:#fff;font-family:-apple-system,system-ui,sans-serif}
 </style>
 </head><body>
 <div class="wrap">
-  <div id="playerCnt"></div>
+  <video src="${videoUrl}" controls playsinline webkit-playsinline preload="auto"></video>
   <div class="bar">
     <a class="btn btn-sen" href="${senUrl}">SenPlayer 下载</a>
     <button class="btn btn-copy" id="copyBtn">复制链接</button>
@@ -86,7 +80,6 @@ body{background:#000;color:#fff;font-family:-apple-system,system-ui,sans-serif}
 </div>
 <div class="toast" id="toast"></div>
 <script>
-var dp=new DPlayer({container:document.getElementById("playerCnt"),autoplay:true,video:{url:"${videoUrl}",type:"${vtype}"}});
 document.getElementById("copyBtn").onclick=function(){
   var u="${videoUrl}";
   if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){tt("已复制")}).catch(function(){fb(u)})}else{fb(u)}
