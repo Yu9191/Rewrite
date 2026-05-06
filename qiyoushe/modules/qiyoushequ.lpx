@@ -1,0 +1,16 @@
+﻿#!name=妻友社区解锁
+#!desc=VIP 解锁 + 去广告 + 完整 m3u8 + 第三方播放器跳转
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Argument]
+player = input, "lenna", tag=播放器代号, desc=lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / NPlayer / Alook / VLC / KMPlayer / Safari
+scheme = input, "", tag=自定义 Scheme, desc=填写后会覆盖播放器代号；留空表示不使用
+encode = input, "", tag=URL 编码强制开关, desc=yes / no / 留空(按播放器默认)
+logLevel = input, "info", tag=日志级别, desc=off / error / warn / info(默认) / debug / all
+
+[Script]
+http-request ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel}]
+
+[MITM]
+hostname = *.cloudfront.net, *.gcwe44p.com
