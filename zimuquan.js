@@ -1,10 +1,10 @@
 /*
 字母圈
 解锁会员及金币视频
-2026-05-06
+2026-05-06 17点24分
 
 [rewrite_local]
-^https?:\/\/[^\/]+\/index\.php\/vod\/play\/ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/zimuquan.js
+^https?:\/\/[^\/]*zimuquan[^\/]*\/index\.php\/vod\/play\/ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/zimuquan.js
 
 [mitm]
 hostname = *.zimuquan*.top, *.zimuquan*.uk, *.zimuquan*.com
