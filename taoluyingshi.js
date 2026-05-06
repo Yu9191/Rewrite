@@ -1,6 +1,6 @@
 /*
- 套路影视 
-2026-05-06 17点32分
+ 套路影视
+2026-05-06 17点36分
 
 [rewrite_local]
 ^https?:\/\/[^\/]*taoluyingshi[^\/]*\/index\.php\/vod\/play\/id\/(\d+)\/sid\/(\d+)\/nid\/(\d+) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/taoluyingshi.js
@@ -47,49 +47,53 @@ const $ = new Env("套路影视");
 
   $.log(`注入 vid=${vid} → ${videoUrl.slice(0, 80)}`);
 
+  const isM3u8 = /\.m3u8/i.test(videoUrl);
+  const vtype = isM3u8 ? "hls" : "normal";
+
   const html = `<!DOCTYPE html>
 <html><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>${vodName}</title>
+<link rel="stylesheet" href="${host}/static/player/dplayer/DPlayer.min.css">
+<script src="${host}/static/player/dplayer/hls.min.js"><\/script>
+<script src="${host}/static/player/dplayer/DPlayer.min.js"><\/script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#111;color:#fff;font-family:-apple-system,system-ui,sans-serif}
-.wrap{max-width:900px;margin:0 auto;padding:12px}
-.title{font-size:16px;font-weight:600;padding:10px 0}
-.player{width:100%;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden}
-.player video{width:100%;height:100%}
-.bar{display:flex;gap:8px;padding:12px 0;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:10px 18px;border-radius:8px;
-     font-size:14px;font-weight:500;text-decoration:none;color:#fff;border:none;cursor:pointer}
+body{background:#000;color:#fff;font-family:-apple-system,system-ui,sans-serif}
+.wrap{max-width:960px;margin:0 auto}
+#playerCnt{width:100%;height:100vh;max-height:calc(100vw * 9 / 16)}
+.bar{display:flex;gap:8px;padding:10px 12px;flex-wrap:wrap;background:#111}
+.btn{display:inline-block;padding:8px 16px;border-radius:6px;
+     font-size:13px;font-weight:500;text-decoration:none;color:#fff;border:none;cursor:pointer}
 .btn-sen{background:#007AFF}
 .btn-copy{background:#34C759}
 .btn-open{background:#FF9500}
-.info{color:#888;font-size:12px;padding:4px 0}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);
-       color:#fff;padding:8px 24px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .3s;z-index:9999}
+.info{color:#666;font-size:11px;padding:4px 12px;background:#111}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.85);
+       color:#fff;padding:8px 24px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .3s;z-index:9999}
 .toast.on{opacity:1}
 </style>
 </head><body>
 <div class="wrap">
-  <div class="title">${vodName}</div>
-  <div class="player"><video src="${videoUrl}" controls autoplay playsinline></video></div>
+  <div id="playerCnt"></div>
   <div class="bar">
-    <a class="btn btn-sen" href="${senUrl}">📥 SenPlayer 下载</a>
-    <button class="btn btn-copy" id="copyBtn">📋 复制链接</button>
-    <a class="btn btn-open" href="${videoUrl}" target="_blank">🔗 直链</a>
+    <a class="btn btn-sen" href="${senUrl}">SenPlayer 下载</a>
+    <button class="btn btn-copy" id="copyBtn">复制链接</button>
+    <a class="btn btn-open" href="${videoUrl}" target="_blank">直链播放</a>
   </div>
-  <div class="info">vid: ${vid} · sid: ${sid} · nid: ${nid}</div>
+  <div class="info">${vodName} | vid:${vid}</div>
 </div>
 <div class="toast" id="toast"></div>
 <script>
+var dp=new DPlayer({container:document.getElementById("playerCnt"),autoplay:true,video:{url:"${videoUrl}",type:"${vtype}"}});
 document.getElementById("copyBtn").onclick=function(){
   var u="${videoUrl}";
-  if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){t("已复制")}).catch(function(){fb(u)})}else{fb(u)}
+  if(navigator.clipboard){navigator.clipboard.writeText(u).then(function(){tt("已复制")}).catch(function(){fb(u)})}else{fb(u)}
 };
-function fb(u){var a=document.createElement("textarea");a.value=u;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();t("已复制")}
-function t(m){var e=document.getElementById("toast");e.textContent=m;e.classList.add("on");setTimeout(function(){e.classList.remove("on")},1500)}
-</script>
+function fb(u){var a=document.createElement("textarea");a.value=u;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();tt("已复制")}
+function tt(m){var e=document.getElementById("toast");e.textContent=m;e.classList.add("on");setTimeout(function(){e.classList.remove("on")},1500)}
+<\/script>
 </body></html>`;
 
   $.done({ body: html });
