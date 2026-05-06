@@ -3,6 +3,7 @@ import { modifyCards } from "../handlers/cards.mjs";
 import { modifyMediaList } from "../handlers/mediaList.mjs";
 import { modifyMediaPlay, notifyMediaPlay } from "../handlers/mediaPlay.mjs";
 import { modifyPingConfig } from "../handlers/pingConfig.mjs";
+import { modifyPosts } from "../handlers/posts.mjs";
 import { modifyStaticJs } from "../handlers/staticAssets.mjs";
 import { modifyUserInfo } from "../handlers/userInfo.mjs";
 import { decryptResponse, encryptResponse, safeJson } from "../utils/crypto.mjs";
@@ -12,6 +13,7 @@ function pickHandler(url) {
 	if (/\/api\/app\/media\/play/.test(url)) return modifyMediaPlay;
 	if (/\/api\/app\/media\/(home|short\/hot)/.test(url)) return modifyMediaList;
 	if (/\/api\/app\/card\/(promotion|list|advance\/status)/.test(url)) return modifyCards;
+	if (/\/api\/app\/post\/(detail|list|pay|rent\/check)/.test(url)) return modifyPosts;
 	if (/\/api\/app\/user\/info/.test(url)) return modifyUserInfo;
 	if (/\/api\/app\/login\/guest/.test(url)) return modifyUserInfo;
 	return null;

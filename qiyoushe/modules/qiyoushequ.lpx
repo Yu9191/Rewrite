@@ -13,7 +13,7 @@ jump = input, "yes", tag=播放器跳转, desc=yes(通知跳转外部播放器) 
 
 [Script]
 http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/js\/index-Dg2qL6uR\.\d+\.js script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区启动页, argument=[{player},{scheme},{encode},{logLevel},{jump}]
-http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel},{jump}]
+http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)|post\/(detail|list|pay|rent\/check)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel},{jump}]
 
 [MITM]
 hostname = *.cloudfront.net, *.gcwe44p.com
