@@ -8,6 +8,7 @@ export const BOXJS_KEYS = Object.freeze({
 	player: "qiyou_player_select",
 	scheme: "qiyou_custom_scheme",
 	encode: "qiyou_url_encode",
+	jump: "qiyou_player_jump",
 	logLevel: "qiyou_log_level",
 });
 

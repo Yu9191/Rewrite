@@ -32,7 +32,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 - VIP 视频解锁：`/api/app/media/play` 解密后修改 `playable / isBuy / payType / preTime / price`
 - 个人中心会员显示：`/api/app/user/info` 与 `/api/app/login/guest` 修改 `normalVip / supremeVip / darkVip / liveVip / showCardName / showCardExpiredAt`
 - 完整 m3u8：根据 `mediaInfo.videoUrl` 生成 `/api/app/media/h5/m3u8/...` 签名地址
-- 播放器跳转：播放页推送系统通知，点击直接调起第三方播放器
+- 播放器跳转：播放页可推送系统通知并调起第三方播放器；关闭后不通知、不跳转
 - 去广告：清空 `ping/config` 中的启动广告、弹窗、banner、播放页广告、我的页广告、公告等全局广告配置
 - 去广告：清空 `card/promotion`、`card/list`、`card/advance/status` 等推广卡片接口
 - 列表免费标记：`media/home`、`media/short/hot` 中的视频统一标记免费/已购买
@@ -47,6 +47,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 | `qiyou_player_select` | 播放器代号（lenna / Infuse / custom 等） |
 | `qiyou_custom_scheme` | 自定义 scheme（player=custom 时生效） |
 | `qiyou_url_encode` | URL 编码：`yes` / `no` / 留空（按播放器默认） |
+| `qiyou_player_jump` | 播放器跳转：`yes` / `no`，默认 `yes`；`no` 表示不通知、不跳转 |
 | `qiyou_log_level` | 日志级别：`off` / `error` / `warn` / `info` / `debug` / `all` |
 
 支持播放器：lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / NPlayer / Alook / VLC / KMPlayer / Safari

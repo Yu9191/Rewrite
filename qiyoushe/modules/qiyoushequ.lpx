@@ -1,5 +1,6 @@
 ﻿#!name=妻友社区解锁
-#!desc=VIP 解锁 + 去广告 + 完整 m3u8 + 第三方播放器跳转
+#!desc=VIP 解锁 + 去广告 + 完整 m3u8 + 第三方播放器跳转可选
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/qiyou.png
 #!author=Yu9191 Rewrite
 #!homepage=https://github.com/Yu9191/Rewrite
 
@@ -8,9 +9,10 @@ player = input, "lenna", tag=播放器代号, desc=lenna / SenPlayer / SenPlayer
 scheme = input, "", tag=自定义 Scheme, desc=填写后会覆盖播放器代号；留空表示不使用
 encode = input, "", tag=URL 编码强制开关, desc=yes / no / 留空(按播放器默认)
 logLevel = input, "info", tag=日志级别, desc=off / error / warn / info(默认) / debug / all
+jump = input, "yes", tag=播放器跳转, desc=yes(通知跳转外部播放器) / no(不通知、不跳转)
 
 [Script]
-http-request ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel}]
+http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel},{jump}]
 
 [MITM]
 hostname = *.cloudfront.net, *.gcwe44p.com

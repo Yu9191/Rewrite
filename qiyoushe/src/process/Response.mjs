@@ -55,9 +55,9 @@ export async function Response($request, $response, settings) {
 		if (result?.body) {
 			$response.body = result.body;
 			Console.info("已解密改写并重加密响应");
-			if (/\/api\/app\/media\/play/.test(url)) notifyMediaPlay(result.payload, settings, $request);
+			if (settings.jump && /\/api\/app\/media\/play/.test(url)) notifyMediaPlay(result.payload, settings, $request);
 		} else {
-			Console.warn("改写失败或未变更");
+			Console.debug("未变更或无需改写");
 		}
 		return $response;
 	} finally {
