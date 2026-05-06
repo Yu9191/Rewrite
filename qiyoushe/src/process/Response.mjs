@@ -22,7 +22,7 @@ function pickHandler(url) {
 function rewriteEncryptedBody(body, handler) {
 	if (!body) return null;
 	const outer = safeJson(body);
-	if (!outer || outer.code !== 200 || typeof outer.data !== "string") return null;
+	if (!outer || typeof outer.data !== "string") return null;
 	const decrypted = decryptResponse(outer.data);
 	if (!decrypted) {
 		Console.error("解密失败");
@@ -40,6 +40,9 @@ function rewriteEncryptedBody(body, handler) {
 		Console.error("重加密失败");
 		return null;
 	}
+	outer.code = 200;
+	outer.msg = "success";
+	outer.tip = "success";
 	outer.data = encrypted;
 	outer.hash = true;
 	return { body: JSON.stringify(outer), payload: inner };
