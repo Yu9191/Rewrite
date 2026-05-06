@@ -1,0 +1,9 @@
+#!name=套路影视VIP解锁
+#!desc=绕过积分墙直接播放，支持SenPlayer下载
+#!author=Yu9191
+#!homepage=https://github.com/Yu9191
+#!date=2026-05-06
+
+^https?:\/\/[^\/]*taoluyingshi[^\/]*\/index\.php\/vod\/play\/id\/(\d+)\/sid\/(\d+)\/nid\/(\d+) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/taoluyingshi.js
+
+hostname = *.taoluyingshi.vip, taoluyingshi.vip
