@@ -1,0 +1,10 @@
+#!name=套路SM VIP解锁@Yu9191
+#!desc=绕过 60 秒预览，注入完整视频与 SenPlayer 下载
+#!author=Yu9191
+#!homepage=https://github.com/Yu9191
+#!date=2026-05-12
+
+^https?:\/\/(?:www\.)?tlsm\.one\/v\/\d+(?:[\/?#]|$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js
+^https?:\/\/(?:www\.)?itaolu\.com\/v\/\d+(?:[\/?#]|$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js
+
+hostname = tlsm.one, www.tlsm.one, itaolu.com, www.itaolu.com
