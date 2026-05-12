@@ -5,10 +5,11 @@
 
 [rewrite_local]
 ^https?:\/\/(?:www\.)?tlsm\.one\/v\/\d+(?:[\/?#]|$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js
+^https?:\/\/(?:www\.)?taolusm\.com\/v\/\d+(?:[\/?#]|$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js
 ^https?:\/\/(?:www\.)?itaolu\.com\/v\/\d+(?:[\/?#]|$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js
 
 [mitm]
-hostname = tlsm.one, www.tlsm.one, itaolu.com, www.itaolu.com
+hostname = tlsm.one, www.tlsm.one, taolusm.com, www.taolusm.com, itaolu.com, www.itaolu.com
 */
 
 const $ = new Env("套路SM");
