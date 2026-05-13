@@ -1,0 +1,24 @@
+{
+  "name": "porntube-unblock",
+  "version": "1.0.0",
+  "description": "porntube.cool / 91porn family VIP 解锁 + 去广告 (script-response-body)",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c && node -e \"require('fs').copyFileSync('src/frontend.js','dist/porntube-frontend.js')\"",
+    "build:watch": "rollup -c -w"
+  },
+  "author": "Yu9191 Rewrite",
+  "license": "MIT",
+  "dependencies": {
+    "@nsnanocat/url": "^1.2.5",
+    "@nsnanocat/util": "^2.6.11",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.60.1"
+  }
+}
