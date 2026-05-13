@@ -382,6 +382,36 @@
                 "https://raw.githubusercontent.com/Yu9191/-/main/qiyou.png"
             ],
             "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js"
+        },
+        {
+            "id": "PorntubeSettings",
+            "name": "porntube 设置",
+            "keys": [
+                "porntube_log_level"
+            ],
+            "settings": [
+                {
+                    "id": "porntube_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        { "key": "off",   "label": "off (静默)" },
+                        { "key": "error", "label": "error" },
+                        { "key": "warn",  "label": "warn" },
+                        { "key": "info",  "label": "info (默认)" },
+                        { "key": "debug", "label": "debug" },
+                        { "key": "all",   "label": "all" }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                }
+            ],
+            "author": "Yu9191 Rewrite",
+            "repo": "https://github.com/Yu9191/Rewrite",
+            "icons": [
+                "https://raw.githubusercontent.com/Yu9191/-/main/porntube.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/dist/porntube.js"
         }
     ]
 }

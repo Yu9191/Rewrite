@@ -61,9 +61,15 @@ chinesebdsm.* (前端用 includes 匹配前缀)
 <details>
 <summary><b>BoxJS 配置项</b></summary>
 
+BoxJS 订阅链接：
+
+https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
+
 | Key | 含义 |
 | --- | --- |
 | `porntube_log_level` | 日志级别：`off` / `error` / `warn` / `info` / `debug` / `all` |
+
+> Quantumult X / Snippet 用户的日志级别 **只能走 BoxJS 设置**（rewrite_local 段不支持 argument）。Surge / Loon 既可以在模块的 `arguments` 里改，也可以走 BoxJS。
 
 </details>
 
