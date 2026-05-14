@@ -93,7 +93,7 @@ export async function decodeResponseText($response) {
 	try {
 		const out = (z.decompress || z.decompressSync).call(z, bytes);
 		const text = utf8(out);
-		Console.info(`zstd 解压成功: ${out && out.length || 0} bytes`);
+		Console.debug(`zstd 解压成功: ${out && out.length || 0} bytes`);
 		return text;
 	} catch (e) {
 		Console.error(`zstd 解压失败: ${e?.message || e}`);

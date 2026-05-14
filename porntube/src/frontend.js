@@ -5,12 +5,9 @@
 (async function () {
 	try {
 		const resp = $response || {};
-		console.log(`[porntube-frontend] 开始处理: ${$request && $request.url || ""}`);
 		const body = await decodeBody(resp || {});
-		console.log(`[porntube-frontend] HTML 解码: type=${typeof body}, len=${body ? body.length : 0}, hasHead=${/<\/head>/i.test(body || "")}`);
 		if (!body || typeof body !== "string" || !/<\/head>/i.test(body)) return $done(body ? { body } : {});
 		const inject = '<script id="porntube-patch">(' + bootstrap.toString() + ')();</script>';
-		console.log("[porntube-frontend] 伪登录脚本已注入");
 		$done({ status: "HTTP/1.1 200 OK", body: body.replace(/<\/head>/i, inject + "</head>"), headers: cleanHeaders(resp.headers || {}) });
 	} catch (e) {
 		notifyError(e);
@@ -71,7 +68,6 @@ async function loadFzstd() {
 	try {
 		const r = await httpGet("https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js");
 		const code = typeof r === "string" ? r : r && typeof r.body === "string" ? r.body : "";
-		console.log(`[porntube-frontend] fzstd 代码长度=${code.length}`);
 		if (!code) return null;
 		Function(code).call(globalThis);
 		return globalThis.fzstd || null;
@@ -85,37 +81,24 @@ async function decodeBody(resp) {
 	const headers = resp.headers || {};
 	const key = Object.keys(headers).find(k => k.toLowerCase() === "content-encoding");
 	const enc = key ? String(headers[key]).toLowerCase() : "";
-	console.log(`[porntube-frontend] 响应体: body=${describeBody(body)} bodyBytes=${describeBody(resp.bodyBytes)} 压缩=${enc || "无"}`);
 	const isText = typeof body === "string" && /<!doctype html|<html|<\/head>|<body/i.test(body);
 	if (isText) return body;
 	const bytes = toUint8Array(resp.bodyBytes) || toUint8Array(body);
-	console.log(`[porntube-frontend] 二进制检测: ${bytes ? bytes.length : 0} bytes, zstd=${isZstd(bytes) ? "是" : "否"}`);
 	if (!bytes || !bytes.length) return typeof body === "string" ? body : "";
 	if (!enc.includes("zstd") && !isZstd(bytes)) {
 		const text = utf8(bytes);
-		console.log("[porntube-frontend] 按 UTF-8 转换后检测 HTML");
 		if (/<!doctype html|<html|<\/head>|<body/i.test(text)) return text;
 	}
 	const z = await loadFzstd();
-	console.log(`[porntube-frontend] zstd 解压库: ${z ? "已加载" : "加载失败"}`);
 	if (!z) return "";
 	try {
 		const out = (z.decompress || z.decompressSync).call(z, bytes);
 		const text = utf8(out);
-		console.log(`[porntube-frontend] zstd 解压成功: ${out && out.length || 0} bytes`);
 		return text;
 	} catch (e) {
 		console.log(`[porntube-frontend] zstd 解压失败: ${e && e.message || e}`);
 		return "";
 	}
-}
-
-function describeBody(v) {
-	if (v == null) return String(v);
-	const tag = Object.prototype.toString.call(v);
-	const len = typeof v === "string" ? v.length : v.byteLength || v.length || 0;
-	const ctor = v && v.constructor && v.constructor.name || "";
-	return `${tag} ctor=${ctor} len=${len}`;
 }
 
 function cleanHeaders(headers) {
