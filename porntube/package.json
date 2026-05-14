@@ -4,7 +4,7 @@
   "description": "porntube.cool / 91porn family VIP 解锁 + 去广告 (script-response-body)",
   "type": "module",
   "scripts": {
-    "build": "rollup -c && node -e \"require('fs').copyFileSync('src/frontend.js','dist/porntube-frontend.js')\"",
+    "build": "rollup -c",
     "build:watch": "rollup -c -w"
   },
   "author": "Yu9191 Rewrite",
@@ -12,7 +12,8 @@
   "dependencies": {
     "@nsnanocat/url": "^1.2.5",
     "@nsnanocat/util": "^2.6.11",
-    "crypto-js": "^4.2.0"
+    "crypto-js": "^4.2.0",
+    "fzstd": "^0.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.8",

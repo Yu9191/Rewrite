@@ -1,4 +1,5 @@
-import { Console, fetch } from "@nsnanocat/util";
+import { Console } from "@nsnanocat/util";
+import { decompress } from "fzstd";
 
 export function getHeader(headers, name) {
 	const key = Object.keys(headers || {}).find(k => k.toLowerCase() === name.toLowerCase());
@@ -53,19 +54,6 @@ function describeBody(v) {
 	return `${tag} ctor=${ctor} len=${len}`;
 }
 
-async function loadFzstd() {
-	if (globalThis.fzstd) return globalThis.fzstd;
-	try {
-		const r = await fetch({ url: "https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js" });
-		const code = typeof r === "string" ? r : r && typeof r.body === "string" ? r.body : "";
-		if (!code) return null;
-		Function(code).call(globalThis);
-		return globalThis.fzstd || null;
-	} catch {
-		return null;
-	}
-}
-
 // 试图把 $response.body 解成 utf8 文本，遇到 zstd 按需加载 fzstd 解压
 export async function decodeResponseText($response) {
 	const body = $response.body;
@@ -87,11 +75,8 @@ export async function decodeResponseText($response) {
 		}
 	}
 
-	const z = await loadFzstd();
-	Console.debug(`zstd 解压库: ${z ? "已加载" : "加载失败"}`);
-	if (!z) return null;
 	try {
-		const out = (z.decompress || z.decompressSync).call(z, bytes);
+		const out = decompress(bytes);
 		const text = utf8(out);
 		Console.debug(`zstd 解压成功: ${out && out.length || 0} bytes`);
 		return text;

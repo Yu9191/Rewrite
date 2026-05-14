@@ -1,6 +1,7 @@
 // 注入到站点 HTML 的前端 patch
 // 伪造 SevenVideoUser 让前端以为已登录，并清空 history 取消每日次数限制
 // HTML response-body 入口
+import { decompress } from "fzstd";
 
 (async function () {
 	try {
@@ -55,27 +56,6 @@ function utf8(bytes) {
 	try { return new TextDecoder("utf-8").decode(bytes); } catch { return ""; }
 }
 
-function httpGet(url) {
-	return new Promise((resolve, reject) => {
-		if (typeof $task !== "undefined") return $task.fetch({ url }).then(resolve, reject);
-		if (typeof $httpClient !== "undefined") return $httpClient.get(url, (e, r, b) => e ? reject(e) : resolve({ body: b, headers: r && r.headers }));
-		reject(new Error("no http client"));
-	});
-}
-
-async function loadFzstd() {
-	if (globalThis.fzstd) return globalThis.fzstd;
-	try {
-		const r = await httpGet("https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js");
-		const code = typeof r === "string" ? r : r && typeof r.body === "string" ? r.body : "";
-		if (!code) return null;
-		Function(code).call(globalThis);
-		return globalThis.fzstd || null;
-	} catch {
-		return null;
-	}
-}
-
 async function decodeBody(resp) {
 	const body = resp.body;
 	const headers = resp.headers || {};
@@ -89,10 +69,8 @@ async function decodeBody(resp) {
 		const text = utf8(bytes);
 		if (/<!doctype html|<html|<\/head>|<body/i.test(text)) return text;
 	}
-	const z = await loadFzstd();
-	if (!z) return "";
 	try {
-		const out = (z.decompress || z.decompressSync).call(z, bytes);
+		const out = decompress(bytes);
 		const text = utf8(out);
 		return text;
 	} catch (e) {

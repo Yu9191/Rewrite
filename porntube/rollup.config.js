@@ -25,4 +25,12 @@ export default [
 		},
 		plugins: [json(), nodeResolve({ dedupe: ["@nsnanocat/util"] }), commonjs(), terser(), buildBanner("porntube.js")],
 	},
+	{
+		input: "src/frontend.js",
+		output: {
+			file: "dist/porntube-frontend.js",
+			format: "iife",
+		},
+		plugins: [json(), nodeResolve(), commonjs(), terser(), buildBanner("porntube-frontend.js")],
+	},
 ];
