@@ -1,13 +1,27 @@
 // 注入到站点 HTML 的前端 patch
 // 伪造 SevenVideoUser 让前端以为已登录，并清空 history 取消每日次数限制
-// 走 script-response-body，匹配 porntube.cool 等站点 HTML 响应
+// 走 script-analyze-echo-response，自己请求上游后注入
 
 (async function () {
-	const body = await decodeBody($response || {});
+	const resp = await fetchOrigin($request || {});
+	const body = await decodeBody(resp || {});
 	if (!body || typeof body !== "string" || !/<\/head>/i.test(body)) return $done(body ? { body } : {});
 	const inject = '<script id="porntube-patch">(' + bootstrap.toString() + ')();</script>';
-	$done({ body: body.replace(/<\/head>/i, inject + "</head>"), headers: cleanHeaders($response.headers || {}) });
+	$done({ status: "HTTP/1.1 200 OK", body: body.replace(/<\/head>/i, inject + "</head>"), headers: cleanHeaders(resp.headers || {}) });
 })();
+
+function fetchOrigin(req) {
+	return new Promise((resolve, reject) => {
+		const headers = { ...(req.headers || {}) };
+		const aeKey = Object.keys(headers).find(k => k.toLowerCase() === "accept-encoding") || "Accept-Encoding";
+		headers[aeKey] = "identity";
+		const task = { url: req.url, method: req.method || "GET", headers };
+		if (req.body != null && task.method !== "GET") task.body = req.body;
+		if (typeof $task !== "undefined") return $task.fetch(Object.assign(task, { opts: { hints: false } })).then(resolve, reject);
+		if (typeof $httpClient !== "undefined") return $httpClient[task.method.toLowerCase()](task, (e, r, b) => e ? reject(e) : resolve({ status: r && (r.status || r.statusCode), headers: r && r.headers, body: b }));
+		reject(new Error("no http client"));
+	});
+}
 
 // zstd 处理
 function isZstd(bytes) {
@@ -64,11 +78,14 @@ async function decodeBody(resp) {
 	const headers = resp.headers || {};
 	const key = Object.keys(headers).find(k => k.toLowerCase() === "content-encoding");
 	const enc = key ? String(headers[key]).toLowerCase() : "";
-	const suspect = enc.includes("zstd") || (typeof body === "string" && body.charCodeAt(0) === 0x28);
-	if (typeof body === "string" && body.length && !suspect) return body;
+	const isText = typeof body === "string" && /<!doctype html|<html|<\/head>|<body/i.test(body);
+	if (isText) return body;
 	const bytes = toUint8Array(resp.bodyBytes) || toUint8Array(body);
 	if (!bytes || !bytes.length) return typeof body === "string" ? body : "";
-	if (!enc.includes("zstd") && !isZstd(bytes)) return utf8(bytes);
+	if (!enc.includes("zstd") && !isZstd(bytes)) {
+		const text = utf8(bytes);
+		if (/<!doctype html|<html|<\/head>|<body/i.test(text)) return text;
+	}
 	const z = await loadFzstd();
 	if (!z) return "";
 	try {

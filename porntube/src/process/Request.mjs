@@ -15,6 +15,8 @@ export async function Request($request) {
 	Console.groupEnd();
 
 	const upstreamHeaders = { ...($request.headers || {}) };
+	const aeKey = Object.keys(upstreamHeaders).find(k => k.toLowerCase() === "accept-encoding") || "Accept-Encoding";
+	upstreamHeaders[aeKey] = "identity";
 	// 避免响应被自身二次拦截
 	if (["Surge", "Loon", "Stash"].includes($app)) upstreamHeaders["X-Surge-Skip-Scripting"] = "true";
 
