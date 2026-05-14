@@ -1,3 +1,5 @@
+import { fetch } from "@nsnanocat/util";
+
 export function getHeader(headers, name) {
 	const key = Object.keys(headers || {}).find(k => k.toLowerCase() === name.toLowerCase());
 	return key ? headers[key] : "";
@@ -13,6 +15,12 @@ function toUint8Array(v) {
 	if (v instanceof Uint8Array) return v;
 	if (typeof ArrayBuffer !== "undefined" && v instanceof ArrayBuffer) return new Uint8Array(v);
 	if (Array.isArray(v)) return new Uint8Array(v);
+	// QX/Egern 不解 zstd 时 body 是 latin1 binary string（一 char = 一字节）
+	if (typeof v === "string") {
+		const u = new Uint8Array(v.length);
+		for (let i = 0; i < v.length; i++) u[i] = v.charCodeAt(i) & 0xff;
+		return u;
+	}
 	if (typeof v === "object") {
 		if (v.bytes) return toUint8Array(v.bytes);
 		if (v.data) return toUint8Array(v.data);
@@ -34,11 +42,11 @@ function utf8(bytes) {
 }
 
 async function loadFzstd() {
-	if (typeof globalThis.fzstd !== "undefined") return globalThis.fzstd;
+	if (globalThis.fzstd) return globalThis.fzstd;
 	try {
-		if (typeof fetch !== "function") return null;
-		const r = await fetch("https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js");
-		const code = await r.text();
+		const r = await fetch({ url: "https://cdn.jsdelivr.net/npm/fzstd@0.1.1/umd/index.js" });
+		const code = typeof r === "string" ? r : r && typeof r.body === "string" ? r.body : "";
+		if (!code) return null;
 		Function(code).call(globalThis);
 		return globalThis.fzstd || null;
 	} catch {
@@ -49,15 +57,12 @@ async function loadFzstd() {
 // 试图把 $response.body 解成 utf8 文本，遇到 zstd 按需加载 fzstd 解压
 export async function decodeResponseText($response) {
 	const body = $response.body;
-	// 已是文本：JSON 通常以 { 开头，HTML 以 < 开头，AES base64 以字母开头。
-	if (typeof body === "string" && body.length) {
-		const c0 = body.charCodeAt(0);
-		if (c0 !== 0x28) return body; // 非 zstd magic 直接用
-	}
-	const bytes = toUint8Array($response.bodyBytes) || (typeof body === "string" ? null : toUint8Array(body));
-	if (!bytes || !bytes.length) return typeof body === "string" ? body : null;
-
 	const enc = (getHeader($response.headers, "content-encoding") || "").toLowerCase();
+	const suspect = enc.includes("zstd") || (typeof body === "string" && body.charCodeAt(0) === 0x28);
+	if (typeof body === "string" && body.length && !suspect) return body;
+
+	const bytes = toUint8Array($response.bodyBytes) || toUint8Array(body);
+	if (!bytes || !bytes.length) return typeof body === "string" ? body : null;
 	if (!enc.includes("zstd") && !isZstd(bytes)) return utf8(bytes);
 
 	const z = await loadFzstd();
