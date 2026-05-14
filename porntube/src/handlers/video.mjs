@@ -31,7 +31,7 @@ export function modifyVideo(payload) {
 
 	if (changed) {
 		const m3 = (payload.m3u8s && payload.m3u8s[0]) || payload.m3u8 || "";
-		Console.info(`unlock ${payload.id || ""} type=${payload.videoType} m3u8=${String(m3).slice(0, 80)}`);
+		Console.info(`视频已解锁: id=${payload.id || ""}, type=${payload.videoType}, m3u8=${String(m3).slice(0, 80)}`);
 	}
 	return changed;
 }
