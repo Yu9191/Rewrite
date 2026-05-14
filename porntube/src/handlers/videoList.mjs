@@ -1,5 +1,5 @@
-// 列表接口：清掉列表项里的 cvideo / isPaid / premium 标记
-// /relatedSevenVideos /listSevenVideos /listMySevenVideos
+// 列表接口：清掉列表项里的 cvideo / isPaid / premium / vip 标记
+// /sevenVideos /relatedSevenVideos /listSevenVideos /listMySevenVideos
 
 function unlockItem(item) {
 	if (!item || typeof item !== "object") return false;
@@ -14,6 +14,10 @@ function unlockItem(item) {
 	}
 	if (item.premium === true) {
 		item.premium = false;
+		changed = true;
+	}
+	if (item.vip === true) {
+		item.vip = false;
 		changed = true;
 	}
 	return changed;

@@ -15,8 +15,6 @@ function finish($response) {
 	delete headers["transfer-encoding"];
 	const body = $response.body || "";
 	const out = body ? { status, headers, body } : { status, headers };
-	if ($app === "Quantumult X") return done(out);
-	if (["Surge", "Loon", "Stash", "Shadowrocket", "Egern"].includes($app)) return done({ response: out });
 	return done(out);
 }
 
