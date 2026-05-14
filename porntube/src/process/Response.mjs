@@ -5,6 +5,7 @@ import { modifyUser } from "../handlers/user.mjs";
 import { modifyVideo } from "../handlers/video.mjs";
 import { modifyVideoList } from "../handlers/videoList.mjs";
 import { decryptResponse, encryptResponse, safeJson } from "../utils/crypto.mjs";
+import { decodeResponseText } from "../utils/headers.mjs";
 
 function pickHandler(url) {
 	if (/\/sevenVideos\/[^/?]+/.test(url)) return modifyVideo;
@@ -67,6 +68,12 @@ export async function Response($request, $response /*, _settings */) {
 		if (!handler) {
 			Console.debug("no handler, passthrough");
 			return $response;
+		}
+		// 客户端不解 zstd 时这里兜底解一次
+		const decoded = await decodeResponseText($response);
+		if (typeof decoded === "string" && decoded !== $response.body) {
+			$response.body = decoded;
+			Console.debug("zstd-decoded body");
 		}
 		const result = rewriteEncryptedBody($response.body, handler);
 		if (result?.body) {

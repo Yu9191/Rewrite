@@ -1,6 +1,5 @@
 // 请求模式入口（dev 兜底，生产用 script-response-body 直接进 Response）
 import { $app, Console, fetch } from "@nsnanocat/util";
-import { stripZstd } from "../utils/headers.mjs";
 import { resolveSettings } from "../utils/settings.mjs";
 import { Response } from "./Response.mjs";
 
@@ -10,7 +9,6 @@ export async function Request($request) {
 	Console.logLevel = settings.logLevel;
 	Console.debug(`App: ${$app}, logLevel=${Console.logLevel}`);
 
-	$request.headers = stripZstd($request.headers || {});
 	const url = $request.url || "";
 	const method = ($request.method || "GET").toUpperCase();
 	Console.group(`Request ${method} ${url}`);
