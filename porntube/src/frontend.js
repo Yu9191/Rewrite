@@ -38,6 +38,8 @@ function toUint8Array(v) {
 	if (typeof ArrayBuffer !== "undefined" && v instanceof ArrayBuffer) return new Uint8Array(v);
 	if (Array.isArray(v)) return new Uint8Array(v);
 	if (typeof v === "string") {
+		const b64 = base64ToUint8Array(v);
+		if (b64 && isZstd(b64)) return b64;
 		const u = new Uint8Array(v.length);
 		for (let i = 0; i < v.length; i++) u[i] = v.charCodeAt(i) & 0xff;
 		return u;
@@ -52,27 +54,37 @@ function toUint8Array(v) {
 	return null;
 }
 
+function base64ToUint8Array(s) {
+	const text = String(s || "").trim();
+	if (!/^KLUv[+/]/.test(text)) return null;
+	try {
+		if (typeof atob === "function") {
+			const bin = atob(text);
+			const u = new Uint8Array(bin.length);
+			for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i) & 0xff;
+			return u;
+		}
+		if (typeof Buffer !== "undefined") return new Uint8Array(Buffer.from(text, "base64"));
+	} catch {}
+	return null;
+}
+
 function utf8(bytes) {
 	try { return new TextDecoder("utf-8").decode(bytes); } catch { return ""; }
 }
 
 async function decodeBody(resp) {
 	const body = resp.body;
-	const headers = resp.headers || {};
-	const key = Object.keys(headers).find(k => k.toLowerCase() === "content-encoding");
-	const enc = key ? String(headers[key]).toLowerCase() : "";
 	const isText = typeof body === "string" && /<!doctype html|<html|<\/head>|<body/i.test(body);
 	if (isText) return body;
 	const bytes = toUint8Array(resp.bodyBytes) || toUint8Array(body);
 	if (!bytes || !bytes.length) return typeof body === "string" ? body : "";
-	if (!enc.includes("zstd") && !isZstd(bytes)) {
-		const text = utf8(bytes);
-		if (/<!doctype html|<html|<\/head>|<body/i.test(text)) return text;
-	}
+	const text = utf8(bytes);
+	if (/<!doctype html|<html|<\/head>|<body/i.test(text)) return text;
+	if (!isZstd(bytes)) return typeof body === "string" ? body : text;
 	try {
 		const out = decompress(bytes);
-		const text = utf8(out);
-		return text;
+		return utf8(out);
 	} catch (e) {
 		console.log(`[porntube-frontend] zstd 解压失败: ${e && e.message || e}`);
 		return "";

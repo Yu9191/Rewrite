@@ -18,6 +18,8 @@ function toUint8Array(v) {
 	if (Array.isArray(v)) return new Uint8Array(v);
 	// QX/Egern 不解 zstd 时 body 是 latin1 binary string（一 char = 一字节）
 	if (typeof v === "string") {
+		const b64 = base64ToUint8Array(v);
+		if (b64 && isZstd(b64)) return b64;
 		const u = new Uint8Array(v.length);
 		for (let i = 0; i < v.length; i++) u[i] = v.charCodeAt(i) & 0xff;
 		return u;
@@ -31,6 +33,21 @@ function toUint8Array(v) {
 			return new Uint8Array(keys.sort((a, b) => a - b).map(k => v[k]));
 		}
 	}
+	return null;
+}
+
+function base64ToUint8Array(s) {
+	const text = String(s || "").trim();
+	if (!/^KLUv[+/]/.test(text)) return null;
+	try {
+		if (typeof atob === "function") {
+			const bin = atob(text);
+			const u = new Uint8Array(bin.length);
+			for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i) & 0xff;
+			return u;
+		}
+		if (typeof Buffer !== "undefined") return new Uint8Array(Buffer.from(text, "base64"));
+	} catch {}
 	return null;
 }
 
@@ -67,13 +84,12 @@ export async function decodeResponseText($response) {
 	const bytes = toUint8Array($response.bodyBytes) || toUint8Array(body);
 	Console.debug(`二进制检测: ${bytes ? bytes.length : 0} bytes, zstd=${isZstd(bytes) ? "是" : "否"}`);
 	if (!bytes || !bytes.length) return typeof body === "string" ? body : null;
-	if (!enc.includes("zstd") && !isZstd(bytes)) {
-		const text = utf8(bytes);
-		if (looksApiText(text)) {
-			Console.debug("按 UTF-8 转换后是 JSON");
-			return text;
-		}
+	const text = utf8(bytes);
+	if (looksApiText(text)) {
+		Console.debug("按 UTF-8 转换后是 JSON");
+		return text;
 	}
+	if (!isZstd(bytes)) return text || (typeof body === "string" ? body : null);
 
 	try {
 		const out = decompress(bytes);
