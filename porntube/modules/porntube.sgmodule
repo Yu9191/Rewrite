@@ -1,13 +1,14 @@
 #!name=porntube VIP 解锁
-#!desc=API 解密改写 + 前端伪登录 + 去广告 (porntube.cool / 91porn family)
+#!desc=VIP 解锁 + 去广告 (porntube.cool / 91porn family)
+#!icon=https://raw.githubusercontent.com/fishdown/Icon/master/app/porntube.png
 #!author=Yu9191 Rewrite
 #!homepage=https://github.com/Yu9191/Rewrite
 #!category=18+
-#!arguments=日志级别:info
-#!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all\n推荐 BoxJS 配置 porntube_log_level
+#!arguments=日志级别:info,播放器:lenna,自定义scheme:none,URL编码:default,播放器跳转:no
+#!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all\n播放器: lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / Alook / VLC / KMPlayer / NPlayer / Safari\n自定义scheme: 填写后覆盖播放器，例如 myplayer://play?url= ；留默认 none 表示不启用\nURL编码: yes / no / default(默认，走播放器默认行为)\n播放器跳转: yes / no(默认)
 
 [Script]
-porntube API = type=http-response, pattern=^https?:\/\/v2\.(?:cdn199\.com|kekecdn\.net|luchu\.org|madou\.ws|papapa\.biz|tianmtv\.com|xiaoshuo\.info|xiaoshuo\.la)\/(?:sevenVideos|relatedSevenVideos|listSevenVideos|listMySevenVideos|getAdsList|getWhitelist|sevenVideoUserSH|sevenVideoUserDetails|sevenVideoUserFind|downloadSevenVideo), requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/dist/porntube.js, argument=logLevel={{{日志级别}}}
+porntube API = type=http-response, pattern=^https?:\/\/v2\.(?:cdn199\.com|kekecdn\.net|luchu\.org|madou\.ws|papapa\.biz|tianmtv\.com|xiaoshuo\.info|xiaoshuo\.la)\/(?:sevenVideos|relatedSevenVideos|listSevenVideos|listMySevenVideos|getAdsList|getWhitelist|sevenVideoUserSH|sevenVideoUserDetails|sevenVideoUserFind|downloadSevenVideo), requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/dist/porntube.js, argument=logLevel={{{日志级别}}}&player={{{播放器}}}&scheme={{{自定义scheme}}}&encode={{{URL编码}}}&jump={{{播放器跳转}}}
 porntube 前端 = type=http-response, pattern=^https?:\/\/(?:porntube\.(?:cool|fit|site|store)|91porn\.(?:coach|top|band|name|plus|porn|red|sex)|91pornny\.com|91\.wtf|91forum\.com|91dabiaojie\.com|91zpc\.(?:app|pro|org|co|com)|chineseselfie\.(?:com|net|org)|xchina\.(?:day|cloud|plus|tube|cool|red)|xasian\.org|theporny\.com|madoumedia\.org|1024(?:videos|movies)\.com|bdsmzoo\.com|pornshop\.one|pilipili\.cool|dsdav\.net|x91\.club|x91porn\.com|chinesebdsm\.\w+)\/(?:video\/[^/?]+|videos\?|videos$|$|\?), requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/dist/porntube-frontend.js
 
 [MITM]
