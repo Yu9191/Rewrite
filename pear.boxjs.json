@@ -1,4 +1,4 @@
-{
+﻿{
     "id": "PearVideo.app",
     "name": "PearVideo",
     "author": "@Jsforbaby",
@@ -426,7 +426,8 @@
                 "porntube_player_select",
                 "porntube_custom_scheme",
                 "porntube_url_encode",
-                "porntube_log_level"
+                "porntube_log_level",
+                "porntube_player_jump"
             ],
             "settings": [
                 {
@@ -553,6 +554,23 @@
                         }
                     ],
                     "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                },
+                {
+                    "id": "porntube_player_jump",
+                    "name": "播放器跳转",
+                    "val": "no",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "no",
+                            "label": "关闭（默认）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "开启"
+                        }
+                    ],
+                    "desc": "开启后播放视频时通知跳转外部播放器"
                 }
             ],
             "author": "Yu9191 Rewrite",
