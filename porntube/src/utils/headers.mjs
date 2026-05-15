@@ -16,7 +16,7 @@ function toUint8Array(v) {
 	if (v instanceof Uint8Array) return v;
 	if (typeof ArrayBuffer !== "undefined" && v instanceof ArrayBuffer) return new Uint8Array(v);
 	if (Array.isArray(v)) return new Uint8Array(v);
-	// QX/Egern 不解 zstd 时 body 是 latin1 binary string（一 char = 一字节）
+	// QX/Egern 传 latin1 string
 	if (typeof v === "string") {
 		const b64 = base64ToUint8Array(v);
 		if (b64 && isZstd(b64)) return b64;
@@ -71,7 +71,7 @@ function describeBody(v) {
 	return `${tag} ctor=${ctor} len=${len}`;
 }
 
-// 试图把 $response.body 解成 utf8 文本，遇到 zstd 按需加载 fzstd 解压
+// body 解码，兼容 zstd
 export async function decodeResponseText($response) {
 	const body = $response.body;
 	const enc = (getHeader($response.headers, "content-encoding") || "").toLowerCase();

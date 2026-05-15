@@ -1,5 +1,4 @@
-// CryptoJS AES passphrase 模式封装
-// 与前端 main.*.js 的 worker.encrypt/decrypt("xxx") 二进制兼容
+// 加解密工具
 import CryptoJS from "crypto-js";
 import { CRYPTO } from "../config/index.mjs";
 

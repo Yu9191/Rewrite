@@ -1,7 +1,6 @@
-// 广告 + 重定向白名单
+// 广告
 import { Console } from "@nsnanocat/util";
 
-// /getAdsList -> 清空 list
 export function modifyAds(payload) {
 	if (!payload) return false;
 	let changed = false;
@@ -17,7 +16,6 @@ export function modifyAds(payload) {
 	return changed;
 }
 
-// /getWhitelist -> 只删 redirect/ad/popup/banner，保留语言包等正常项
 export function modifyWhitelist(payload) {
 	if (!Array.isArray(payload) || payload.length === 0) return false;
 	let removed = 0;

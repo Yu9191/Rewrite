@@ -1,5 +1,4 @@
-// porntube.cool / 91porn family VIP 解锁
-// API response-body 入口
+// 入口
 import { $app, Console, done, notification } from "@nsnanocat/util";
 import { Response } from "./process/Response.mjs";
 import { resolveSettings } from "./utils/settings.mjs";

@@ -1,6 +1,4 @@
-// 列表接口：清掉列表项里的 cvideo / isPaid / premium / vip 标记
-// /sevenVideos /relatedSevenVideos /listSevenVideos /listMySevenVideos
-
+// 列表接口
 function unlockItem(item) {
 	if (!item || typeof item !== "object") return false;
 	let changed = false;
@@ -23,7 +21,6 @@ function unlockItem(item) {
 	return changed;
 }
 
-// 不同接口返回结构不一样，深度遍历兼容 [{},{}] / {list:[]} / {data:{items:[]}}
 function walk(value) {
 	let changed = false;
 	if (Array.isArray(value)) {

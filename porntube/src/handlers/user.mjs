@@ -1,5 +1,4 @@
-// 已登录账号信息接口的提权：避免到期续费弹窗
-// /sevenVideoUserSH /sevenVideoUserDetails /sevenVideoUserFind
+// 账号
 import { Console } from "@nsnanocat/util";
 
 const FUTURE = 4102444800000; // 2100-01-01

@@ -1,6 +1,4 @@
-// 注入到站点 HTML 的前端 patch
-// 伪造 SevenVideoUser 让前端以为已登录，并清空 history 取消每日次数限制
-// HTML response-body 入口
+// 前端注入
 import { decompress } from "fzstd";
 
 (async function () {
@@ -27,7 +25,6 @@ function notifyError(e) {
 	} catch {}
 }
 
-// zstd 处理
 function isZstd(bytes) {
 	return bytes && bytes.length > 4 && bytes[0] === 0x28 && bytes[1] === 0xb5 && bytes[2] === 0x2f && bytes[3] === 0xfd;
 }
@@ -102,8 +99,7 @@ function cleanHeaders(headers) {
 	return next;
 }
 
-// 下面这段会被 toString 序列化嵌进 HTML，跑在页面里。
-// 注意：不能用闭包外的变量
+// 嵌入页面运行
 function bootstrap() {
 	const USER_KEY = "CapacitorStorage.SevenVideoUser";
 	const HISTORY_KEY = "CapacitorStorage.history";
@@ -121,19 +117,27 @@ function bootstrap() {
 		});
 	}
 
-	// 等同于前端的 worker.setObject(key, obj)：双层 stringify 后 AES
 	function encode(C, obj) {
 		return C.AES.encrypt(JSON.stringify(JSON.stringify(obj)), SECRET).toString();
+	}
+
+	function decode(C, str) {
+		try {
+			const a = C.AES.decrypt(str, SECRET).toString(C.enc.Utf8);
+			return JSON.parse(JSON.parse(a));
+		} catch { return null; }
 	}
 
 	(async function () {
 		try {
 			const C = await loadCrypto();
-			if (!localStorage.getItem(USER_KEY)) {
+			const existing = localStorage.getItem(USER_KEY) || "";
+			const obj = existing ? decode(C, existing) : null;
+			if (!obj || obj.token || obj.userId) {
 				localStorage.setItem(USER_KEY, encode(C, {
-					userId: "u" + Date.now().toString(36),
+					userId: "",
 					userEmail: "联合国儿童基金会",
-					token: "vip_" + Math.random().toString(36).slice(2),
+					token: "",
 					activeUntil: FUTURE,
 				}));
 			}
