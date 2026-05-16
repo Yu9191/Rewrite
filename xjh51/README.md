@@ -15,7 +15,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/modules/x
 **Loon**
 https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/modules/xjh51.lpx
 
-> Stash 使用 Surge 模块链接，Shadowrocket 使用 Quantumult X 模块链接
+> Egern 使用 Surge 模块链接，其他代理工具用 ScriptHub 转换
 
 <details><summary><b>功能</b></summary>
 
