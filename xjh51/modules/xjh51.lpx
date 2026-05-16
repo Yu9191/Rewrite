@@ -6,7 +6,7 @@
 
 [Argument]
 logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
-player = select, "IINA", "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "NPlayer", "potplayer", "Safari", tag=播放器
+player = select, "SenPlayer", "lenna", "IINA", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "NPlayer", "potplayer", "Safari", tag=播放器
 scheme = input, "none", tag=自定义scheme
 encode = select, "default", "yes", "no", tag=URL编码
 jump = select, "no", "yes", tag=播放器跳转
