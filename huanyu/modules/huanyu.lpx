@@ -5,7 +5,7 @@
 #!homepage=https://github.com/Yu9191/Rewrite
 
 [URL Rewrite]
-^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com)(/.*) https://huanyu-proxy.pry-decoys6v.workers.dev$1 header
+^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com)(/.*) https://huanyu-proxy.daoyufan.workers.dev$1 header
 
 [MITM]
 hostname = daoyu.fan, huanyuxingqiu.vip, huanyuxingqiu.life, hyxq666.com
