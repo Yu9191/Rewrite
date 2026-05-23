@@ -1,0 +1,15 @@
+#!name=幻宇星球 VIP 解锁
+#!desc=通过 Worker 反代解锁 VIP 下载 (daoyu.fan)
+#!icon=https://daoyu.fan/wp-content/uploads/2026/05/3b2f6f083ed1a8e.jpeg
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Argument]
+workerUrl = input, "", tag=Worker地址 (如 https://xxx.workers.dev)
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
+
+[Script]
+http-request ^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huanyu/dist/request.js, requires-body=true, timeout=30, tag=huanyu, argument=[{workerUrl},{logLevel}]
+
+[MITM]
+hostname = daoyu.fan, huanyuxingqiu.vip, huanyuxingqiu.life, hyxq666.com
