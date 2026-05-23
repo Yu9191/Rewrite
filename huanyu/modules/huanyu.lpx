@@ -4,12 +4,8 @@
 #!author=Yu9191 Rewrite
 #!homepage=https://github.com/Yu9191/Rewrite
 
-[Argument]
-workerUrl = input, "", tag=Worker地址 (如 https://xxx.workers.dev)
-logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
-
 [Script]
-http-request ^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huanyu/dist/request.js, requires-body=true, timeout=30, tag=huanyu, argument=[{workerUrl},{logLevel}]
+http-request ^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huanyu/dist/request.js, requires-body=true, timeout=30, tag=huanyu
 
 [MITM]
 hostname = daoyu.fan, huanyuxingqiu.vip, huanyuxingqiu.life, hyxq666.com
