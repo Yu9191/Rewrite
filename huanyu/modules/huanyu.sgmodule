@@ -6,7 +6,7 @@
 #!category=18+
 
 [URL Rewrite]
-^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com)(/.*) https://huanyu-proxy.daoyufan.workers.dev$1 header
+^https?://(?:daoyu\.fan|huanyuxingqiu\.(?:vip|life)|hyxq666\.com)/(?!.*\.(?:png|jpe?g|gif|webp|svg|ico|css|js|woff2?|ttf|eot|mp[34]|zip|rar)(?:\?|$))(.*) https://huanyu-proxy.daoyufan.workers.dev/$1 header
 
 [MITM]
 hostname = %APPEND% daoyu.fan, huanyuxingqiu.vip, huanyuxingqiu.life, hyxq666.com
