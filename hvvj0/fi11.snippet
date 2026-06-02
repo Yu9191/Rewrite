@@ -1,0 +1,11 @@
+#!name=Fi11 VIP 解锁
+#!desc=h5.hvvj0.com 解锁 VIP 视频 + 去广告
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!date=2026-06-03
+
+[rewrite_local]
+^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|v2\/getUrl|getPreUrl|getList|getRecommendListByVideoId|getFeatured|getHot)|home\/(getAds|getMoreAds|getMoreAdsList)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js
+
+[mitm]
+hostname = a74d.uwegu.com

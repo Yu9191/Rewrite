@@ -1,0 +1,12 @@
+#!name=Fi11 VIP 解锁
+#!desc=h5.hvvj0.com 解锁 VIP 视频 + 去广告 (script-response-body)
+#!author=Jsforbaby
+#!category=18+
+#!arguments=日志级别:info
+#!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all
+
+[Script]
+fi11-api = type=http-response, pattern=^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|v2\/getUrl|getPreUrl|getList|getRecommendListByVideoId|getFeatured|getHot)|home\/(getAds|getMoreAds|getMoreAdsList)), requires-body=true, max-size=0, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, argument=logLevel={{{日志级别}}}
+
+[MITM]
+hostname = a74d.uwegu.com
