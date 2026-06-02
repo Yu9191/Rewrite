@@ -5,7 +5,7 @@
 #!category=18+
 
 [Script]
-http-response ^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|v2\/getUrl|getPreUrl|getList|getRecommendListByVideoId|getFeatured|getHot)|home\/(getAds|getMoreAds|getMoreAdsList)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-api
+http-response ^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|v2\/getUrl|getPreUrl|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/(add|getOrderInfo)|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-api
 
 [MitM]
 hostname = a74d.uwegu.com
