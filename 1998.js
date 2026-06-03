@@ -1,4 +1,3 @@
-
 /*
 1998 解锁全课程全资料
 
@@ -18,37 +17,41 @@ try {
     // 会员界面2
     if (url.includes('getVipInfomationAll')) {
         let obj = JSON.parse(body);
-        obj.data.mainInfoList = [{
-            "vipId": "86",
-            "vipName": "永久题库会员",
-            "vipType": "3",
-            "powerImage": "https://raw.githubusercontent.com/Yu9191/-/main/icon/laoliu.png",
-            "catLog": "1",
-            "buyCount": null,
-            "isVip": "1",
-            "validTime": "2099-09-09",
-            "createTime": "2099-09-09 09:40:43",
-            "fakeBuyCount": "3280",
-            "count": "3280",
-            "selected": "1",
-            "priceList": [],
-            "exclusiveList": []
-        }];
-        body = JSON.stringify(obj);
+        if (obj && obj.data) {
+            obj.data.mainInfoList = [{
+                "vipId": "86",
+                "vipName": "永久题库会员",
+                "vipType": "3",
+                "powerImage": "https://raw.githubusercontent.com/Yu9191/-/main/icon/laoliu.png",
+                "catLog": "1",
+                "buyCount": null,
+                "isVip": "1",
+                "validTime": "2099-09-09",
+                "createTime": "2099-09-09 09:40:43",
+                "fakeBuyCount": "3280",
+                "count": "3280",
+                "selected": "1",
+                "priceList": [],
+                "exclusiveList": []
+            }];
+            body = JSON.stringify(obj);
+        }
     }
 
     // 会员界面1
     if (url.includes('getMemberVipInfo')) {
         let obj = JSON.parse(body);
-        obj.data.memberInfos = [{
-            "vipName": "题库会员",
-            "isVip": "1",
-            "validTime": "2099-09-09",
-            "vipType": "3",
-            "catelogId1": "1",
-            "vipId": 86
-        }];
-        body = JSON.stringify(obj);
+        if (obj && obj.data) {
+            obj.data.memberInfos = [{
+                "vipName": "题库会员",
+                "isVip": "1",
+                "validTime": "2099-09-09",
+                "vipType": "3",
+                "catelogId1": "1",
+                "vipId": 86
+            }];
+            body = JSON.stringify(obj);
+        }
     }
 
     // 课程
@@ -73,4 +76,3 @@ try {
 }
 
 //by iu 请勿倒卖
-
