@@ -6,8 +6,8 @@
 #!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all
 
 [Script]
-fi11-req = type=http-request, pattern=^https?:\/\/a74d\.uwegu\.com\/videos\/v2\/getUrl, requires-body=true, max-size=0, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, argument=logLevel={{{日志级别}}}
-fi11-resp = type=http-response, pattern=^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/(add|getOrderInfo)|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)), requires-body=true, max-size=0, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, argument=logLevel={{{日志级别}}}
+fi11-req = type=http-request, pattern=^https?:\/\/a74d\.uwegu\.com\/(videos\/v2\/getUrl|visitor\/add), requires-body=true, max-size=0, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, argument=logLevel={{{日志级别}}}
+fi11-resp = type=http-response, pattern=^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/getOrderInfo|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)), requires-body=true, max-size=0, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, argument=logLevel={{{日志级别}}}
 
 [MITM]
 hostname = a74d.uwegu.com

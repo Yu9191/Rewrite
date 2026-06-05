@@ -5,8 +5,8 @@
 #!category=18+
 
 [Script]
-http-request ^https?:\/\/a74d\.uwegu\.com\/videos\/v2\/getUrl script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-req
-http-response ^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/(add|getOrderInfo)|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-resp
+http-request ^https?:\/\/a74d\.uwegu\.com\/(videos\/v2\/getUrl|visitor\/add) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-req
+http-response ^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/getOrderInfo|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js, requires-body=true, timeout=30, tag=fi11-resp
 
 [MitM]
 hostname = a74d.uwegu.com

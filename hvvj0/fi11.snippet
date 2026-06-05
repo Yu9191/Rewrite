@@ -5,8 +5,8 @@
 #!date=2026-06-03
 
 [rewrite_local]
-^https?:\/\/a74d\.uwegu\.com\/videos\/v2\/getUrl url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js
-^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/(add|getOrderInfo)|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js
+^https?:\/\/a74d\.uwegu\.com\/(videos\/v2\/getUrl|visitor\/add) url script-analyze-echo-response https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js
+^https?:\/\/a74d\.uwegu\.com\/(videos\/(getInfo|getList|getRecommendListByVideoId|getFeatured|getHot)|gather\/(getDetail|getListByVideoId)|visitor\/getOrderInfo|user\/(getUserHome|getInfo|detail|info)|home\/(getAds|getMoreAds|getMoreAdsList)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/hvvj0/dist/fi11.js
 
 [mitm]
 hostname = a74d.uwegu.com
