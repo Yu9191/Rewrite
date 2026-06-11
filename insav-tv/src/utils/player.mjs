@@ -45,7 +45,22 @@ export function buildLaunchUrl(videoUrl, videoName, settings) {
 	// http:// 直接放行（Safari 等）
 	if (schemePrefix.startsWith("http")) return videoUrl;
 
-	const prefix = schemePrefix.endsWith("=") || schemePrefix.endsWith("://") ? schemePrefix : `${schemePrefix}://`;
+	let prefix;
+	if (schemePrefix.endsWith("=") || schemePrefix.endsWith("://")) {
+		prefix = schemePrefix;
+	} else {
+		const lastQ = schemePrefix.lastIndexOf("?");
+		const lastAmp = schemePrefix.lastIndexOf("&");
+		const lastSep = Math.max(lastQ, lastAmp);
+		if (lastSep >= 0 && lastSep < schemePrefix.length - 1
+			&& !schemePrefix.slice(lastSep + 1).includes("=")) {
+			prefix = `${schemePrefix}=`;
+		} else if (schemePrefix.includes("://")) {
+			prefix = schemePrefix;
+		} else {
+			prefix = `${schemePrefix}://`;
+		}
+	}
 
 	let needEncode = player.needEncode;
 	const encodeOpt = (settings.encode || "").toLowerCase();

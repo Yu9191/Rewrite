@@ -35,7 +35,20 @@ function applyArgument(settings) {
 	if (typeof $argument === "object" && !Array.isArray($argument)) {
 		const { player, scheme, encode, logLevel } = $argument;
 		if (player) settings.player = String(player);
-		if (scheme) settings.scheme = String(scheme);
+		if (scheme) {
+			let fullScheme = String(scheme);
+			// Surge may split "scheme=forward://play?url=" at "?" and put
+			// "url" into a separate key. Detect and reconstruct.
+			const knownKeys = new Set(["player", "scheme", "encode", "logLevel"]);
+			for (const key of Object.keys($argument)) {
+				if (!knownKeys.has(key) && fullScheme.includes("://")) {
+					const val = $argument[key];
+					const sep = fullScheme.includes("?") ? "&" : "?";
+					fullScheme += `${sep}${key}=${val != null ? val : ""}`;
+				}
+			}
+			settings.scheme = fullScheme;
+		}
 		if (encode) settings.encode = String(encode);
 		if (logLevel) settings.logLevel = String(logLevel);
 		return;
