@@ -1,7 +1,7 @@
 import { Console } from "@nsnanocat/util";
 import { buildSign, decryptAES, encryptAES, safeJson } from "../utils/crypto.mjs";
 import { stripZstd } from "../utils/headers.mjs";
-import { fetchToken, notifyIfStale } from "../utils/token.mjs";
+import { fetchToken } from "../utils/token.mjs";
 
 /**
  * getVideoUrl 请求体改写结果
@@ -27,8 +27,6 @@ async function rewriteVideoUrlBody(body) {
 
 	const tokenData = await fetchToken();
 	if (!tokenData?.token) return null;
-
-	notifyIfStale(tokenData);
 
 	inner.token = tokenData.token;
 	inner.encode_sign = buildSign({
