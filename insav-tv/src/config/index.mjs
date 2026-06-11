@@ -21,7 +21,7 @@ export const DEFAULT_LOG_LEVEL = "info";
 export const CACHE_KEY = "insav_last_video_id";
 
 /** 远端共享 Token JSON */
-export const TOKEN_URL = "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insavtoken.json";
+export const TOKEN_URL = "https://insav-pages.pages.dev/token";
 
 /** 默认播放器代号 */
 export const DEFAULT_PLAYER = "lenna";

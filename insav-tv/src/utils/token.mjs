@@ -38,7 +38,7 @@ export function notifyIfStale(tokenData) {
 			notification(
 				"insav Token 续期中",
 				"⏳ 请 5 分钟后再来查看",
-				"会员正在自动续期，GitHub 缓存可能有延迟，请稍候再试",
+				"会员正在自动续期，Worker 缓存可能有延迟，请稍候再试",
 			);
 		}
 	} catch (e) {
