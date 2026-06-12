@@ -14,4 +14,4 @@ logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级
 http-request ^https?:\/\/(\w+\.)?(insav\.tv|[a-z]{4,}\d{2,}\.(top|com|net|cc|xyz))\/api\/(extend\/lists|banner\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/(info|getVideoUrl)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/dist/insav.js, requires-body=true, timeout=20, tag=insav, argument=[{player},{scheme},{encode},{logLevel}]
 
 [MITM]
-hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.* ```
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.* 
