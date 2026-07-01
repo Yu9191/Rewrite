@@ -8,4 +8,4 @@
 妻社 = type=http-response,pattern=^https?:\/\/qsh\d+\.qsh\d+\.\w+\.cn\/(?:source\/plugin\/qsts_app\/index\.php|mserver)\/,requires-body=true,max-size=-1,timeout=30,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qishe/qishe.js
 
 [MITM]
-hostname = %APPEND% *.qsh526215.org.cn
+hostname = %APPEND% qsh*.qsh*.org.cn
