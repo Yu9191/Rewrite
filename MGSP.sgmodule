@@ -1,0 +1,17 @@
+#!name=咪咕视频
+#!desc=伟人
+
+[Map Local]
+# > 开屏广告
+^https://.*miguvideo\.com/request/sdk data-type=text data=" " status-code=200
+
+^https://common-sc\.miguvideo\.com/task/v7/task-list/cmvideo/visitor data-type=text data=" " status-code=200
+
+[Script]
+# > 咪咕视频Vip会员
+mgsp = type=http-response, pattern=^https?:\/\/(play|dis).*miguvideo.com\/(play|dis)(url|play)\/.*$, script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/mgsp.js, requires-body=true, max-size=-1, timeout=60
+
+mgspck = type=http-request, pattern=^https?:\/\/play.miguvideo.com\/playurl\/v1\/play\/playurl\?2Kvivid=true?.*=true$, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/mgspck.js, timeout=60
+
+[MITM]
+hostname = %APPEND% *.miguvideo.com

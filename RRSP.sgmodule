@@ -1,0 +1,13 @@
+#!name=人人视频
+#!desc=频道获取每日最新Token..UMID
+#!author=@Jsforbaby
+#!category=人人视频
+#!arguments=Token:请填写, UMID:请填写, 播放器名称:SenPlayer, 自定义Scheme:xxx
+#!arguments-desc=播放器名称支持: SenPlayer, Infuse, Fileball, VidHub, Alook, VLC, Safari
+
+[Script]
+
+http-request ^https?:\/\/api\.rrmj\.plus\/m-station\/drama\/(?:page|play) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/RRSP.js, requires-body=true, timeout=60, tag=RRTV_4K, argument=token={{{Token}}}&umid={{{UMID}}}&player={{{播放器名称}}}&scheme={{{自定义Scheme}}}
+
+[MITM]
+hostname = %APPEND% api.rrmj.plus

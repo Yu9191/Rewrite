@@ -1,0 +1,16 @@
+#!name=面具公社
+#!desc=18+
+
+[URL Rewrite]
+#游戏
+^https:\/\/(mfjk|gnjk|buyaoda).+\.com\/request_game\/v3\/game\/list - reject-dict
+
+[Script]
+#广告
+mjgsad = type=http-response, pattern=https:\/\/(mfjk|gnjk|buyaoda).+\.com\/(playerinfo|api\/home\/popup|api\/get_advert), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/mjgsad.js, requires-body=true, max-size=-1, timeout=60
+
+#视频
+mjgshd = type=http-request, pattern=https?:\/\/(mfjk|gnjk|buyaoda).+\.com\/api\/(comic|video|short_movie_info|novel|gallery|vip|index), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/mjgshd.js, timeout=60
+
+[MITM]
+hostname = %APPEND% gnjk.*.com, mfjk.*.com, buyaoda.*.com

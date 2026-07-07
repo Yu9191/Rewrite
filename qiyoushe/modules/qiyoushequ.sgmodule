@@ -1,0 +1,14 @@
+﻿#!name=妻友社区解锁
+#!desc=VIP 解锁 + 去广告 + 完整 m3u8 + 第三方播放器跳转可选
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!category=18+
+#!arguments=播放器名称:lenna, 自定义Scheme:完整的URLscheme, URL编码:auto, 日志级别:info, 播放器跳转:yes
+#!arguments-desc=播放器支持: lenna, SenPlayer, SenPlayer-dl, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)\n播放器跳转: yes(通知跳转外部播放器), no(不通知、不跳转)\n日志级别: off / error / warn / info(默认) / debug / all\n\n推荐使用BoxJS配置，无需填写参数！
+
+[Script]
+妻友社区启动页 = type=http-response, pattern="^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/js\/index-Dg2qL6uR\.\d+\.js", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, argument=player={{{播放器名称}}}&scheme={{{自定义Scheme}}}&encode={{{URL编码}}}&logLevel={{{日志级别}}}&jump={{{播放器跳转}}}
+妻友社区 = type=http-response, pattern="^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)|post\/(detail|list|pay|rent\/check))", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, argument=player={{{播放器名称}}}&scheme={{{自定义Scheme}}}&encode={{{URL编码}}}&logLevel={{{日志级别}}}&jump={{{播放器跳转}}}
+
+[MITM]
+hostname = %APPEND% *.cloudfront.net, *.gcwe44p.com

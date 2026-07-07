@@ -1,0 +1,25 @@
+{
+  "data": {
+    "processAppleReceipt": {
+      "__typename": "SubscriptionResult",
+      "isClassic": false,
+      "subscription": {
+        "productId": "com.gingerlabs.Notability.premium_subscription",
+        "originalTransactionId": "570001185968888",
+        "tier": "premium",
+        "refundedDate": null,
+        "refundedReason": null,
+        "isInBillingRetryPeriod": false,
+        "expirationDate": "999999-09-09T09:09:09.000Z",
+        "gracePeriodExpiresAt": null,
+        "overDeviceLimit": false,
+        "expirationIntent": "CUSTOMER_CANCELLED",
+        "__typename": "AppStoreSubscription",
+        "user": null,
+        "status": "canceled",
+        "originalPurchaseDate": "2024-09-19T09:27:35.000Z"
+      },
+      "error": 0
+    }
+  }
+}

@@ -1,0 +1,9 @@
+#!name=Topluntan
+#!desc=Topluntan
+
+[Script]
+Topluntan = type=http-response, pattern=^https://super\.toppps\.com/app-api/v(1|3)/(toppps/(live/getLiveSpaceDetailsV|products)|blueMain), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/TOPlt.js, requires-body=true, max-size=-1, timeout=60
+Topluntan-Video = type=http-request, pattern=^https://mpv\.videocc\.net/.*\.mp4, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/TOPlt.js, timeout=60
+
+[MITM]
+hostname = %APPEND% super.toppps.com, mpv.videocc.net

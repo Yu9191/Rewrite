@@ -1,0 +1,9 @@
+#!name=Tangtoutiao
+#!desc=Tangtoutiao
+
+[Script]
+#只保留一个
+Tangtoutiao = type=http-request, pattern=^https:\/\/[^\/]*\..*\.cn\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8(\?.*)?, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsp/Tangtoutiao.js, timeout=60
+
+[MITM]
+hostname = %APPEND% *.shjsvkj.cn, *.qxoovv.cn, *.shoknkj.cn, *.shedbgs.cn, *.shnyigs.cn, *.sholfgs.cn, *.shjtqgs.cn, *.shjtpkj.cn, *.hfsudf.cn, *.qohzni.cn, 

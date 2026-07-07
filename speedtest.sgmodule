@@ -1,0 +1,10 @@
+#!name=Speedtest 广告vip & 净化
+#!desc=去广告会员权益，移除广告，需登录
+
+
+
+[Script]
+
+Speedtest_advip = type=http-response,pattern=^https?:\/\/(user-api\.speedtest\.net\/v1\/flows\/users\/(me\/)?(login|apply-identities)|(www\.)?speedtest\.net\/(api\/)?ios-config\.php),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/speedtest.js
+[MITM]
+hostname = %APPEND% user-api.speedtest.net, www.speedtest.net

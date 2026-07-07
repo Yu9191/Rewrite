@@ -1,0 +1,584 @@
+﻿{
+    "id": "PearVideo.app",
+    "name": "PearVideo",
+    "author": "@Jsforbaby",
+    "icon": "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
+    "repo": "https://t.me/GithubYu9191",
+    "apps": [
+        {
+            "id": "PearVideoSettings",
+            "name": "PearVideo 播放器设置",
+            "keys": [
+                "pear_player_select",
+                "pear_custom_scheme",
+                "pear_url_encode"
+            ],
+            "settings": [
+                {
+                    "id": "pear_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna",
+                            "label": "Lenna 视频库"
+                        },
+                        {
+                            "key": "SenPlayer",
+                            "label": "SenPlayer (播放)"
+                        },
+                        {
+                            "key": "SenPlayer-dl",
+                            "label": "SenPlayer (下载+命名.mp4)"
+                        },
+                        {
+                            "key": "Infuse",
+                            "label": "Infuse 播放器"
+                        },
+                        {
+                            "key": "Fileball",
+                            "label": "Fileball 文件管理"
+                        },
+                        {
+                            "key": "VidHub",
+                            "label": "VidHub 影库"
+                        },
+                        {
+                            "key": "IINA",
+                            "label": "IINA 播放器"
+                        },
+                        {
+                            "key": "NPlayer",
+                            "label": "nPlayer"
+                        },
+                        {
+                            "key": "VLC",
+                            "label": "VLC 播放器"
+                        },
+                        {
+                            "key": "KMPlayer",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "Alook",
+                            "label": "Alook 浏览器"
+                        },
+                        {
+                            "key": "Safari",
+                            "label": "Safari 浏览器"
+                        },
+                        {
+                            "key": "custom",
+                            "label": "🛠 自定义播放器"
+                        }
+                    ],
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "pear_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "pear_player_select": "custom"
+                    }
+                },
+                {
+                    "id": "pear_url_encode",
+                    "name": "URL 编码",
+                    "val": "auto",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "auto",
+                            "label": "自动（推荐）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "强制编码"
+                        },
+                        {
+                            "key": "no",
+                            "label": "不编码"
+                        }
+                    ],
+                    "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                }
+            ],
+            "author": "@Jsforbaby",
+            "repo": "https://t.me/GithubYu9191",
+            "icons": [
+                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/1818.png",
+                "https://raw.githubusercontent.com/sE7En0908/Icon/refs/heads/master/GitHub.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js"
+        },
+        {
+            "id": "InsavSettings",
+            "name": "insav 播放器设置",
+            "keys": [
+                "insav_player_select",
+                "insav_custom_scheme",
+                "insav_url_encode",
+                "insav_log_level"
+            ],
+            "settings": [
+                {
+                    "id": "insav_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna",
+                            "label": "Lenna 视频库"
+                        },
+                        {
+                            "key": "SenPlayer",
+                            "label": "SenPlayer (播放)"
+                        },
+                        {
+                            "key": "SenPlayer-dl",
+                            "label": "SenPlayer (下载+命名.mp4)"
+                        },
+                        {
+                            "key": "Infuse",
+                            "label": "Infuse 播放器"
+                        },
+                        {
+                            "key": "Fileball",
+                            "label": "Fileball 文件管理"
+                        },
+                        {
+                            "key": "VidHub",
+                            "label": "VidHub 影库"
+                        },
+                        {
+                            "key": "IINA",
+                            "label": "IINA 播放器"
+                        },
+                        {
+                            "key": "NPlayer",
+                            "label": "nPlayer"
+                        },
+                        {
+                            "key": "VLC",
+                            "label": "VLC 播放器"
+                        },
+                        {
+                            "key": "KMPlayer",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "Alook",
+                            "label": "Alook 浏览器"
+                        },
+                        {
+                            "key": "Safari",
+                            "label": "Safari 浏览器"
+                        },
+                        {
+                            "key": "custom",
+                            "label": "🛠 自定义播放器"
+                        }
+                    ],
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "insav_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "insav_player_select": "custom"
+                    }
+                },
+                {
+                    "id": "insav_url_encode",
+                    "name": "URL 编码",
+                    "val": "auto",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "auto",
+                            "label": "自动（推荐）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "强制编码"
+                        },
+                        {
+                            "key": "no",
+                            "label": "不编码"
+                        }
+                    ],
+                    "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                },
+                {
+                    "id": "insav_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "off",
+                            "label": "off (静默)"
+                        },
+                        {
+                            "key": "error",
+                            "label": "error"
+                        },
+                        {
+                            "key": "warn",
+                            "label": "warn"
+                        },
+                        {
+                            "key": "info",
+                            "label": "info (默认)"
+                        },
+                        {
+                            "key": "debug",
+                            "label": "debug"
+                        },
+                        {
+                            "key": "all",
+                            "label": "all"
+                        }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                }
+            ],
+            "author": "@Jsforbaby",
+            "repo": "https://t.me/GithubYu9191",
+            "icons": [
+                "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav.js"
+        },
+        {
+            "id": "QiyouShequSettings",
+            "name": "妻友社区 播放器设置",
+            "keys": [
+                "qiyou_player_select",
+                "qiyou_custom_scheme",
+                "qiyou_url_encode",
+                "qiyou_player_jump",
+                "qiyou_log_level"
+            ],
+            "settings": [
+                {
+                    "id": "qiyou_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna",
+                            "label": "Lenna 视频库"
+                        },
+                        {
+                            "key": "SenPlayer",
+                            "label": "SenPlayer (播放)"
+                        },
+                        {
+                            "key": "SenPlayer-dl",
+                            "label": "SenPlayer (下载+命名.mp4)"
+                        },
+                        {
+                            "key": "Infuse",
+                            "label": "Infuse 播放器"
+                        },
+                        {
+                            "key": "Fileball",
+                            "label": "Fileball 文件管理"
+                        },
+                        {
+                            "key": "VidHub",
+                            "label": "VidHub 影库"
+                        },
+                        {
+                            "key": "IINA",
+                            "label": "IINA 播放器"
+                        },
+                        {
+                            "key": "NPlayer",
+                            "label": "nPlayer"
+                        },
+                        {
+                            "key": "VLC",
+                            "label": "VLC 播放器"
+                        },
+                        {
+                            "key": "KMPlayer",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "Alook",
+                            "label": "Alook 浏览器"
+                        },
+                        {
+                            "key": "Safari",
+                            "label": "Safari 浏览器"
+                        },
+                        {
+                            "key": "custom",
+                            "label": "🛠 自定义播放器"
+                        }
+                    ],
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "qiyou_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "qiyou_player_select": "custom"
+                    }
+                },
+                {
+                    "id": "qiyou_url_encode",
+                    "name": "URL 编码",
+                    "val": "auto",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "auto",
+                            "label": "自动（推荐）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "强制编码"
+                        },
+                        {
+                            "key": "no",
+                            "label": "不编码"
+                        }
+                    ],
+                    "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                },
+                {
+                    "id": "qiyou_player_jump",
+                    "name": "播放器跳转",
+                    "val": "yes",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "yes",
+                            "label": "通知并跳转外部播放器"
+                        },
+                        {
+                            "key": "no",
+                            "label": "不通知、不跳转"
+                        }
+                    ],
+                    "desc": "关闭后仅修改接口响应，不发送播放器跳转通知"
+                },
+                {
+                    "id": "qiyou_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "off",
+                            "label": "off (静默)"
+                        },
+                        {
+                            "key": "error",
+                            "label": "error"
+                        },
+                        {
+                            "key": "warn",
+                            "label": "warn"
+                        },
+                        {
+                            "key": "info",
+                            "label": "info (默认)"
+                        },
+                        {
+                            "key": "debug",
+                            "label": "debug"
+                        },
+                        {
+                            "key": "all",
+                            "label": "all"
+                        }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                }
+            ],
+            "author": "Yu9191 Rewrite",
+            "repo": "https://github.com/Yu9191/Rewrite",
+            "icons": [
+                "https://raw.githubusercontent.com/Yu9191/-/main/qiyou.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js"
+        },
+        {
+            "id": "PorntubeSettings",
+            "name": "porntube 设置",
+            "keys": [
+                "porntube_player_select",
+                "porntube_custom_scheme",
+                "porntube_url_encode",
+                "porntube_log_level",
+                "porntube_player_jump"
+            ],
+            "settings": [
+                {
+                    "id": "porntube_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "lenna",
+                            "label": "Lenna 视频库"
+                        },
+                        {
+                            "key": "SenPlayer",
+                            "label": "SenPlayer (播放)"
+                        },
+                        {
+                            "key": "SenPlayer-dl",
+                            "label": "SenPlayer (下载+命名.mp4)"
+                        },
+                        {
+                            "key": "Infuse",
+                            "label": "Infuse 播放器"
+                        },
+                        {
+                            "key": "Fileball",
+                            "label": "Fileball 文件管理"
+                        },
+                        {
+                            "key": "VidHub",
+                            "label": "VidHub 影库"
+                        },
+                        {
+                            "key": "IINA",
+                            "label": "IINA 播放器"
+                        },
+                        {
+                            "key": "NPlayer",
+                            "label": "nPlayer"
+                        },
+                        {
+                            "key": "VLC",
+                            "label": "VLC 播放器"
+                        },
+                        {
+                            "key": "KMPlayer",
+                            "label": "KMPlayer"
+                        },
+                        {
+                            "key": "Alook",
+                            "label": "Alook 浏览器"
+                        },
+                        {
+                            "key": "Safari",
+                            "label": "Safari 浏览器"
+                        },
+                        {
+                            "key": "custom",
+                            "label": "🛠 自定义播放器"
+                        }
+                    ],
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "porntube_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "porntube_player_select": "custom"
+                    }
+                },
+                {
+                    "id": "porntube_url_encode",
+                    "name": "URL 编码",
+                    "val": "auto",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "auto",
+                            "label": "自动（推荐）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "强制编码"
+                        },
+                        {
+                            "key": "no",
+                            "label": "不编码"
+                        }
+                    ],
+                    "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                },
+                {
+                    "id": "porntube_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "off",
+                            "label": "off (静默)"
+                        },
+                        {
+                            "key": "error",
+                            "label": "error"
+                        },
+                        {
+                            "key": "warn",
+                            "label": "warn"
+                        },
+                        {
+                            "key": "info",
+                            "label": "info (默认)"
+                        },
+                        {
+                            "key": "debug",
+                            "label": "debug"
+                        },
+                        {
+                            "key": "all",
+                            "label": "all"
+                        }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                },
+                {
+                    "id": "porntube_player_jump",
+                    "name": "播放器跳转",
+                    "val": "no",
+                    "type": "selects",
+                    "items": [
+                        {
+                            "key": "no",
+                            "label": "关闭（默认）"
+                        },
+                        {
+                            "key": "yes",
+                            "label": "开启"
+                        }
+                    ],
+                    "desc": "开启后播放视频时通知跳转外部播放器"
+                }
+            ],
+            "author": "Yu9191 Rewrite",
+            "repo": "https://github.com/Yu9191/Rewrite",
+            "icons": [
+                "https://raw.githubusercontent.com/fishdown/Icon/master/app/porntube.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/dist/porntube.js"
+        }
+    ]
+}

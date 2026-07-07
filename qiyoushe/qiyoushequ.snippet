@@ -1,0 +1,12 @@
+﻿#!name=妻友社区VIP解锁
+#!desc=VIP解锁 + 去广告 + 完整m3u8 + 播放器跳转可选
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!date=2026-05-06
+
+[rewrite_local]
+^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/js\/index-Dg2qL6uR\.\d+\.js url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js
+^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)|post\/(detail|list|pay|rent\/check)) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js
+
+[mitm]
+hostname = *.cloudfront.net, *.gcwe44p.com

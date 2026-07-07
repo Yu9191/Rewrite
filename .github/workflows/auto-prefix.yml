@@ -1,0 +1,57 @@
+name: "直推 main 自动加 fix: 前缀"
+
+# 触发条件：push 到 main 分支
+# 行为：检查最新提交，如果不是 conventional 格式，且不是 bot/已知噪声提交，
+#       自动改写为 "fix: <原消息>" 并强推回 main
+# 防循环：amend 后 committer = github-actions[bot]，下次触发会被 if 跳过
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  prefix:
+    # 跳过：bot / token 自动更新 / 已经合规 / merge commit
+    if: |
+      github.event.head_commit.committer.username != 'github-actions[bot]' &&
+      github.actor != 'github-actions[bot]' &&
+      !startsWith(github.event.head_commit.message, 'Update insav token') &&
+      !startsWith(github.event.head_commit.message, 'update onetoken')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Git 身份
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 检查并改写最新提交消息
+        env:
+          KEEP_PATTERN: '^(feat|fix|docs|chore|refactor|perf|test|style|build|ci|revert)(\(.+\))?!?:\s+.+'
+        run: |
+          MSG=$(git log -1 --pretty=%B)
+          FIRST_LINE=$(printf '%s' "$MSG" | head -n1)
+
+          # 已是 merge commit
+          if [ "$(git rev-list --parents -n 1 HEAD | wc -w)" -gt 2 ]; then
+            echo "merge commit，跳过"
+            exit 0
+          fi
+
+          # 已合规
+          if printf '%s' "$FIRST_LINE" | grep -qE "$KEEP_PATTERN"; then
+            echo "已是 conventional 格式：$FIRST_LINE"
+            exit 0
+          fi
+
+          NEW_MSG="fix: ${MSG}"
+          echo "改写：$FIRST_LINE  →  fix: $FIRST_LINE"
+          git commit --amend -m "$NEW_MSG"
+          git push --force-with-lease origin HEAD:main

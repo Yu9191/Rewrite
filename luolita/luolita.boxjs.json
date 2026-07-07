@@ -1,0 +1,110 @@
+{
+    "id": "Luolita.app",
+    "name": "洛丽塔",
+    "author": "Yu9191 Rewrite",
+    "icon": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/modules/luolita.png",
+    "repo": "https://github.com/Yu9191/Rewrite",
+    "apps": [
+        {
+            "id": "LuolitaSettings",
+            "name": "洛丽塔 设置",
+            "keys": [
+                "luolita_player_select",
+                "luolita_custom_scheme",
+                "luolita_url_encode",
+                "luolita_player_jump",
+                "luolita_remove_ads",
+                "luolita_log_level"
+            ],
+            "settings": [
+                {
+                    "id": "luolita_player_select",
+                    "name": "播放器选择",
+                    "val": "lenna",
+                    "type": "selects",
+                    "items": [
+                        { "key": "lenna", "label": "Lenna 视频库" },
+                        { "key": "SenPlayer", "label": "SenPlayer (播放)" },
+                        { "key": "SenPlayer-dl", "label": "SenPlayer (下载+命名.mp4)" },
+                        { "key": "Infuse", "label": "Infuse 播放器" },
+                        { "key": "Fileball", "label": "Fileball 文件管理" },
+                        { "key": "VidHub", "label": "VidHub 影库" },
+                        { "key": "IINA", "label": "IINA 播放器" },
+                        { "key": "NPlayer", "label": "nPlayer" },
+                        { "key": "VLC", "label": "VLC 播放器" },
+                        { "key": "KMPlayer", "label": "KMPlayer" },
+                        { "key": "Alook", "label": "Alook 浏览器" },
+                        { "key": "Safari", "label": "Safari 浏览器" },
+                        { "key": "custom", "label": "🛠 自定义播放器" }
+                    ],
+                    "desc": "选择播放器（或使用自定义）"
+                },
+                {
+                    "id": "luolita_custom_scheme",
+                    "name": "自定义 Scheme",
+                    "val": "",
+                    "type": "text",
+                    "desc": "例如: nplayer-http:// 或 myplayer://x-callback-url/play?url= 记得点旁边的保存按钮",
+                    "show": {
+                        "luolita_player_select": "custom"
+                    }
+                },
+                {
+                    "id": "luolita_url_encode",
+                    "name": "URL 编码",
+                    "val": "",
+                    "type": "selects",
+                    "items": [
+                        { "key": "", "label": "自动（按播放器默认）" },
+                        { "key": "yes", "label": "强制编码" },
+                        { "key": "no", "label": "不编码" }
+                    ],
+                    "desc": "是否对播放地址进行 URL 编码（大部分 x-callback-url 需要编码）"
+                },
+                {
+                    "id": "luolita_player_jump",
+                    "name": "播放器跳转",
+                    "val": "no",
+                    "type": "selects",
+                    "items": [
+                        { "key": "no", "label": "不通知、不跳转（默认）" },
+                        { "key": "yes", "label": "视频详情通知并跳转外部播放器" }
+                    ],
+                    "desc": "开启后在视频详情推送系统通知，点击调起外部播放器"
+                },
+                {
+                    "id": "luolita_remove_ads",
+                    "name": "去广告",
+                    "val": "yes",
+                    "type": "selects",
+                    "items": [
+                        { "key": "yes", "label": "去广告（默认）" },
+                        { "key": "no", "label": "保留广告" }
+                    ],
+                    "desc": "开屏 / 弹窗 / 悬浮 / 信息流 / banner / 促销弹窗等"
+                },
+                {
+                    "id": "luolita_log_level",
+                    "name": "日志级别",
+                    "val": "info",
+                    "type": "selects",
+                    "items": [
+                        { "key": "off", "label": "off (静默)" },
+                        { "key": "error", "label": "error" },
+                        { "key": "warn", "label": "warn" },
+                        { "key": "info", "label": "info (默认)" },
+                        { "key": "debug", "label": "debug" },
+                        { "key": "all", "label": "all" }
+                    ],
+                    "desc": "脚本日志输出级别（影响代理工具的日志面板）"
+                }
+            ],
+            "author": "Yu9191 Rewrite",
+            "repo": "https://github.com/Yu9191/Rewrite",
+            "icons": [
+                "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/modules/luolita.png"
+            ],
+            "script": "https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js"
+        }
+    ]
+}

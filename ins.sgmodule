@@ -1,0 +1,13 @@
+#!name=ins社区
+#!desc=ins
+
+[URL Rewrite]
+https://x2.ins620.com/party/common/advertising/public/adv/list - reject
+
+[Script]
+insck = type=http-request, pattern=https:\/\/x2\.ins620\.com\/post\/app\/p\/post\/private\/(info|page|similar\/page), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insck.js, timeout=60
+
+ins = type=http-response, pattern=https://x2.ins620.com/user/app/u/user/private/info, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ins.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% x2.ins620.com

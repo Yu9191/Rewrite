@@ -1,0 +1,9 @@
+#!name=CAD快速看图
+#!desc=CAD快速看图
+#!system=ios
+
+[Script]
+CADReader = type=http-request, pattern=^https://cad\.everdrawing\.com/(mobile/verifyVip|.*authorize/(verify-vip|query)), requires-body=1, max-size=4096, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/cad.js
+
+[MITM]
+hostname = %APPEND% cad.everdrawing.com

@@ -1,0 +1,19 @@
+#!name=洛丽塔 VIP 解锁
+#!desc=VIP 解锁 + 去广告 + 付费内容解锁 (p4.sbpmlenma.cc / api2.vhmqswjb.cc)
+#!icon=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/modules/luolita.png
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Argument]
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
+player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "IINA", "Alook", "VLC", "KMPlayer", "NPlayer", "Safari", tag=播放器
+scheme = input, "none", tag=自定义scheme
+encode = select, "default", "yes", "no", tag=URL编码
+jump = select, "no", "yes", tag=播放器跳转
+ads = select, "yes", "no", tag=去广告
+
+[Script]
+http-response ^https?:\/\/api2\.vhmqswjb\.cc\/api\/ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js, requires-body=true, timeout=20, tag=luolita API, argument=[{logLevel},{player},{scheme},{encode},{jump},{ads}]
+
+[MITM]
+hostname = api2.vhmqswjb.cc

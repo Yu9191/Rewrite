@@ -1,0 +1,9 @@
+#!name=m3u8
+#!desc=https://958.xqhjej.com的GV
+
+[Script]
+
+m3u8 = type=http-request,pattern=^https:\/\/[^\/]*\.nlsxvnflc\.com\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8,requires-body=0,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/m3u8/m3u8_2.js
+[MITM]
+
+hostname = %APPEND% *.nlsxvnflc.com

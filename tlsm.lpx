@@ -1,0 +1,10 @@
+#!name=套路SM VIP解锁
+#!desc=播放完整视频 SenPlayer 下载
+#!author=Yu9191
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Script]
+http-response ^https?:\/\/(?:www\.)?(?:tlsm\.one|taolusm\.com|itaolu\.com)\/v\/\d+(?:[\/?#]|$) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/tlsm.js, requires-body=true, timeout=10, tag=套路SM
+
+[MITM]
+hostname = tlsm.one, www.tlsm.one, taolusm.com, www.taolusm.com, itaolu.com, www.itaolu.com
