@@ -4,11 +4,11 @@
 #!author=Yu9191 Rewrite
 #!homepage=https://github.com/Yu9191/Rewrite
 #!category=18+
-#!arguments=日志级别:info,播放器:lenna,自定义scheme:none,URL编码:default,播放器跳转:no,去广告:yes,完整视频:yes
-#!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all\n播放器: lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / Alook / VLC / KMPlayer / NPlayer / Safari\n自定义scheme: 填写后覆盖播放器，例如 myplayer://play?url= ；留默认 none 表示不启用\nURL编码: yes / no / default(默认)\n播放器跳转: yes / no(默认)\n去广告: yes(默认) / no\n完整视频: yes(默认) / no —— 解锁完整播放（关闭则仅试看）
+#!arguments=日志级别:info,播放器:lenna,自定义scheme:none,URL编码:default,播放器跳转:no
+#!arguments-desc=去广告与完整视频解锁默认常开，无需设置。\n日志级别: off / error / warn / info(默认) / debug / all\n播放器: lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / Alook / VLC / KMPlayer / NPlayer / Safari\n自定义scheme: 填写后覆盖播放器，例如 myplayer://play?url= ；留默认 none 表示不启用\nURL编码: yes / no / default(默认)\n播放器跳转: yes / no(默认)
 
 [Script]
-luolita API = type=http-response, pattern=^https?:\/\/api2\.vhmqswjb\.cc\/api\/, requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js, argument=logLevel={{{日志级别}}}&player={{{播放器}}}&scheme={{{自定义scheme}}}&encode={{{URL编码}}}&jump={{{播放器跳转}}}&ads={{{去广告}}}&full={{{完整视频}}}
+luolita API = type=http-response, pattern=^https?:\/\/api2\.vhmqswjb\.cc\/api\/, requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js, argument=logLevel={{{日志级别}}}&player={{{播放器}}}&scheme={{{自定义scheme}}}&encode={{{URL编码}}}&jump={{{播放器跳转}}}
 
 [MITM]
 hostname = %APPEND% api2.vhmqswjb.cc
