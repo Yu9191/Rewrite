@@ -1,6 +1,6 @@
 # 洛丽塔 重写脚本
 
-VIP 解锁 + 付费内容解锁 + 去广告 + 第三方播放器跳转。Surge / Loon / Stash / Quantumult X 通用。
+VIP 解锁 + 付费内容解锁 + 完整视频解锁 + 去广告 + 第三方播放器跳转。Surge / Loon / Stash / Quantumult X 通用。
 
 ---
 
@@ -33,6 +33,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/luolita
 
 - VIP 解锁（个人信息升级 VIP，观看配额拉满）
 - 付费内容解锁（视频 / 图集 / 短剧 / 小说 / 音频 / 社区 / 种子等免金币）
+- 完整视频解锁（付费/VIP 视频解锁完整播放，而非仅官方试看片段）
 - 去广告（开屏 / 弹窗 / 悬浮 / 信息流 / banner / 跑马灯 / 聊天广告 / 促销弹窗）
 - 播放页推送系统通知，点击直接调起第三方播放器
 
@@ -49,6 +50,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/luolita
 | `luolita_url_encode` | URL 编码：`yes` / `no` / 留空（按播放器默认） |
 | `luolita_player_jump` | 播放器跳转：`yes` / `no`（默认 no） |
 | `luolita_remove_ads` | 去广告：`yes`（默认） / `no` |
+| `luolita_full_video` | 完整视频：`yes`（默认，解锁完整播放） / `no`（仅试看） |
 
 支持播放器：lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / NPlayer / Alook / VLC / KMPlayer / Safari
 

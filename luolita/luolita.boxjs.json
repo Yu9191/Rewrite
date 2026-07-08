@@ -14,6 +14,7 @@
                 "luolita_url_encode",
                 "luolita_player_jump",
                 "luolita_remove_ads",
+                "luolita_full_video",
                 "luolita_log_level"
             ],
             "settings": [
@@ -82,6 +83,17 @@
                         { "key": "no", "label": "保留广告" }
                     ],
                     "desc": "开屏 / 弹窗 / 悬浮 / 信息流 / banner / 促销弹窗等"
+                },
+                {
+                    "id": "luolita_full_video",
+                    "name": "完整视频",
+                    "val": "yes",
+                    "type": "selects",
+                    "items": [
+                        { "key": "yes", "label": "解锁完整播放（默认）" },
+                        { "key": "no", "label": "仅试看片段" }
+                    ],
+                    "desc": "解锁付费/VIP 视频的完整播放（关闭则仅保留官方试看）"
                 },
                 {
                     "id": "luolita_log_level",

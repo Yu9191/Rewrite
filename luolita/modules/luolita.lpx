@@ -11,9 +11,10 @@ scheme = input, "none", tag=自定义scheme
 encode = select, "default", "yes", "no", tag=URL编码
 jump = select, "no", "yes", tag=播放器跳转
 ads = select, "yes", "no", tag=去广告
+full = select, "yes", "no", tag=完整视频
 
 [Script]
-http-response ^https?:\/\/api2\.vhmqswjb\.cc\/api\/ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js, requires-body=true, timeout=20, tag=luolita API, argument=[{logLevel},{player},{scheme},{encode},{jump},{ads}]
+http-response ^https?:\/\/api2\.vhmqswjb\.cc\/api\/ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/luolita/dist/luolita.js, requires-body=true, timeout=20, tag=luolita API, argument=[{logLevel},{player},{scheme},{encode},{jump},{ads},{full}]
 
 [MITM]
 hostname = api2.vhmqswjb.cc
