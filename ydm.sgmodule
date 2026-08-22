@@ -1,0 +1,21 @@
+#!name=ydm-淫荡猫
+#!desc=4.17最新版
+
+[URL Rewrite]
+# cloudfront广告 
+^https?:\/\/(?:[a-z0-9-]+\.)?cloudfront\.net\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) - reject
+# 三年二班广告
+^https?:\/\/snerbnew\.pxyzjmspfl\.work\/api\/(?:sys\/partner\/list|activity\/indexActs|sys\/advertisement\/list|sys\/getImgAndVideoCdnList|aibox\/entranceConfig) - reject
+
+[Script]
+# 视频
+ydm2 = type=http-request, pattern=https:\/\/[^\/]+\.cloudfront\.net\/api\/m3u8\/decode\/authPath, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js, timeout=60
+
+# 会员
+ydm = type=http-response, pattern=^https:\/\/(?:[a-zA-Z0-9-]+\.cloudfront\.net|snerbnew\.pxyzjmspfl\.work)(?::\d+)?\/api\/(?:video\/getVideoById|user\/base\/info|community\/dynamic\/dynamicInfo), script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm.js, requires-body=true, max-size=-1, timeout=60
+
+# 三年二班 
+ydm2 = type=http-request, pattern=^https:\/\/snerbnew\.pxyzjmspfl\.work(?::\d+)?\/api\/m3u8\/decode\/authPath, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/ydm2.js, timeout=60
+
+[MITM]
+hostname = %APPEND% *.cloudfront.net, snerbnew.pxyzjmspfl.work, snerbnew.pxyzjmspfl.work:51999

@@ -1,0 +1,15 @@
+#!name=xjh51 香蕉视频
+#!desc=VIP 视频解锁 + 去广告 + 外部播放器
+#!icon=https://www.xjh51.tv/favicon.ico
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!category=18+
+#!arguments=日志级别:info,播放器:SenPlayer,自定义scheme:none,URL编码:default,播放器跳转:no
+#!arguments-desc=日志级别: off / error / warn / info(默认) / debug / all\n播放器: lenna / SenPlayer / SenPlayer-dl / Infuse / Fileball / VidHub / IINA / Alook / VLC / KMPlayer / NPlayer / potplayer / Safari\n自定义scheme: 填写后覆盖播放器，例如 myplayer://play?url= ；留默认 none 表示不启用\nURL编码: yes / no / default(默认，走播放器默认行为)\n播放器跳转: yes(解锁时自动跳转外部播放器) / no(默认，仅通知)
+
+[Script]
+xjh51 API = type=http-response, pattern=^https?:\/\/www\.xjh51\.tv\/api\/(?:init|index|ucp\/index|v2\/vod\/(?:reqplay|listing)|vod\/(?:reqplay|show)|getLikeRows|special\/listing|game\/broadcasts), requires-body=1, max-size=-1, timeout=30, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/dist/xjh51.js, argument=logLevel={{{日志级别}}}&player={{{播放器}}}&scheme={{{自定义scheme}}}&encode={{{URL编码}}}&jump={{{播放器跳转}}}
+xjh51 Frontend = type=http-response, pattern=^https?:\/\/www\.xjh51\.tv\/(?:index|pc)\.html, requires-body=1, max-size=-1, timeout=10, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/dist/xjh51-frontend.js
+
+[MITM]
+hostname = %APPEND% www.xjh51.tv

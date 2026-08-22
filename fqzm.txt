@@ -1,0 +1,22 @@
+{
+  "errorCode": 0,
+  "msg": "登录成功",
+  "data": {
+    "token": "-ZLJv6Vpmk7hBM8U150WzeFByGGj92Nm_1773850386",
+    "user": {
+      "id": 154414,
+      "nickname": "",
+      "mobile": "",
+      "email": "2z9i9vj@temailz.com",
+      "gender": "男",
+      "location": "",
+      "birthday": null,
+      "birth_sign": "",
+      "avatar": "",
+      "code": "YtjFsB",
+      "total_money": "0.00",
+      "expire_at": "2026-03-19 00:13:05",
+      "is_vip": false
+    }
+  }
+}

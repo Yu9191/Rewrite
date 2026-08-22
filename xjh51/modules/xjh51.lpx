@@ -1,0 +1,19 @@
+#!name=xjh51 香蕉视频
+#!desc=VIP 视频解锁 + 去广告 + 外部播放器
+#!icon=https://www.xjh51.tv/favicon.ico
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Argument]
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
+player = select, "SenPlayer", "lenna", "IINA", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "NPlayer", "potplayer", "Safari", tag=播放器
+scheme = input, "none", tag=自定义scheme
+encode = select, "default", "yes", "no", tag=URL编码
+jump = select, "no", "yes", tag=播放器跳转
+
+[Script]
+http-response ^https?:\/\/www\.xjh51\.tv\/api\/(?:init|index|ucp\/index|v2\/vod\/(?:reqplay|listing)|vod\/(?:reqplay|show)|getLikeRows|special\/listing|game\/broadcasts) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/dist/xjh51.js, requires-body=true, timeout=30, argument=[{logLevel},{player},{scheme},{encode},{jump}], tag=xjh51 API
+http-response ^https?:\/\/www\.xjh51\.tv\/(?:index|pc)\.html script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/xjh51/dist/xjh51-frontend.js, requires-body=true, timeout=10, tag=xjh51 Frontend
+
+[MITM]
+hostname = www.xjh51.tv

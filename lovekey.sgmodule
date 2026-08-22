@@ -1,0 +1,19 @@
+#!name = Lovekey键盘
+#!desc = 无限制使用 更新2026-05-16
+#!category = 工具
+
+[MITM]
+hostname = %APPEND% sea.api.lovekeyboard.com
+
+[Script]
+# 聊天
+Lovekey-聊天 = type=http-request, pattern=^https://sea\.api\.lovekeyboard\.com/v1/chat/keyboard-stream-msg, requires-body=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60
+
+# 开场白
+Lovekey-开场白 = type=http-request, pattern=^https://sea\.api\.lovekeyboard\.com/v1/chat/keyboard-ow-msg, requires-body=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60
+
+# 超级对话
+Lovekey-超级对话 = type=http-request, pattern=^https://sea\.api\.lovekeyboard\.com/v1/chat/stream_super_msg, requires-body=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60
+
+# 账号信息
+Lovekey-账号 = type=http-response, pattern=^https://sea\.api\.lovekeyboard\.com/v2/account, requires-body=1, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/lovekey.js, timeout=60

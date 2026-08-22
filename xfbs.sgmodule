@@ -1,0 +1,8 @@
+#!name=xfbs
+#!desc=xfbs
+
+[Script]
+xfbs = type=http-response, pattern=https?:\/\/xfapi\.fingerabc\.cn\/+api\/(cf\/vip\/queryList|bookModule\/get\/bookModuleAsNew|lesson\/(queryCalendarBook|queryLessons)|product\/getCategoryProduct|tagMaterial\/queryVipStatus).*, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/xfbs.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% xfapi.fingerabc.cn

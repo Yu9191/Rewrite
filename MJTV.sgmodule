@@ -1,0 +1,14 @@
+#!name=麦咭TV
+#!desc=麦咭TV
+
+[URL Rewrite]
+# 首页 右下角 悬浮广告
+^https:\/\/api02\.maijitv\.com\/api\/v1\/layout\/floatingcards - reject
+# 摇一摇弹窗屏蔽
+^https:\/\/api\.maijitv\.com\/common\/findCommonConfig$ - reject
+
+[Script]
+mjtv = type=http-response, pattern=^https:\/\/api\.maijitv\.com, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/mjtv.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% api.maijitv.com

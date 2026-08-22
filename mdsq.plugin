@@ -1,0 +1,9 @@
+#!name=麻豆社区
+#!desc=https://d1skbu98kuldnf.cloudfront.net
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1068.png
+
+[Script]
+http-response https://d1skbu98kuldnf.cloudfront.net/api/app/media/play script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/mdsq2.js, requires-body=true, timeout=60, tag=mdsq2
+
+[MITM]
+hostname = *.cloudfront.net

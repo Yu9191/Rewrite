@@ -1,0 +1,17 @@
+#!name=insav 解锁
+#!desc=VIP 解锁 + 去广告 + getVideoUrl Token 替换 + 第三方播放器跳转
+#!author=@Jsforbaby
+#!homepage=https://github.com/Yu9191/Rewrite
+#!icon=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/modules/insav.png
+
+[Argument]
+player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "IINA", "NPlayer", "Alook", "VLC", "KMPlayer", "Safari", tag=播放器代号, desc=选择跳转的播放器 (默认 lenna)
+scheme = input, "", tag=自定义 Scheme, desc=填写后会覆盖播放器代号；留空表示不使用
+encode = select, "", "yes", "no", tag=URL 编码强制开关, desc=是否对播放地址编码 (留空 = 按播放器默认)
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别, desc=选择日志输出级别 (默认 info)
+
+[Script]
+http-request ^https?:\/\/(\w+\.)?(insav\.tv|[a-z]{4,}\d{2,}\.(top|com|net|cc|xyz))\/api\/(extend\/lists|banner\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/(info|getVideoUrl)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/dist/insav.js, requires-body=true, timeout=20, tag=insav, argument=[{player},{scheme},{encode},{logLevel}]
+
+[MITM]
+hostname = insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.* 

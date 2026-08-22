@@ -1,0 +1,11 @@
+#!name=妻社 VIP解锁
+#!desc=解锁VIP视频/帖子、去广告弹窗
+#!author=Yu9191
+#!homepage=https://github.com/Yu9191/Rewrite
+#!category=18+
+
+[Script]
+妻社 = type=http-response,pattern=^https?:\/\/qsh\d+\.qsh\d+\.\w+\.cn\/(?:source\/plugin\/qsts_app\/index\.php|mserver)\/,requires-body=true,max-size=-1,timeout=30,script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qishe/qishe.js
+
+[MITM]
+hostname = %APPEND% qsh*.qsh*.org.cn

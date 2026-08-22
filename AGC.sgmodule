@@ -1,0 +1,8 @@
+#!name=AGC
+#!desc=AGC解锁会员1-17
+
+[Script]
+AGC = type=http-response, pattern=https://api.agcplayer.com/, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/AGC.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% api.agcplayer.com

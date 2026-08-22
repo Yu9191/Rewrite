@@ -1,0 +1,12 @@
+#!name = Telegram跳转
+#!desc = 将 https://t.me/... 重定向到你选择的客户端（tg/sg/turrit/ime/ng/lingo
+#!author = b
+#!category=TG跳转
+#!arguments = Client:"Telegram"
+#!arguments-desc = Client: Telegram/Swiftgram/Turrit/iMe/Nicegram/Lingogram 或 tg/sg/turrit/ime/ng/lingo
+
+[Script]
+tme_redirect = type=http-request, pattern=^https?:\/\/t\.me\/.+, requires-body=0, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/TgRedirect.js, argument=client={{{Client}}}
+
+[MITM]
+hostname = %APPEND% t.me

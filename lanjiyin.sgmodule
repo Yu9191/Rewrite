@@ -1,0 +1,8 @@
+#!name=蓝基因医学
+#!desc=20250126最新
+
+[Script]
+lanjiyin = type=http-response, pattern=^https?:\/\/(?:edu|user)\.lezaitizhong\.com, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/lanjiyin.js, requires-body=true, max-size=-1, timeout=60
+
+[MITM]
+hostname = %APPEND% *.lezaitizhong.com

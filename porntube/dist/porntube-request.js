@@ -1,0 +1,2 @@
+/* porntube-request.js - Build 2026-08-09 22:28:17 */
+!function(){"use strict";!function(){const t=$request.headers||{},e=$request.body||"";let r="";try{const t=JSON.parse(e);t&&"string"==typeof t.url&&(r=t.url)}catch{}r&&(t["X-PT-Route"]=r);const o=t.Authorization||t.authorization||"";(/^Bearer\s*$/i.test(o)||/^Bearer\s+ufd$/i.test(o)||o.length<20)&&(delete t.Authorization,delete t.authorization),$done({headers:t})}()}();
