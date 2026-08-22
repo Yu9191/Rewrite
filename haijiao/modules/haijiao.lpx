@@ -1,0 +1,12 @@
+#!name=海角视频解锁VIP
+#!desc=海角视频20260822
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/haijiao.png
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Script]
+http-response ^https?:\/\/haijiao\.com\/api\/(banner\/banner_list|attachment|topic\/\d+) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiao/dist/haijiao.js, requires-body=true, timeout=20, tag=海角API
+http-response ^https?:\/\/ts\d+\.hj\d+\.top\/.*\.m3u8$ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/haijiao/dist/haijiao.js, requires-body=true, timeout=20, tag=海角m3u8
+
+[MITM]
+hostname = haijiao.com, *.hj260302818.top
