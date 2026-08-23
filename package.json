@@ -1,0 +1,21 @@
+{
+  "name": "javhd-rewrite",
+  "version": "1.0.0",
+  "description": "JAVHD video proxy - unlock premium, direct stream URLs, ad removal",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w"
+  },
+  "author": "Yu9191 Rewrite",
+  "license": "MIT",
+  "dependencies": {
+    "@nsnanocat/util": "^2.7.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.60.1"
+  }
+}
