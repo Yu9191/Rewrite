@@ -5,7 +5,6 @@
 #!category=18+
 
 [Script]
-JAVHD请求头 = type=http-request, pattern="^https?:\/\/(www\.|zh\.)?javhd\.com\/zh\/studio\/room\/[\w-]+\/video\/[\w-]+", requires-body=0, max-size=0, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js
 JAVHD播放 = type=http-response, pattern="^https?:\/\/(www\.|zh\.)?javhd\.com\/.*player_api", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js
 JAVHD页面 = type=http-response, pattern="^https?:\/\/(www\.|zh\.)?javhd\.com\/zh\/studio\/room\/[\w-]+\/video\/[\w-]+", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js
 JAVHD API = type=http-response, pattern="^https?:\/\/(www\.|zh\.)?javhd\.com\/api\/.*", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js
