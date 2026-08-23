@@ -1,0 +1,19 @@
+﻿#!name=妻友社区解锁
+#!desc=VIP 解锁 + 去广告 + 完整 m3u8 + 第三方播放器跳转可选
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/qiyou.png
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Argument]
+player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "IINA", "NPlayer", "Alook", "VLC", "KMPlayer", "Safari", tag=播放器
+scheme = input, "", tag=自定义 Scheme（留空不用）
+encode = select, "auto", "yes", "no", tag=URL 编码
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
+jump = select, "yes", "no", tag=播放器跳转
+
+[Script]
+http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/js\/index-Dg2qL6uR\.\d+\.js script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区启动页, argument=[{player},{scheme},{encode},{logLevel},{jump}]
+http-response ^https?:\/\/d1kmvkv4iwtiup\.cloudfront\.net\/api\/app\/(ping\/config|login\/guest|user\/info|media\/(play|home|short\/hot)|card\/(promotion|list|advance\/status)|post\/(detail|list|pay|rent\/check)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/qiyoushe/dist/qiyoushequ.js, requires-body=true, timeout=20, tag=妻友社区, argument=[{player},{scheme},{encode},{logLevel},{jump}]
+
+[MITM]
+hostname = *.cloudfront.net, *.gcwe44p.com

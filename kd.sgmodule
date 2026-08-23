@@ -1,0 +1,9 @@
+#!name=快对答案
+#!desc=快对答案获取
+
+[Script]
+
+kd = type=http-request, pattern= https:\/\/kd-book\.cdnjtzy\.com\/scanimg\/.*\.jpg, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/kd.js, timeout=60
+
+[MITM]
+hostname = %APPEND% kd-book.cdnjtzy.com

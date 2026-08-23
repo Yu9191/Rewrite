@@ -1,0 +1,14 @@
+#!name=insav 解锁
+#!desc=去除广告,解锁视频
+#!openUrl=http://boxjs.com/#/sub/add/https%3A%2F%2Fraw.githubusercontent.com%2FYu9191%2FRewrite%2Frefs%2Fheads%2Fmain%2Fpear.boxjs.json
+#!author=@Jsforbaby
+#!homepage=https://github.com/Yu9191/Rewrite
+#!category=18+
+#!arguments=播放器名称:lenna, 自定义Scheme:完整的URLscheme, URL编码:auto, 日志级别:info
+#!arguments-desc=播放器支持: lenna, SenPlayer, SenPlayer-dl, Infuse, Fileball, VidHub, Alook, VLC, KMPlayer, IINA, NPlayer, Safari\n自定义Scheme优先级最高，例如: myplayer://play?url=\nURL编码: auto(自动), yes(强制编码), no(不编码)\n日志级别: off / error / warn / info(默认) / debug / all\n\n推荐使用BoxJS配置，无需填写参数！\nBoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
+
+[Script]
+insav = type=http-request, pattern="^https?:\/\/(\w+\.)?(insav\.tv|[a-z]{4,}\d{2,}\.(top|com|net|cc|xyz))\/api\/(extend\/lists|banner\/lists|config\/lists|config\/links|notice\/lists|user\/(getVipStatus|info|login)|video\/(info|getVideoUrl))", requires-body=1, max-size=-1, timeout=20, script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/insav-tv/dist/insav.js, argument=player={{{播放器名称}}}&scheme={{{自定义Scheme}}}&encode={{{URL编码}}}&logLevel={{{日志级别}}}
+
+[MITM]
+hostname = %APPEND% insav.tv, 4k.insav.tv, dm.insav.tv, *.rftn469.com, *.pbfk364.com, *.rahc448.com, wuma.*.*

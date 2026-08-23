@@ -1,0 +1,34 @@
+#!name=Pear视频解析
+#!desc=会员视频解析，支持选择播放器（支持BoxJS配置）
+#!author=@Jsforbaby
+#!icon=https://raw.githubusercontent.com/fishdown/Icon/master/app/pear.png
+
+[Argument]
+player = select, "lenna", "SenPlayer", "SenPlayer-dl", "Infuse", "Fileball", "VidHub", "Alook", "VLC", "KMPlayer", "IINA", "NPlayer", "Safari", tag=播放器, desc=选择跳转的播放器 (默认lenna)。个人爱好使用BoxJS配置，无需填写参数！
+scheme = input, "", tag=自定义Scheme, desc=选填 (例如 myplayer://play?url=), 优先级最高。BoxJS订阅: https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
+encode = select, "auto", "yes", "no", tag=URL编码, desc=是否对播放地址编码 (auto=根据播放器自动判断)。SenPlayer: 直接播放 | SenPlayer-dl: 下载模式，自动添加文件名.mp4
+
+[Rewrite]
+^https?:\/\/[^\/]+\/api\/movie\/ShopProduct - reject-dict
+^https?:\/\/[^\/]+\/api\/adv\/index - reject-dict
+
+
+[Script]
+# 视频/动漫解析
+http-request ^https?:\/\/[^\/]+\/api\/(movie\/(LikeUserLikeMovie|DetailInfo)|anime\/DetailRecommend) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=false, timeout=60, tag=Pear视频解析, argument=[{player},{scheme},{encode}]
+
+# 短视频解析
+http-request ^https?:\/\/[^\/]+\/api\/video\/(watch|Detail) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=true, timeout=60, tag=Pear短视频解析, argument=[{player},{scheme},{encode}]
+
+# 磁力下载
+http-request ^https?:\/\/[^\/]+\/api\/download\/MovieWithTorrentInfo script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=false, timeout=60, tag=Pear磁力下载, argument=[{player},{scheme},{encode}]
+
+# 种子详情
+http-request ^https?:\/\/[^\/]+\/api\/Search\/TorrentDetail\/ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=false, timeout=60, tag=Pear种子详情, argument=[{player},{scheme},{encode}]
+
+# VIP伪装
+http-response ^https?:\/\/[^\/]+\/api\/(account\/(IndexDetail|IsVip)|cartoon\/VipInfo|download\/CheckDownloadTorrent) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.js, requires-body=true, timeout=60, tag=PearVIP伪装
+
+
+[Mitm]
+hostname = *.baidu.com2.club, *.pearkin.com, *.pearhot.com, lite.pearhot.com, *.supdogth.com

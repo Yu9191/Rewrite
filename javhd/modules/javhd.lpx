@@ -1,0 +1,14 @@
+#!name=JAVHD解锁VIP
+#!desc=JAVHD视频解锁20260824
+#!icon=https://raw.githubusercontent.com/Yu9191/-/main/javhd.png
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+
+[Script]
+http-response ^https?:\/\/(www\.|zh\.)?javhd\.com\/.*player_api script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js, requires-body=true, timeout=20, tag=JAVHD播放
+http-response ^https?:\/\/(www\.|zh\.)?javhd\.com\/zh\/studio\/room\/[\w-]+\/video\/[\w-]+ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js, requires-body=true, timeout=20, tag=JAVHD页面
+http-response ^https?:\/\/(www\.|zh\.)?javhd\.com\/api\/.* script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js, requires-body=true, timeout=20, tag=JAVHD API
+http-response ^https?:\/\/.*\.cdnjhd\.com\/.*\.m3u8(\?.*)?$ script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/javhd/dist/javhd.js, requires-body=true, timeout=20, tag=JAVHD m3u8
+
+[MITM]
+hostname = javhd.com, www.javhd.com, zh.javhd.com, *.cdnjhd.com

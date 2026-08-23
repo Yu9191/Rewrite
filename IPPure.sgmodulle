@@ -1,0 +1,12 @@
+#!name=IPPure Panel
+#!desc=显示 IPPure 欺诈分数、IP 信息以及当前节点名称。参考StashNetworks
+#!system=ios
+#!category=Information
+#!arguments=group:Proxy
+#!arguments-desc=【可选】策略组名称。若自动嗅探失败，将读取此组选中节点。
+
+[Panel]
+IPPure = script-name=ippure-auto, title="IPPure", content="正在检测...", icon=shield.checkerboard, update-interval=600
+
+[Script]
+ippure-auto = type=generic, script-path=https://gist.githubusercontent.com/Yu9191/f09695c1da79a96e65ddfeda0e41bec5/raw/ippure-ip-fraud-score.js, argument=group={{{group}}}

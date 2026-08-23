@@ -1,0 +1,24 @@
+{
+  "name": "insav-rewrite",
+  "version": "1.0.0",
+  "description": "insav VIP 解锁 + 去广告 + 视频 Token 替换 + 播放器跳转 (script-analyze-echo-response)",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w"
+  },
+  "author": "@Jsforbaby",
+  "license": "MIT",
+  "dependencies": {
+    "@nsnanocat/url": "^1.2.5",
+    "@nsnanocat/util": "^2.6.11",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.60.1"
+  }
+}

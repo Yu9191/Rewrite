@@ -1,0 +1,9 @@
+#!name=瑟瑟视频--Eric
+#!desc=Safari浏览器播放，50度灰网页内可直接播放，汤头条和小蓝视频需进行跳转后播放；海角社区,91pron,91短视频,暗网禁区,黑料社,51动漫,妻友,每日大赛,tiktok成人版,AI色色,水果派,pronhub等APP内直接观看无需跳转
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1090.png
+
+[Script]
+http-request ^https:\/\/[^\/]*\..*\.cn\/\w+\/[a-z0-9]{32}\/[a-z0-9]{32}\.m3u8(\?.*)? script-path=https://raw.githubusercontent.com/Alex0510/Eric/master/surge/Script/tangtoutiao.js, tag=瑟瑟视频
+
+[MITM]
+hostname = *play.*.cn, long.*.cn
