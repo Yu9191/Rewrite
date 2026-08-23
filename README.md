@@ -35,7 +35,7 @@
 |---|---|
 | `.sgmodule` | Surge |
 | `.plugin` | Loon |
-| `.lpx` | Lancelot |
+| `.lpx` | Loon |
 | `.js` | 脚本主体（通用） |
 
 ---
