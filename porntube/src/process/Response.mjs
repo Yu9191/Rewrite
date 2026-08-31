@@ -56,20 +56,38 @@ function fakeDownloadOk($response) {
 	return true;
 }
 
+// 从请求提取内部路由（新版 API 统一走 /js）
+function extractRouteUrl($request) {
+	const httpUrl = $request.url || "";
+	if (!/\/js(?:\?|$)/.test(httpUrl)) return httpUrl;
+
+	// 优先从 request 脚本注入的 header 读取
+	const h = $request.headers || {};
+	const fromHeader = h["X-PT-Route"] || h["x-pt-route"];
+	if (fromHeader) return fromHeader;
+
+	// fallback: 直接解析 body（部分平台 response 阶段可读 $request.body）
+	try {
+		const body = typeof $request.body === "string" ? JSON.parse($request.body) : $request.body;
+		if (body && typeof body.url === "string") return body.url;
+	} catch {}
+	return httpUrl;
+}
+
 export async function Response($request, $response, settings) {
-	const url = $request.url || "";
+	const routeUrl = extractRouteUrl($request);
 	const method = ($request.method || "GET").toUpperCase();
-	Console.group(`Response ${url}`);
+	Console.group(`Response ${routeUrl}`);
 	try {
 		if (method === "OPTIONS" || Number($response.status || $response.statusCode) === 204) {
 			Console.debug(`跳过空响应: method=${method}, status=${$response.status || $response.statusCode || "无"}`);
 			return $response;
 		}
-		if (/\/downloadSevenVideo/.test(url)) {
+		if (/\/downloadSevenVideo/.test(routeUrl)) {
 			if (fakeDownloadOk($response)) Console.info("downloadSevenVideo faked ok");
 			return $response;
 		}
-		const handler = pickHandler(url);
+		const handler = pickHandler(routeUrl);
 		if (!handler) {
 			Console.debug("未匹配处理器，原样放行");
 			return $response;
@@ -82,7 +100,7 @@ export async function Response($request, $response, settings) {
 			$response.body = decoded;
 			Console.debug("响应体已替换为解压文本");
 		}
-		const result = rewriteEncryptedBody($response.body, handler, { settings, url });
+		const result = rewriteEncryptedBody($response.body, handler, { settings, url: routeUrl });
 		if (result?.body) {
 			$response.body = result.body;
 			Console.info("改写完成");

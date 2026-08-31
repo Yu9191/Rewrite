@@ -128,27 +128,43 @@ function bootstrap() {
 		} catch { return null; }
 	}
 
+	// 预计算的加密用户数据（CryptoJS AES passphrase 模式）
+	// 解密结果: {userId:"",userEmail:"联合国儿童基金会",token:"",activeUntil:4102444800000}
+	var PRESET_USER = "U2FsdGVkX1/j5oTROFjDw3lsX94EyJmKmGIKBA0mNgyN2Xzvx4Xpp5My0paxHOP9XETF/rBc8WfyyLwm6YLkaQ+8/toNPo+PZ/9qcyz74kXebiP+VyIui0GkQBjICYNuF9Z+yqLgY6LD40sqpUmLn4lQJ7V2crpNmuFw0H9luAQ=";
+
+	// 同步阶段: 必须在 Angular 启动前完成
+	try {
+		localStorage.removeItem(HISTORY_KEY);
+		localStorage.setItem(USER_KEY, PRESET_USER);
+		var origSet = Storage.prototype.setItem;
+		Storage.prototype.setItem = function (k, v) {
+			if (k === HISTORY_KEY) return;
+			if (k === USER_KEY) return;
+			return origSet.call(this, k, v);
+		};
+	} catch (e) {
+		console.warn("[porntube-patch] sync", e && e.message);
+	}
+
+	// CSS 兜底: 隐藏 VIP 弹窗
+	try {
+		var style = document.createElement("style");
+		style.textContent = ".video-overlay-poster,.coment-bottom{display:none!important}";
+		document.head.appendChild(style);
+	} catch {}
+
+	// 异步阶段: 用动态加密刷新用户数据（更健壮）
 	(async function () {
 		try {
-			const C = await loadCrypto();
-			const existing = localStorage.getItem(USER_KEY) || "";
-			const obj = existing ? decode(C, existing) : null;
-			if (!obj || obj.token || obj.userId) {
-				localStorage.setItem(USER_KEY, encode(C, {
-					userId: "",
-					userEmail: "联合国儿童基金会",
-					token: "",
-					activeUntil: FUTURE,
-				}));
-			}
-			localStorage.removeItem(HISTORY_KEY);
-			const origSet = Storage.prototype.setItem;
-			Storage.prototype.setItem = function (k, v) {
-				if (k === HISTORY_KEY) return;
-				return origSet.call(this, k, v);
-			};
+			var C = await loadCrypto();
+			origSet.call(localStorage, USER_KEY, encode(C, {
+				userId: "",
+				userEmail: "联合国儿童基金会",
+				token: "",
+				activeUntil: FUTURE,
+			}));
 		} catch (e) {
-			console.warn("[porntube-patch]", e && e.message);
+			console.warn("[porntube-patch] async", e && e.message);
 		}
 	})();
 }
