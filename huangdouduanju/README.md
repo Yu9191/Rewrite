@@ -16,10 +16,6 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huangdouduanju/
 
 https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huangdouduanju/huangdou.snippet
 
-**Clash / Stash**
-
-https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huangdouduanju/modules/huangdou.conf
-
 ## 功能
 
 - VIP 视频解锁
