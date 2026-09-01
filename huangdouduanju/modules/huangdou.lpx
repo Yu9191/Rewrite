@@ -1,4 +1,4 @@
-#!name=huangdouduanjuVIP解锁
+#!name=黄豆短剧VIP解锁
 #!desc=VIP解锁 + 去广告 + 完整播放（浏览器直接观看）
 #!icon=https://cdn.g3ejjm8m.com/common_file/headico/wahaha/58.jpg
 #!author=Yu9191 Rewrite
@@ -9,7 +9,8 @@
 logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
 
 [Script]
-http-response ^https?:\/\/cocoaview\.cc\/api\/(system\/info|user\/(info|home|vip|favorite)|drama\/(play|detail|navBlock|navFilter|searchResult|more|rank|topicDetail|topicList|favorite|love)|movie\/(navBlock|navFilter|detail|favorite|love|history)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huangdouduanju/dist/huangdou.js, requires-body=true, timeout=30, tag=huangdouduanju, argument=[{logLevel}]
+http-request ^https?:\/\/(cocoaview\.cc|hdmgdj\.com|sxqirtho\.top|qicuknlj\.top|ferncider\.cc|hvthtcpa\.top|onyxripple\.cc|vivifable\.top|kucvcxrv\.cc|larkgarden\.top|niniharbor\.top|larksummit\.icu|lzlukvca\.cc)\/api\/(drama\/play|up\/episodePreview|up\/unlock|up\/access|up\/subscribe) script-path=http://192.168.1.4:8888/dist/huangdou.js, requires-body=true, binary-body-mode=true, timeout=30, tag=黄豆短剧请求, argument=[{logLevel}]
+http-response ^https?:\/\/(cocoaview\.cc|hdmgdj\.com|sxqirtho\.top|qicuknlj\.top|ferncider\.cc|hvthtcpa\.top|onyxripple\.cc|vivifable\.top|kucvcxrv\.cc|larkgarden\.top|niniharbor\.top|larksummit\.icu|lzlukvca\.cc)\/api\/.+ script-path=http://192.168.1.4:8888/dist/huangdou.js, requires-body=true, binary-body-mode=true, timeout=30, tag=黄豆短剧, argument=[{logLevel}]
 
 [MITM]
-hostname = cocoaview.cc, *.cocoaview.cc
+hostname = cocoaview.cc, *.cocoaview.cc, hdmgdj.com, *.hdmgdj.com, sxqirtho.top, *.sxqirtho.top, qicuknlj.top, *.qicuknlj.top, ferncider.cc, *.ferncider.cc, hvthtcpa.top, *.hvthtcpa.top, onyxripple.cc, *.onyxripple.cc, vivifable.top, *.vivifable.top, kucvcxrv.cc, *.kucvcxrv.cc, larkgarden.top, *.larkgarden.top, niniharbor.top, *.niniharbor.top, larksummit.icu, *.larksummit.icu, lzlukvca.cc, *.lzlukvca.cc
