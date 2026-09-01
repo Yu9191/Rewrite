@@ -1,0 +1,15 @@
+#!name=huangdouduanjuVIP解锁
+#!desc=VIP解锁 + 去广告 + 完整播放（浏览器直接观看）
+#!icon=https://cdn.g3ejjm8m.com/common_file/headico/wahaha/58.jpg
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!date=2026-09-01
+
+[Argument]
+logLevel = select, "info", "off", "error", "warn", "debug", "all", tag=日志级别
+
+[Script]
+http-response ^https?:\/\/cocoaview\.cc\/api\/(system\/info|user\/(info|home|vip|favorite)|drama\/(play|detail|navBlock|navFilter|searchResult|more|rank|topicDetail|topicList|favorite|love)|movie\/(navBlock|navFilter|detail|favorite|love|history)) script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/huangdouduanju/dist/huangdou.js, requires-body=true, timeout=30, tag=huangdouduanju, argument=[{logLevel}]
+
+[MITM]
+hostname = cocoaview.cc, *.cocoaview.cc

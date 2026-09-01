@@ -1,0 +1,25 @@
+{
+  "name": "huangdou-rewrite",
+  "version": "1.0.0",
+  "description": "huangdouduanju VIP 解锁 + 去广告 + 完整播放 (script-analyze-echo-response)",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w"
+  },
+  "author": "Yu9191 Rewrite",
+  "license": "MIT",
+  "dependencies": {
+    "@nsnanocat/url": "^1.2.5",
+    "@nsnanocat/util": "^2.6.11",
+    "crypto-js": "^4.2.0",
+    "fflate": "^0.8.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.60.1"
+  }
+}
