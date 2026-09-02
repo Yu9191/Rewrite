@@ -1,0 +1,15 @@
+#!name=黄果短剧去广告
+#!desc=去广告（播放跳转/轮播/横幅/贴片）
+#!icon=https://raw.githubusercontent.com/Yu9191/Rewrite/main/huangguoduanju/icon.png
+#!author=Yu9191 Rewrite
+#!homepage=https://github.com/Yu9191/Rewrite
+#!date=2026-09-02
+
+[Script]
+http-response ^https?://huangguoai\.com script-path=https://raw.githubusercontent.com/Yu9191/Rewrite/main/huangguoduanju/dist/huangguo.js, requires-body=true, timeout=30, tag=黄果短剧
+
+[Rule]
+URL-REGEX,^https?://[^/]*adsdk[12]\.cc,REJECT
+
+[MITM]
+hostname = huangguoai.com, *.huangguoai.com
