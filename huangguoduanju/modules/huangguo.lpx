@@ -12,4 +12,4 @@ http-response ^https?://huangguoai\.com script-path=https://raw.githubuserconten
 URL-REGEX,^https?://[^/]*adsdk[12]\.cc,REJECT
 
 [MITM]
-hostname = huangguoai.com, *.huangguoai.com
+hostname = huangguoai.com, *.huangguoai.com, *.adsdk1.cc, *.adsdk2.cc

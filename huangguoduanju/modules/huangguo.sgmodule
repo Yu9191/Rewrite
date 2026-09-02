@@ -12,4 +12,4 @@
 URL-REGEX,^https?://[^/]*adsdk[12]\.cc,REJECT
 
 [MITM]
-hostname = %APPEND% huangguoai.com, *.huangguoai.com
+hostname = %APPEND% huangguoai.com, *.huangguoai.com, *.adsdk1.cc, *.adsdk2.cc
