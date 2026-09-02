@@ -1,14 +1,22 @@
 /**
- * 黄果短剧去广告
- * 支持 Surge / Loon / Quantumult X / Stash
+ * @name 黄果短剧去广告
+ * @description 去除黄果短剧 (huangguoai.com) 全站广告
+ * @author Yu9191 Rewrite
+ * @homepage https://github.com/Yu9191/Rewrite
+ * @date 2026-09-02
  *
- * 去除内容：
- * - 播放页跳转广告 (playAd)
- * - 播放前贴片广告 (prerollAd)
- * - 首页轮播广告 (hero slides isAd)
- * - SSP 广告位 (data-ssp-slot-key)
- * - 广告标识 (data-hero-adbadge)
+ * @supported Surge / Loon / Quantumult X / Stash
+ *
+ * @ad-type playAd          播放页跳转广告（点击播放器跳转外部广告页）
+ * @ad-type prerollAd       播放前贴片视频广告
+ * @ad-type heroSlides      首页轮播广告（isAd 项）
+ * @ad-type sspSlot         SSP 广告位（横幅/信息流/暂停覆盖层）
+ * @ad-type adBadge         广告标识角标
+ * @ad-type adSdk           广告 SDK 请求（配置层 reject）
+ *
+ * @target huangguoai.com   HTML 页面响应
  */
+
 (function () {
   var body = $response.body;
   if (!body || typeof body !== "string") {
@@ -16,7 +24,7 @@
     return;
   }
 
-  // 只处理 HTML 页面
+  // 仅处理 HTML 页面，JSON/JS/图片等透传
   if (body.indexOf("<!DOCTYPE") < 0 && body.indexOf("<html") < 0) {
     $done({});
     return;
@@ -24,7 +32,9 @@
 
   var modified = false;
 
-  // 1. 清空 playAd（播放页跳转广告）
+  // playAd：播放页跳转广告
+  // videoInitialData.playAd = { id, url, intervalSec }
+  // 置 null 后点击播放器直接播放，不再跳转外部广告页
   body = body.replace(
     /"playAd":\s*\{[^}]*\}/g,
     function () {
@@ -33,7 +43,9 @@
     }
   );
 
-  // 2. 清空 prerollAd（播放前贴片广告）
+  // prerollAd：播放前贴片视频广告
+  // videoInitialData.prerollAd = { id, url, ... }
+  // 置 null 后跳过贴片，直接进入正片
   body = body.replace(
     /"prerollAd":\s*\{[^}]*\}/g,
     function () {
@@ -42,7 +54,8 @@
     }
   );
 
-  // 3. 过滤 hero slides 里的广告项
+  // heroSlides：首页轮播广告
+  // <script data-hero-slides> 内 JSON 数组，过滤 isAd === true 的项
   var heroRegex = /(<script[^>]*data-hero-slides[^>]*>)([\s\S]*?)(<\/script>)/;
   var heroMatch = body.match(heroRegex);
   if (heroMatch) {
@@ -59,10 +72,17 @@
         );
         modified = true;
       }
-    } catch (e) {}
+    } catch (e) {
+      // JSON 解析失败，跳过
+    }
   }
 
-  // 4. 注入 CSS 隐藏广告元素
+  // CSS 注入：隐藏剩余广告 DOM
+  // [data-ssp-slot-key]         SSP 广告位容器（横幅/信息流/暂停覆盖层）
+  // [data-hero-adbadge]         轮播广告"广告"角标
+  // .hg-hero__ad-badge          同上兜底
+  // .dx-ov-plugin               播放器覆盖层广告插件
+  // .hg-hero__cover-link[...]   轮播广告封面链接
   var css =
     '<style id="hg-ad-block">' +
     "[data-ssp-slot-key]{display:none!important}" +
