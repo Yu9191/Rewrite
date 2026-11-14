@@ -558,7 +558,7 @@
                 {
                     "id": "porntube_player_jump",
                     "name": "播放器跳转",
-                    "val": "yes",
+                    "val": "no",
                     "type": "selects",
                     "items": [
                         {
