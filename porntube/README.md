@@ -34,7 +34,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/module
 - 重定向白名单清理：从 `/getWhitelist` 删除 `redirect_ / ad_ / popup_ / banner` 等推广跳转项
 - 用户提权：`/sevenVideoUserSH` 等接口的 `activeUntil` 推到 2100，`isPremium / vip / premium` 置 true
 - 前端伪登录：注入伪 `SevenVideoUser` localStorage，解决高速线路按钮无法切换、顶部「立刻开启 VIP 会员体验」横幅、每日 5 次试看上限三个前端拦截
-- 视频页播放器按钮：视频下方直接选「网页播放」或外部播放器（lenna / SenPlayer / Infuse / VLC，「更多」里还有 Fileball 等），点哪个用哪个，不需要打开 BoxJS。原「切换线路」按钮已隐藏，默认走免费线路；`src/config/index.mjs` 的 `HIDE_LINE_SWITCHER` 设为 `false` 可恢复显示。填了自定义 scheme（模块参数或 BoxJS）后，播放器行里还会多出一个「自定义」按钮
+- 视频页播放器按钮：视频下方直接选「网页播放」或外部播放器（lenna / SenPlayer / Infuse / VLC，「更多」里还有 Fileball 等），点哪个用哪个，不需要打开 BoxJS。原「切换线路」按钮已隐藏，默认走免费线路；`src/config/index.mjs` 的 `HIDE_LINE_SWITCHER` 设为 `false` 可恢复显示。「自定义」按钮旁边有 Scheme 输入框，直接在网页里填写并保存即可（保存到代理工具里，不存在浏览器）；代理里有值时优先，没有值时用模块参数
 
 </details>
 
@@ -72,7 +72,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 
 > Quantumult X / Snippet 用户的日志级别 **只能走 BoxJS 设置**（rewrite_local 段不支持 argument）。Surge / Loon 既可以在模块的 `arguments` 里改，也可以走 BoxJS。
 >
-> `porntube_player_select`、`porntube_custom_scheme`、`porntube_url_encode` 只决定通知跳转用哪个播放器（需要 `porntube_player_jump` 设为 `yes`；默认是 `no`，即关闭通知）；视频页的播放器按钮不读这些设置。
+> `porntube_player_select`、`porntube_url_encode` 只决定通知跳转用哪个播放器（需要 `porntube_player_jump` 设为 `yes`；默认是 `no`，即关闭通知）。`porntube_custom_scheme` 就是网页里保存的 scheme，两边是同一个值。
 
 </details>
 

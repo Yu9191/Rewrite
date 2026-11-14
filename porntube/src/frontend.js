@@ -19,23 +19,60 @@ function argumentValue(key) {
 }
 
 function readCustomScheme() {
-	const fromArgument = argumentValue("scheme");
-	if (fromArgument) return fromArgument;
 	try {
-		if (typeof $persistentStore !== "undefined") return $persistentStore.read(BOXJS_KEYS.scheme) || "";
-		if (typeof $prefs !== "undefined") return $prefs.valueForKey(BOXJS_KEYS.scheme) || "";
+		if (typeof $persistentStore !== "undefined") {
+			const v = $persistentStore.read(BOXJS_KEYS.scheme) || "";
+			if (isValidCustomScheme(v)) return v;
+		}
+		if (typeof $prefs !== "undefined") {
+			const v = $prefs.valueForKey(BOXJS_KEYS.scheme) || "";
+			if (isValidCustomScheme(v)) return v;
+		}
 	} catch (e) {}
-	return "";
+	const fromArgument = argumentValue("scheme");
+	return isValidCustomScheme(fromArgument) ? fromArgument : "";
+}
+
+// 网页保存的 scheme：页面请求 /porntube-scheme?v=…，这里写进代理工具的存储
+function schemeSaveValue() {
+	const url = typeof $request !== "undefined" && $request && $request.url ? String($request.url) : "";
+	if (!/\/porntube-scheme\?/.test(url)) return null;
+	const m = url.match(/[?&]v=([^&]*)/);
+	try {
+		return m ? decodeURIComponent(m[1]) : "";
+	} catch (e) {
+		return "";
+	}
+}
+
+function writeScheme(value) {
+	try {
+		if (typeof $persistentStore !== "undefined") return !!$persistentStore.write(value, BOXJS_KEYS.scheme);
+		if (typeof $prefs !== "undefined") return !!$prefs.setValueForKey(value, BOXJS_KEYS.scheme);
+	} catch (e) {}
+	return false;
+}
+
+function saveScheme(raw) {
+	const value = String(raw || "").trim();
+	const ok = (!value || isValidCustomScheme(value)) && writeScheme(value);
+	return {
+		status: 200,
+		headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
+		body: JSON.stringify({ ok }),
+	};
 }
 
 (async function () {
 	try {
+		const saving = schemeSaveValue();
+		if (saving !== null) return $done(saveScheme(saving));
 		const resp = $response || {};
 		const body = await decodeBody(resp || {});
 		if (!body || typeof body !== "string" || !/<\/head>/i.test(body)) return $done(body ? { body } : {});
 		const custom = readCustomScheme();
 		pageCfg.custom = isValidCustomScheme(custom) ? custom : "";
-		const inject = '<script id="porntube-patch">(' + bootstrap.toString() + ')(' + JSON.stringify(pageCfg) + ',' + composeLaunchUrl.toString() + ');</script>';
+		const inject = '<script id="porntube-patch">(' + bootstrap.toString() + ')(' + JSON.stringify(pageCfg) + ',' + composeLaunchUrl.toString() + ',' + isValidCustomScheme.toString() + ');</script>';
 		$done({ status: Number(resp.status) || 200, body: body.replace(/<\/head>/i, inject + "</head>"), headers: cleanHeaders(resp.headers || {}) });
 	} catch (e) {
 		notifyError(e);
@@ -125,13 +162,13 @@ function cleanHeaders(headers) {
 	delete next["content-length"];
 	delete next["Transfer-Encoding"];
 	delete next["transfer-encoding"];
-	// 不缓存，关闭或更新模块后立即生效
-	next["Cache-Control"] = "no-store";
+	// no-cache：正常打开每次都重新请求（保证注入）；返回键用缓存，不重新请求
+	next["Cache-Control"] = "no-cache";
 	return next;
 }
 
 // 嵌入页面运行
-function bootstrap(cfg, compose) {
+function bootstrap(cfg, compose, isValid) {
 	const USER_KEY = "CapacitorStorage.SevenVideoUser";
 	const HISTORY_KEY = "CapacitorStorage.history";
 	const SECRET = "xxxxx";
@@ -194,7 +231,7 @@ function bootstrap(cfg, compose) {
 
 	// 播放器行: 插在 .server-selection 前面
 	try {
-		mountPlayers(cfg, compose);
+		mountPlayers(cfg, compose, isValid);
 	} catch (e) {
 		console.warn("[porntube-patch] players", e && e.message);
 	}
@@ -218,7 +255,7 @@ function bootstrap(cfg, compose) {
 		document.querySelectorAll(".promo-modal").forEach(m => (m.closest(".modal-backdrop-overlay") || m).remove());
 	}
 
-	function mountPlayers(cfg, compose) {
+	function mountPlayers(cfg, compose, isValid) {
 		const style = document.createElement("style");
 		style.textContent = [
 			".pt-players{margin:12px 0;font-size:14px;color:#333}",
@@ -229,9 +266,54 @@ function bootstrap(cfg, compose) {
 			".pt-btn{border:1px solid #d9d9d9;background:#fff;color:#333;border-radius:999px;padding:7px 14px;font-size:14px;line-height:1.2;cursor:pointer}",
 			".pt-btn.pt-web{background:#e53935;border-color:#e53935;color:#fff}",
 			".pt-hint{margin-top:8px;font-size:12px;color:#999}",
+				".pt-custom{display:flex;gap:8px;margin-top:10px}",
+				".pt-custom input{flex:1;min-width:0;border:1px solid #d9d9d9;border-radius:999px;padding:7px 14px;font-size:14px;color:#333;outline:none}",
 			cfg.hideLines ? ".server-selection{display:none!important}" : "",
 		].join("");
 		document.head.appendChild(style);
+
+		function currentScheme() {
+			return cfg.custom || "";
+		}
+
+		function openCustom() {
+			const scheme = currentScheme();
+			if (!scheme) {
+				alert("先在下面的输入框填写自定义 Scheme，然后点保存");
+				return;
+			}
+			openPlayer({ name: "自定义", scheme, needEncode: true, supportName: false });
+		}
+
+		function buildCustomRow() {
+			const box = document.createElement("div");
+			box.className = "pt-custom";
+			const input = document.createElement("input");
+			input.type = "text";
+			input.placeholder = "自定义播放器 Scheme，例如 myplayer://play?url=";
+			input.value = currentScheme();
+			const save = button("保存", "", async () => {
+				const value = input.value.trim();
+				if (value && !isValid(value)) {
+					alert("Scheme 格式不对，例如 myplayer://play?url=");
+					return;
+				}
+				let ok = false;
+				try {
+					const res = await fetch("/porntube-scheme?v=" + encodeURIComponent(value), { cache: "no-store" });
+					ok = (await res.json()).ok === true;
+				} catch {}
+				if (!ok) {
+					alert("保存失败：请确认代理模块已启用，并且已更新到最新版");
+					return;
+				}
+				cfg.custom = value;
+				save.textContent = "已保存";
+				setTimeout(() => (save.textContent = "保存"), 1500);
+			});
+			box.append(input, save);
+			return box;
+		}
 
 		function button(text, cls, onClick) {
 			const b = document.createElement("button");
@@ -282,7 +364,7 @@ function bootstrap(cfg, compose) {
 			more.className = "pt-more";
 			list.appendChild(button("网页播放", "pt-web", playInPage));
 			for (const p of cfg.main) list.appendChild(button(p.name, "", () => openPlayer(p)));
-			if (cfg.custom) list.appendChild(button("自定义", "", () => openPlayer({ name: "自定义", scheme: cfg.custom, needEncode: true, supportName: false })));
+			list.appendChild(button("自定义", "", openCustom));
 			for (const p of cfg.more) more.appendChild(button(p.name, "", () => openPlayer(p)));
 			if (cfg.more.length) {
 				const toggle = button("更多", "", () => {
@@ -293,7 +375,7 @@ function bootstrap(cfg, compose) {
 			const hint = document.createElement("div");
 			hint.className = "pt-hint";
 			hint.textContent = "没装对应的 App 时点了没反应。";
-			row.append(title, list, more, hint);
+			row.append(title, list, more, buildCustomRow(), hint);
 			return row;
 		}
 
