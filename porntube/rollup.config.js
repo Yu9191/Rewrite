@@ -18,6 +18,14 @@ function buildBanner(name = "Script") {
 
 export default [
 	{
+		input: "src/page-request.js",
+		output: {
+			file: "dist/porntube-page-request.js",
+			format: "iife",
+		},
+		plugins: [terser(), buildBanner("porntube-page-request.js")],
+	},
+	{
 		input: "src/porntube.js",
 		output: {
 			file: "dist/porntube.js",

@@ -18,33 +18,14 @@ function loadFromBoxJS() {
 	return settings;
 }
 
+// util 在 import 时已把 $argument 归一化为对象（无参数时为 {}）
 function applyArgument(settings) {
-	if (typeof $argument === "undefined" || !$argument) return;
-	if (typeof $argument === "object" && !Array.isArray($argument)) {
-		if ($argument.logLevel) settings.logLevel = String($argument.logLevel);
-		if ($argument.player) settings.player = String($argument.player);
-		if ($argument.scheme) settings.scheme = String($argument.scheme);
-		if ($argument.encode) settings.encode = String($argument.encode);
-		if ($argument.jump) settings.jump = String($argument.jump);
-		return;
-	}
-	const raw = String($argument);
-	// Loon "[logLevel,player,scheme,encode,jump]"
-	if (raw.startsWith("[") && raw.endsWith("]")) {
-		const parts = raw.slice(1, -1).split(",").map(s => s.trim());
-		if (parts[0]) settings.logLevel = parts[0];
-		if (parts[1]) settings.player = parts[1];
-		if (parts[2]) settings.scheme = parts[2];
-		if (parts[3]) settings.encode = parts[3];
-		if (parts[4]) settings.jump = parts[4];
-		return;
-	}
-	const params = Object.fromEntries(new URLSearchParams(raw));
-	if (params.logLevel) settings.logLevel = decodeURIComponent(params.logLevel);
-	if (params.player) settings.player = decodeURIComponent(params.player);
-	if (params.scheme) settings.scheme = decodeURIComponent(params.scheme);
-	if (params.encode) settings.encode = decodeURIComponent(params.encode);
-	if (params.jump) settings.jump = decodeURIComponent(params.jump);
+	if (!$argument || typeof $argument !== "object") return;
+	if ($argument.logLevel) settings.logLevel = String($argument.logLevel);
+	if ($argument.player) settings.player = String($argument.player);
+	if ($argument.scheme) settings.scheme = String($argument.scheme);
+	if ($argument.encode) settings.encode = String($argument.encode);
+	if ($argument.jump) settings.jump = String($argument.jump);
 }
 
 export function resolveSettings() {

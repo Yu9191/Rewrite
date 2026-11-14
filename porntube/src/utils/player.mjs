@@ -1,7 +1,7 @@
 // 播放器链接
 import { DEFAULT_PLAYER, PLAYER_MAP } from "../config/index.mjs";
 
-function isValidCustomScheme(scheme) {
+export function isValidCustomScheme(scheme) {
 	if (!scheme || scheme.length <= 5) return false;
 	if (scheme === "none") return false;
 	if (scheme.includes("{") || scheme.includes("}")) return false;
@@ -18,8 +18,8 @@ export function resolvePlayer(settings) {
 	return key ? PLAYER_MAP[key] : PLAYER_MAP[DEFAULT_PLAYER];
 }
 
-export function buildLaunchUrl(videoUrl, videoName, settings) {
-	const player = resolvePlayer(settings);
+// frontend.js 会用 toString() 把它注入页面，不能引用本文件的其他变量
+export function composeLaunchUrl(player, videoUrl, videoName, encodeSetting) {
 	const schemePrefix = player.scheme;
 
 	// http 直接放行
@@ -28,7 +28,7 @@ export function buildLaunchUrl(videoUrl, videoName, settings) {
 	const prefix = schemePrefix.endsWith("=") || schemePrefix.endsWith("://") ? schemePrefix : `${schemePrefix}://`;
 
 	let needEncode = player.needEncode;
-	const encodeOpt = (settings.encode || "").toLowerCase();
+	const encodeOpt = (encodeSetting || "").toLowerCase();
 	if (["yes", "1", "true"].includes(encodeOpt)) needEncode = true;
 	else if (["no", "0", "false"].includes(encodeOpt)) needEncode = false;
 
@@ -44,4 +44,8 @@ export function buildLaunchUrl(videoUrl, videoName, settings) {
 	}
 
 	return finalUrl;
+}
+
+export function buildLaunchUrl(videoUrl, videoName, settings) {
+	return composeLaunchUrl(resolvePlayer(settings), videoUrl, videoName, settings.encode);
 }

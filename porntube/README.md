@@ -30,10 +30,11 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/porntube/module
 - VIP 视频解锁：拦截 `/sevenVideos/<id>`，把 `views` 置 0、`videoType=cvideo` 改为 `tvideo`，绕过 VIP 弹窗与 120 秒预览限制
 - 完整 m3u8：后端不校验登录态，所有线路返回的 m3u8 都可直接播放
 - 列表 / 相关视频清理：清掉列表项里的 `cvideo / isPaid / premium` 标记
-- 去广告：清空 `/getAdsList` 所有条目，前端广告位变空
+- 去广告：清空 `/getAdsList` 所有条目，前端广告位变空；视频页的限时促销弹窗（`.promo-modal`）直接删掉
 - 重定向白名单清理：从 `/getWhitelist` 删除 `redirect_ / ad_ / popup_ / banner` 等推广跳转项
 - 用户提权：`/sevenVideoUserSH` 等接口的 `activeUntil` 推到 2100，`isPremium / vip / premium` 置 true
 - 前端伪登录：注入伪 `SevenVideoUser` localStorage，解决高速线路按钮无法切换、顶部「立刻开启 VIP 会员体验」横幅、每日 5 次试看上限三个前端拦截
+- 视频页播放器按钮：视频下方直接选「网页播放」或外部播放器（lenna / SenPlayer / Infuse / VLC，「更多」里还有 Fileball 等），点哪个用哪个，不需要打开 BoxJS。原「切换线路」按钮已隐藏，默认走免费线路；`src/config/index.mjs` 的 `HIDE_LINE_SWITCHER` 设为 `false` 可恢复显示。填了自定义 scheme（模块参数或 BoxJS）后，播放器行里还会多出一个「自定义」按钮
 
 </details>
 
@@ -70,6 +71,8 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/refs/heads/main/pear.boxjs.json
 | `porntube_log_level` | 日志级别：`off` / `error` / `warn` / `info` / `debug` / `all` |
 
 > Quantumult X / Snippet 用户的日志级别 **只能走 BoxJS 设置**（rewrite_local 段不支持 argument）。Surge / Loon 既可以在模块的 `arguments` 里改，也可以走 BoxJS。
+>
+> `porntube_player_select`、`porntube_custom_scheme`、`porntube_url_encode` 只决定通知跳转用哪个播放器（需要 `porntube_player_jump` 设为 `yes`；默认是 `no`，即关闭通知）；视频页的播放器按钮不读这些设置。
 
 </details>
 

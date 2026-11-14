@@ -31,6 +31,15 @@ export const DEFAULT_LOG_LEVEL = "info";
 // 默认播放器
 export const DEFAULT_PLAYER = "lenna";
 
+// 视频页内的播放器按钮：main 直接显示，more 收进「更多」
+export const PAGE_PLAYERS = Object.freeze({
+	main: ["lenna", "SenPlayer", "Infuse", "VLC"],
+	more: ["Fileball", "VidHub", "Alook", "KMPlayer", "NPlayer"],
+});
+
+// 为 true 时隐藏原「切换线路」按钮
+export const HIDE_LINE_SWITCHER = true;
+
 // 通知去重键
 export const CACHE_KEY = "porntube_last_video_id";
 
