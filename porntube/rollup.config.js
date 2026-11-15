@@ -18,6 +18,14 @@ function buildBanner(name = "Script") {
 
 export default [
 	{
+		input: "src/porntube-echo.js",
+		output: {
+			file: "dist/porntube-echo.js",
+			format: "es",
+		},
+		plugins: [json(), nodeResolve({ dedupe: ["@nsnanocat/util"] }), commonjs(), terser(), buildBanner("porntube-echo.js")],
+	},
+	{
 		input: "src/page-request.js",
 		output: {
 			file: "dist/porntube-page-request.js",

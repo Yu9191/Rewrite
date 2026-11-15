@@ -1,4 +1,4 @@
-// 请求模式入口（dev 兜底，生产用 script-response-body 直接进 Response）
+// 请求模式入口：QX 回显模式（script-analyze-echo-response）使用；其他平台仍走 script-response-body
 import { $app, Console, fetch } from "@nsnanocat/util";
 import { resolveSettings } from "../utils/settings.mjs";
 import { Response } from "./Response.mjs";
@@ -15,6 +15,14 @@ export async function Request($request) {
 	Console.groupEnd();
 
 	const upstreamHeaders = { ...($request.headers || {}) };
+	// 与 porntube-request.js 一致：去掉 Host / Content-Length（底层会重新生成），去掉假 Authorization
+	for (const key of Object.keys(upstreamHeaders)) {
+		const k = key.toLowerCase();
+		if (k === "host" || k === ":authority" || k === "content-length") delete upstreamHeaders[key];
+	}
+	const authKey = Object.keys(upstreamHeaders).find(k => k.toLowerCase() === "authorization");
+	const auth = authKey ? String(upstreamHeaders[authKey] || "") : "";
+	if (authKey && (/^Bearer\s*$/i.test(auth) || /^Bearer\s+ufd$/i.test(auth) || auth.length < 20)) delete upstreamHeaders[authKey];
 	const aeKey = Object.keys(upstreamHeaders).find(k => k.toLowerCase() === "accept-encoding") || "Accept-Encoding";
 	upstreamHeaders[aeKey] = "identity";
 	// 避免响应被自身二次拦截

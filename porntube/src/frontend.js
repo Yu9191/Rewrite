@@ -68,8 +68,9 @@ function saveScheme(raw) {
 		const saving = schemeSaveValue();
 		if (saving !== null) return $done(saveScheme(saving));
 		const resp = $response || {};
+		if (!isHtmlResponse(resp)) return $done({});
 		const body = await decodeBody(resp || {});
-		if (!body || typeof body !== "string" || !/<\/head>/i.test(body)) return $done(body ? { body } : {});
+		if (!body || typeof body !== "string" || !/<\/head>/i.test(body)) return $done({});
 		const custom = readCustomScheme();
 		pageCfg.custom = isValidCustomScheme(custom) ? custom : "";
 		const inject = '<script id="porntube-patch">(' + bootstrap.toString() + ')(' + JSON.stringify(pageCfg) + ',' + composeLaunchUrl.toString() + ',' + isValidCustomScheme.toString() + ');</script>';
@@ -79,6 +80,13 @@ function saveScheme(raw) {
 		$done({});
 	}
 })();
+
+function isHtmlResponse(resp) {
+	const headers = resp.headers || {};
+	const key = Object.keys(headers).find(k => k.toLowerCase() === "content-type");
+	const type = key ? String(headers[key]) : "";
+	return !type || /text\/html/i.test(type);
+}
 
 function notifyError(e) {
 	const title = "Porntube 前端脚本异常";
